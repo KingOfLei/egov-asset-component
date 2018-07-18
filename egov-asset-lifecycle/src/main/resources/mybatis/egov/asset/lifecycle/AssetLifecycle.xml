@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.lifecycle.mapper.AssetLifecycleMapper" >
+
+ <insert id="insertLife">
+   	 insert into aims_card6_life
+      (${destField}) 
+      (select ${srcField} from ${srcViewName} v where bill_id in
+        <foreach collection="billIdsList" item="billId" index="index"
+	                               open="(" close=")" separator=",">
+	                                  #{billId}
+	    </foreach>
+      )
+   </insert>
+   
+   <insert id="insertLifeLog">
+   	 insert into aims_card6_life_log
+      (${destField}) 
+      (select ${srcField} from ${srcViewName} v where bill_id =
+	                                  #{billId}
+	  
+      )
+   </insert>
+   
+   <update id="updateLifeSimple">
+      update aims_card6_life t set (${destField})=
+         (select ${srcField} from dual)
+      where asset_id in(
+           select asset_id from ${srcViewName} where  bill_id in
+              <foreach collection="billIdsList" item="billId" index="index"
+	                               open="(" close=")" separator=",">
+	                                  #{billId}
+	           </foreach>
+         )
+   </update>
+   
+   <update id="updateLife">
+      update aims_card6_life t set (${destField})=
+	       (select ${srcField} from  ${srcViewName} where asset_id in(
+			           select asset_id from ${srcViewName} where  bill_id in
+			              <foreach collection="billIdsList" item="billId" index="index"
+				                               open="(" close=")" separator=",">
+				                                  #{billId}
+				           </foreach>
+		           )
+	       )
+       where  asset_id in(  
+             select asset_id from ${srcViewName} where  bill_id in
+			              <foreach collection="billIdsList" item="billId" index="index"
+				                               open="(" close=")" separator=",">
+				                                  #{billId}
+				           </foreach>
+        )
+   </update>
+   <delete id="deleteLife">
+   	  delete from aims_card6_life t
+   	      <if test="srcViewName=='aims_split_details' ">
+		   	  where asset_id in(
+		                 select asset_id from ${srcViewName} where  bill_id in
+		              <foreach collection="billIdsList" item="billId" index="index"
+			                               open="(" close=")" separator=",">
+			                                  #{billId}
+			           </foreach>   	  
+		   	  )
+	   	     </if>
+	  <if test="srcViewName!='aims_split_details' ">
+    	     where  bill_id  in
+    	     <foreach collection="billIdsList" item="billId" index="index"
+		                               open="(" close=")" separator=",">
+		                                  #{billId}
+		      </foreach>   	
+      </if>
+   </delete>
+    
+      <delete id="deleteLifeLog">
+   	  delete from aims_card6_life_log t
+   	     where biz_id =
+	                                  #{billId}
+	    
+   </delete>
+    
+</mapper>

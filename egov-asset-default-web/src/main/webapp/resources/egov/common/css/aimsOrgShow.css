@@ -1,0 +1,15 @@
+@charset "UTF-8";
+/* 注意：!important 尽量少用，只有当框架样式使用JS生成，无法用一般方式覆盖时使用*/
+/******************************组织机构情况页面样式开始*********************************************/
+#aimsBasicShow_form>section{
+    margin-bottom: 0px;
+}
+#aimsBasicShow_form>section h5{
+	height: 30px !important;
+	line-height: 30px !important;
+	color: #fff;
+	background-color: #62a9f1;
+    margin-bottom: -1px;
+    font-size: 15px;
+}
+/******************************组织机构情况页面样式结束*********************************************/

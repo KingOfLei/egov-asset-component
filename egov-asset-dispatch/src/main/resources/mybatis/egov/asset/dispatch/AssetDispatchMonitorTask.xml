@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.dispatch.mapper.AssetDispatchMonitorTaskMapper" >
+  <resultMap id="assetDispatchMonitorTaskMap" type="com.bosssoft.egov.asset.dispatch.entity.AssetDispatchMonitorTask" >
+         <result property="taskid" column="TASKID" />
+	     <result property="taskcode" column="TASKCODE" />
+	     <result property="taskname" column="TASKNAME" />
+	     <result property="taskobj" column="TASKOBJ" />
+	     <result property="taskquartz" column="TASKQUARTZ" />
+	     <result property="taskparams" column="TASKPARAMS" />
+	     <result property="taskstate" column="TASKSTATE" />
+	     <result property="fz1" column="FZ1" />
+	     <result property="fz2" column="FZ2" />
+	     <result property="fz3" column="FZ3" />
+	     <result property="fz4" column="FZ4" />
+	     <result property="fz5" column="FZ5" />
+	 </resultMap>
+ 
+ <sql id="Base_Column_List">
+    TASKID,TASKCODE,TASKNAME,TASKOBJ,TASKQUARTZ,TASKPARAMS,TASKSTATE,FZ1,FZ2,FZ3,FZ4,FZ5  </sql>
+ 
+    <select id="queryAssetDispatchMonitorTaskPage" resultMap="assetDispatchMonitorTaskMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM ASSET_DISPATCH_MONITOR_TASK
+      	 <trim prefix="where"  prefixOverrides="and |or">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            #{searcher.__QUERYCON}
+	        </if>  
+	    </trim>
+    </select>
+</mapper>

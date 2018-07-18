@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.dictionary.impl.mapper.AssetDictIndustryMapper" >
+  <resultMap id="assetDictIndustryMap" type="com.bosssoft.egov.asset.dictionary.impl.entity.AssetDictIndustry" >
+         <result property="industryId" column="INDUSTRY_ID" />
+	     <result property="industryCode" column="INDUSTRY_CODE" />
+	     <result property="industryPid" column="INDUSTRY_PID" />
+	     <result property="industryPcode" column="INDUSTRY_PCODE" />
+	     <result property="industryName" column="INDUSTRY_NAME" />
+	     <result property="industryTitle" column="INDUSTRY_TITLE" />
+	     <result property="industryRank" column="INDUSTRY_RANK" />
+	     <result property="industryIsleaf" column="INDUSTRY_ISLEAF" />
+	     <result property="industryState" column="INDUSTRY_STATE" />
+	     <result property="remark" column="REMARK" />
+	     <result property="creator" column="CREATOR" />
+	     <result property="createdate" column="CREATEDATE" />
+	 </resultMap>
+ 
+ <sql id="Base_Column_List">
+    INDUSTRY_ID,INDUSTRY_CODE,INDUSTRY_PID,INDUSTRY_PCODE,INDUSTRY_NAME,INDUSTRY_TITLE,INDUSTRY_RANK,INDUSTRY_ISLEAF,INDUSTRY_STATE,REMARK,CREATOR,CREATEDATE  </sql>
+ 
+    <select id="queryAssetDictIndustryPage" resultMap="assetDictIndustryMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM ASSET_DICT_INDUSTRY
+      	 <trim prefix="where"  prefixOverrides="and |or">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            ${searcher.__QUERYCON}
+	        </if>  
+	    </trim>
+    </select>
+</mapper>

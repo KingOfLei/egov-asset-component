@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.cms.mapper.CmsNoticeMapper" >
+  <resultMap id="cmsNoticeMap" type="com.bosssoft.egov.cms.entity.CmsNotice" >
+         <result property="id" column="ID" />
+	     <result property="rgnId" column="RGN_ID" />
+	     <result property="orgId" column="ORG_ID" />
+	     <result property="title" column="TITLE" />
+	     <result property="content" column="CONTENT" />
+	     <result property="realeaseUserId" column="REALEASE_USER_ID" />
+	     <result property="realeaseUser" column="REALEASE_USER" />
+	     <result property="realeaseDate" column="REALEASE_DATE" />
+	     <result property="receiveType" column="RECEIVE_TYPE" />
+	     <result property="auditor" column="AUDITOR" />
+	     <result property="audittime" column="AUDITTIME" />
+	     <result property="auditopin" column="AUDITOPIN" />
+	     <result property="status" column="STATUS" />
+	     <result property="type" column="TYPE" />
+	     <result property="isPortal" column="IS_PORTAL" />
+	     <result property="isTop" column="IS_TOP" />
+	     <result property="remark" column="REMARK" />
+	     <result property="topExpir" column="TOP_EXPIR" />
+	     <result property="startDate" column="START_DATE" />
+	     <result property="endDate" column="END_DATE" />
+	     <result property="wenHao" column="WEN_HAO" />
+	     <result property="attachCnt" column="ATTACH_CNT" />
+	     <result property="read" column="READ" />
+	 </resultMap>
+ 
+ <sql id="Base_Column_List">
+    ID,RGN_ID,ORG_ID,TITLE,CONTENT,REALEASE_USER_ID,REALEASE_USER,REALEASE_DATE,RECEIVE_TYPE,AUDITOR,AUDITTIME,AUDITOPIN,STATUS,TYPE,IS_PORTAL,IS_TOP,REMARK,TOP_EXPIR,START_DATE,END_DATE,WEN_HAO  </sql>
+ <sql id="Base_Column_List_Not_Content">
+    ID,RGN_ID,ORG_ID,TITLE,REALEASE_USER_ID,REALEASE_USER,REALEASE_DATE,RECEIVE_TYPE,AUDITOR,AUDITTIME,AUDITOPIN,STATUS,TYPE,IS_PORTAL,IS_TOP,REMARK,TOP_EXPIR,START_DATE,END_DATE,WEN_HAO 
+ </sql>
+    <select id="queryCmsNoticePage" resultMap="cmsNoticeMap">
+    	SELECT  (SELECT COUNT(1) FROM ASSET_ATTACH_FILE WHERE BIZ_ID LIKE ID||'%' ) AS ATTACH_CNT,
+    	 (SELECT MAX(COUNT) FROM ASSET_BIZ_USER U WHERE U.BIZ_ID = T.ID AND U.USER_CODE = #{userCode}) AS READ,
+		<include refid="Base_Column_List_Not_Content" />
+		FROM CMS_NOTICE T
+        WHERE 1=1
+      	 <trim prefix="AND"  prefixOverrides="and | or ">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            ${searcher.__QUERYCON}
+	        </if>  
+	    </trim>
+	     <trim prefix="and"  prefixOverrides="and | or ">  
+	        <if test="condition != null">  
+	            ${condition}
+	        </if>  
+	    </trim>
+	    ${orderby}
+    </select>
+    <select id="queryCmsNoticePageBy" resultMap="cmsNoticeMap">
+    	SELECT (SELECT COUNT(1) FROM ASSET_ATTACH_FILE WHERE BIZ_ID LIKE ID||'%' ) AS ATTACH_CNT,
+    	 (SELECT MAX(COUNT) FROM ASSET_BIZ_USER U WHERE U.BIZ_ID = T.ID AND U.USER_CODE = #{userCode}) AS READ,
+    	<include refid="Base_Column_List_Not_Content" />
+        FROM CMS_NOTICE T
+        WHERE 1=1
+      	 <trim prefix="AND"  prefixOverrides="and | or ">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            ${searcher.__QUERYCON}
+	        </if>  
+	    </trim>
+      	 <trim prefix="and"  prefixOverrides="and | or ">  
+	        <if test="condition != null">  
+	            ${condition}
+	        </if>  
+	    </trim>
+	    ${orderby}
+    </select>
+    
+    <select id="queryCmsNotice" resultMap="cmsNoticeMap">
+    	SELECT  (SELECT COUNT(1) FROM ASSET_ATTACH_FILE WHERE BIZ_ID LIKE ID||'%' ) AS ATTACH_CNT,
+    	 (SELECT MAX(COUNT) FROM ASSET_BIZ_USER U WHERE U.BIZ_ID = T.ID AND U.USER_CODE = #{userCode}) AS READ,
+		<include refid="Base_Column_List_Not_Content" />
+		FROM CMS_NOTICE T
+      	 <trim prefix="where"  prefixOverrides="and | or ">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            ${searcher.__QUERYCON}
+	        </if>  
+	    </trim>
+    </select>
+
+	<select id="queryByDate" resultMap="cmsNoticeMap">
+		SELECT  (SELECT COUNT(1) FROM ASSET_ATTACH_FILE WHERE BIZ_ID LIKE ID||'%' ) AS ATTACH_CNT,
+    	 (SELECT MAX(COUNT) FROM ASSET_BIZ_USER U WHERE U.BIZ_ID = T.ID AND U.USER_CODE = #{userCode}) AS READ,
+		<include refid="Base_Column_List_Not_Content" />
+		FROM CMS_NOTICE T
+		WHERE type IN ('1','0') AND status = '2' AND start_date <![CDATA[ <= ]]> #{endDate} AND end_date <![CDATA[ >= ]]> #{endDate}
+		ORDER BY realease_date DESC,is_top DESC
+	</select>
+</mapper>

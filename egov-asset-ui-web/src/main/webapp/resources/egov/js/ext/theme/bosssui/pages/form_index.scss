@@ -1,0 +1,108 @@
+/* 卡片表单首页样式
+ * author: zhangxiaoyun
+ * date: 2017-11-30
+*/
+// html,body{ width: 100%; height: 100%;}
+// html,body,div,ul,li,ol,p,h1,h2,h3,h4,h5{ margin: 0; padding: 0;}
+
+.form-index{
+	width: 100%; 
+	height:100%; 
+	position: relative;
+}
+/*表单布局--用于垂直水平居中*/
+.form-table{
+	width: 100%; 
+	height:100%;
+	border-top: 1px solid #aaa;
+	overflow: auto;
+}
+
+.form-table-center{
+    width: 80%;
+    max-width: 900px;
+    min-height: 300px;
+    height: auto;
+    margin: 30px auto 60px auto;
+    padding: 10px;
+    border: 1px solid $border-color;
+    border-radius: 5px;
+}
+
+.form-table-center>h3{
+	text-align: center;
+	margin-top: 10px;
+}
+.form-table-center>.form-table-title{
+	border-bottom: 2px solid $border-color;
+    overflow: hidden;
+}
+.form-table-center>.form-table-title>ul>li>span{
+	border: none;
+}
+.form-table-center>ul.form-center{
+	margin: 20px auto;
+}
+.form-table-center .form-table-content, .form-table-center>div>h5, .form-table-center>div>ol{
+    margin-top: -1px;
+    width: 80%;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.form-table-center>div.form-table-mark{
+    border-top: 2px solid $border-color;
+}
+.form-table-center .form-table-content>li{
+    padding: 10px;
+}
+
+.form-table-center>div.form-table-mark>h5{
+	padding: 10px;
+	font-size: 16px;
+}
+.form-table-center>div.form-table-mark>ol>li{
+	margin-left: 20px;
+	padding: 5px;
+}
+.form-table-center>ul.form-table-title{
+    border-bottom: 2px solid $border-color;
+}
+.form-table-center .form-table-content>li{
+	display: inline-block;
+    float: left;
+    min-width: 250px;
+    min-height: 52px;
+}
+.form-table-center .form-table-content>li.form-table-content-even{
+	float: right;
+}
+
+.form-table-center .form-table-content>li.form-table-content-full{
+	width: 100%;
+}
+
+.form-table-center .form-table-content>li.form-table-content-full>span{
+	width: 100%;
+}
+
+.form-table-center .form-table-content>li>label{
+	font-weight: bold;
+	line-height: 30px;
+}
+
+.form-table-center .form-table-content>li>span{
+	display: inline-block;
+	min-width: 150px;
+	min-height: 31px;
+	margin-left: 10px;
+	padding: 5px 10px;
+	border-bottom: 1px solid $border-color;
+	font-weight: normal;
+	float: right;
+
+	word-break: keep-all;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

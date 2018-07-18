@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>                       
+<Page id="activityPage" layout="border" 
+	templatePath="egov/asset/aims/activity/activity_add.jsp" 
+	js="resources/egov/js/asset/aims/activity/activity_add.js"
+	jsId="activity_add" 
+	xmlns="http://www.bosssoft.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.bosssoft.org ../../../../schema/uis/uitemplate-2.0.xsd">
+	<items>
+		<Panel id="activityPage_panel_top" region="north" height="70">
+		</Panel>
+		<Panel id="activityPage_panel_center" region="center" layout="border" style="overflow-y:auto;">
+			<items>
+				<!-- <Panel id="nodeSequence" style="height:110px;" css="nodeSequence" region="north" /> -->
+				<Panel id="activitiPage_center" region="center">
+					<items>
+						<Panel id="activityPage_remarkList" style="height:300px;" css="remarkList" region="north"/>
+					 	<Panel id="activityPage_panel_bottom" style="height:270px;" region="center">
+							<items>
+								<XGrid id="activityPage_grid_remark"
+									title="审核列表"
+									rownumbers="normal"
+									fitColumns="N">
+									<columns>
+										<XGridColumn field="nodeName" title="岗位名称" align="center" width="100" />
+										<XGridColumn field="executor" title="操作人" align="left" width="100" />
+										<XGridColumn field="statement" title="操作状态" align="left" width="100"  />
+										<XGridColumn field="description" title="说明" align="left" width="100"  />
+										<XGridColumn field="startTime" title="接收时间" align="center" width="150" />
+										<XGridColumn field="endTime" title="操作时间" align="center" width="150" />
+										<!-- <XGridColumn field="excutorPhoneNumber" title="联系方式" align="left" width="100" /> -->
+										<XGridColumn field="totalCostTime" title="总耗时" align="left" width="100" />
+										<XGridColumn field="remark" title="审核意见" align="left" width="100" />
+									</columns>
+								</XGrid>
+							</items>
+						</Panel>
+					</items>
+			 	</Panel>
+			</items>
+		</Panel> 
+	</items>
+</Page>

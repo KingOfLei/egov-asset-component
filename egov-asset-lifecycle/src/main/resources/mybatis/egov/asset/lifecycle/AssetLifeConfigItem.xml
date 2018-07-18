@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.lifecycle.mapper.AssetLifeConfigItemMapper" >
+  <resultMap id="assetLifeConfigItemMap" type="com.bosssoft.egov.asset.lifecycle.entity.AssetLifeConfigItem" >
+         <result property="id" column="ID" />
+	     <result property="itemSn" column="ITEM_SN" />
+	     <result property="itemStatus" column="ITEM_STATUS" />
+	     <result property="destFieldTitle" column="DEST_FIELD_TITLE" />
+	     <result property="srcFieldName" column="SRC_FIELD_NAME" />
+	     <result property="destFieldName" column="DEST_FIELD_NAME" />
+	     <result property="checkStatus" column="CHECK_STATUS" />
+	     <result property="checkItemId" column="CHECK_ITEM_ID" />
+	     <result property="remark" column="REMARK" />
+	     <result property="fieldType" column="FIELD_TYPE" />
+	     <result property="destFieldType" column="DEST_FIELD_TYPE" />
+	     <result property="destFieldLength" column="DEST_FIELD_LENGTH" />
+	     <result property="srcFieldType" column="SRC_FIELD_TYPE" />
+	     <result property="srcFieldLength" column="SRC_FIELD_LENGTH" />
+	     <result property="busConfigId" column="BUS_CONFIG_ID" />
+	     <result property="dictConfigId" column="DICT_CONFIG_ID" />
+	 </resultMap>
+ 
+ <sql id="Base_Column_List">
+    ID,ITEM_SN,ITEM_STATUS,DEST_FIELD_TITLE,SRC_FIELD_NAME,DEST_FIELD_NAME,CHECK_STATUS,CHECK_ITEM_ID,REMARK,FIELD_TYPE,DEST_FIELD_TYPE,DEST_FIELD_LENGTH,SRC_FIELD_TYPE,SRC_FIELD_LENGTH,BUS_CONFIG_ID,DICT_CONFIG_ID  </sql>
+ 
+    <select id="queryAssetLifeConfigItemPage" resultMap="assetLifeConfigItemMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM ASSET_LIFE_CONFIG_ITEM
+      	 <trim prefix="where"  prefixOverrides="and |or">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            #{searcher.__QUERYCON}
+	        </if>  
+	    </trim>
+    </select>
+    
+    
+    <select id="getAssetLifeConfigItem" resultMap="assetLifeConfigItemMap">
+    	SELECT     
+	    	<include refid="Base_Column_List" />
+	        FROM ASSET_LIFE_CONFIG_ITEM a
+        where a.ITEM_STATUS =1 
+              and a.BUS_CONFIG_ID=#{busConfigId} 
+              <!--<if test="checkStatus !=null ">
+              	  and nvl(CHECK_STATUS,0)=#{checkStatus}
+              </if>-->
+             
+              order by item_sn
+    </select>
+ 
+     <select id="getAssetLifeDictConfigItem" resultMap="assetLifeConfigItemMap">
+    	SELECT     
+	    	 <include refid="Base_Column_List" />
+	        FROM ASSET_LIFE_DICT_CONFIG_ITEM
+        where ITEM_STATUS =1
+              and DICT_CONFIG_ID=#{dictConfigId} 
+              order by item_sn
+    </select>
+    
+     <select id="getCommonColumn" resultMap="assetLifeConfigItemMap">
+   	   select column_name as destFieldName
+	    from user_tab_columns a
+	   where
+	   <if test="commonConfigId==1">
+	   	 1=1 and 
+	   </if>    
+	   <if test="commonConfigId==null or commonConfigId=='' or commonConfigId==0 ">
+	   	1=2 and 
+	   </if>      
+	     table_name = upper('aims_card6_life')
+	     and exists (select 1
+	            from user_tab_columns b
+	           where b.table_name = upper('aims_card6')
+	             and a.COLUMN_NAME = b.COLUMN_NAME )
+	     and not exists (select 1
+	            from asset_life_config_item c
+	           where c.bus_config_id = #{busConfigId}
+	             and c.item_status in (1,2)
+	             and upper(c.dest_field_name) = upper(a.COLUMN_NAME))
+	     and not exists (select 1
+	            from asset_life_dict_config_item c
+	           where c.dict_config_id = #{dictConfigId}
+	             and c.item_status in (1,2)
+	             and upper(c.dest_field_name) = upper(a.COLUMN_NAME))  
+	          order by a.COLUMN_ID     
+   </select>
+   <select id="getCheckSqlInfo" resultType ="HashMap">
+      select 'select asset_id ,''' || show_info ||
+           ''' as show_info  from ${srcViewName} a where ' ||
+           check_item_sql as sqlunion,
+           check_item_id
+	      from ASSET_LIFE_CHECK
+	     where check_item_id in 
+        <foreach collection="assetLifeConfigItemList" item="item" index="index"
+	                               open="(" close=")" separator=",">
+	                                  #{item.checkItemId}
+	    </foreach>
+   </select>
+     
+  <select  id="checkConfigItem"  resultType ="HashMap">
+	select *
+	  from (select a.asset_name,
+	               a.asset_code,
+	               a.asset_id,
+	               a.BILL_ID,<!--卡片新增会将asset_id作为 bill_id-->
+	               substr(b.show_info, 1, 100) show_info
+	          from ${srcViewName} a,
+	               (select asset_id,
+	                       listagg(show_info, ' ') within group(order by null) as show_info
+	                  from (
+	                    <foreach collection="checkSqlInfoList" item="item" index="index"
+	                              separator=" union all ">
+	                                  ${item.SQLUNION} and a.bill_id in 
+	                                  <foreach collection="billIdsList" item="billId" index="index"
+			                               open="(" close=")" separator=",">
+			                                  #{billId}
+	                                 </foreach>
+	                    </foreach>
+	                 )
+	                 group by asset_id) b
+	         where a.asset_id = b.asset_id 
+	           and a.bill_id in 
+	             <foreach collection="billIdsList" item="billId" index="index"
+			                               open="(" close=")" separator=",">
+			                                  #{billId}
+	              </foreach>
+	           ) a
+	 where show_info is not null
+
+  </select>
+   <!-- 校验方式2 select case
+         when (sp_chk_date(bill_date) is null) then
+          '单据的使用方式必填！'
+         else
+          ''
+       end as errorinfo
+  from vaims_dispose_life
+ where bill_id in (25075534364935174)
+   and ((sp_chk_date(bill_date) is null) or (bill_date is not null)) -->
+</mapper>

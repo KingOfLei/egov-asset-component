@@ -1,0 +1,37 @@
+// 系统中通用模块、按钮等样式
+// author: zhangxiaoyun
+// date: 2017.10.10
+// 
+
+.common-class-radiolist{
+	display: block;
+    width: 500px;
+    height: auto;
+    padding: 10px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+.common-class-radiolist>label{
+	display: inline-block;
+	float: left;
+	width: 50%;
+	line-height: 28px;
+}
+
+// dialog弹框footer按钮样式
+.common-class-footerbtn {
+	margin: 5px 10px;
+    border: 1px solid $border-color;
+    padding: 2px 8px;
+    // vertical-align: middle;
+    border-radius: 3px;
+    line-height: 35px;
+}
+.common-class-footerbtn:hover{
+	text-decoration: none;
+	cursor: pointer;
+    border-color: $btn-hover-border-color;
+    background-color: $btn-hover-bgcolor;
+    color: #333;
+}
+

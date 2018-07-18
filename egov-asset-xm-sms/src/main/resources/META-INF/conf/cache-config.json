@@ -1,0 +1,32 @@
+[
+	{
+		cacheName:"AuthCode",
+		cacheProperty:{
+			cacheLoader:"com.bosssoft.asset.xm.sms.utils.cache.authcode.AuthCodeCacheLoader",
+			cacheProvider:"com.bosssoft.platform.cache.redis.RedisCacheProvider",
+			serverAddress:"127.0.0.1:6379",
+			cacheMode:"LOCAL",
+			maxElementsInMemory:"10000",
+			timeToLiveSeconds:"12000",
+			timeToIdleSeconds:"12000",
+			priority:"100",
+			isClustered:"false",
+			cacheModificationListener:""
+		}
+	},
+		{
+		cacheName:"AuthCodeCacheLoader",
+		cacheProperty:{
+			cacheLoader:"com.bosssoft.asset.xm.sms.utils.cache.authcode.ForgetPwdAutoCodeCacheLoader",
+			cacheProvider:"com.bosssoft.platform.cache.redis.RedisCacheProvider",
+			serverAddress:"127.0.0.1:6379",
+			cacheMode:"LOCAL",
+			maxElementsInMemory:"10000",
+			timeToLiveSeconds:"12000",
+			timeToIdleSeconds:"12000",
+			priority:"100",
+			isClustered:"false",
+			cacheModificationListener:""
+		}
+	}
+] 

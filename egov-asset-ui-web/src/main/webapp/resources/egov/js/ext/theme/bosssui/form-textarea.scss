@@ -1,0 +1,108 @@
+// form-textarea 表单文本域样式
+// author: zxy
+// date: 2017-05-09
+
+$ft-label-width: 150px;
+.form-textarea{
+    border: 1px solid #ccc;
+    border-top: 0px;
+    margin: 0 auto;
+    text-align: left; 
+    
+    // 字段名称
+    label{
+        display: inline-block;
+        height: 100%;
+        text-align: right;
+        padding: 5px;
+        float: left;
+        border-right: 1px solid #ccc;
+        background-color: $panel-title-bgcolor;  
+    }
+    
+    >div{
+        height: 100%;
+        float: left;
+        // padding: 5px 0;
+    }
+
+    // 输入文本域
+    .inputArea{
+        padding: 5px 0px;
+
+        textarea{
+            height: 100%;
+            resize: none;
+        }
+    }
+
+    .operateArea{
+        float:left;
+        height:100%;
+
+        .buttonArea{
+            float:left;
+            height:100%;
+            cursor: default;
+            padding: 5px 0px;
+            
+            span{
+                display: block;
+                width: 30px;
+                height: 30%;
+                margin: 2px auto;
+                border: 1px solid $border-color;
+                text-align: center;
+            }
+            span:after {
+                display:inline-block;
+                width:0;
+                height:100%;
+                vertical-align:middle;
+                content:"";
+            }
+            span:hover{
+                cursor: pointer;
+                border-color: $btn-hover-border-color;
+                background-color: $btn-hover-bgcolor;
+            }
+        }
+
+        .loadName{
+            border-left: 1px solid #ccc;
+        }
+
+        .listArea{
+            float:left;
+            height:100%;
+            padding: 5px 0px;
+
+            ul{
+                width: 100%;
+                height:100%;
+                overflow-y: auto;
+                padding:2px;
+                border:1px solid #a9a9a9;
+
+                li{
+                    cursor: pointer;
+                    word-break: keep-all;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    font-weight: normal;
+                    padding-left: 3px;
+                }
+
+                li:hover{
+                    font-weight: bold;
+                }
+
+                .select{
+                    border: 1px solid orange;
+                    background-color: #ffeece!important;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.asset.etl.mapper.AssetEtlConfigAttrMapper" >
+  <resultMap id="assetEtlConfigAttrMap" type="com.bosssoft.asset.etl.entity.AssetEtlConfigAttr" >
+         <result property="id" column="ID" />
+	     <result property="configId" column="CONFIG_ID" />
+	     <result property="configCode" column="CONFIG_CODE" />
+	     <result property="configName" column="CONFIG_NAME" />
+	     <result property="bizType" column="BIZ_TYPE" />
+	     <result property="attrName" column="ATTR_NAME" />
+	     <result property="attrValue" column="ATTR_VALUE" />
+	     <result property="status" column="STATUS" />
+	     <result property="remark" column="REMARK" />
+	 </resultMap>
+ 
+ <sql id="Base_Column_List">
+    ID,CONFIG_ID,CONFIG_CODE,CONFIG_NAME,BIZ_TYPE,ATTR_NAME,ATTR_VALUE,STATUS,REMARK  </sql>
+ 
+    <select id="queryAssetEtlConfigAttrPage" resultMap="assetEtlConfigAttrMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM ASSET_ETL_CONFIG_ATTR
+      	 <trim prefix="where"  prefixOverrides="and |or">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            ${searcher.__QUERYCON}
+	        </if>  
+	    </trim>
+    </select>
+</mapper>

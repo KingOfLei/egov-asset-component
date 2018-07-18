@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.asset.etl.comp.mapper.AssetEtlCompConfigMapper" >
+  <resultMap id="assetEtlCompConfigMap" type="com.bosssoft.asset.etl.comp.entity.AssetEtlCompConfig" >
+         <result property="id" column="ID" />
+	     <result property="configId" column="CONFIG_ID" />
+	     <result property="attr01" column="ATTR01" />
+	     <result property="attr02" column="ATTR02" />
+	     <result property="attr03" column="ATTR03" />
+	     <result property="attr04" column="ATTR04" />
+	     <result property="attr05" column="ATTR05" />
+	     <result property="status" column="STATUS" />
+	     <result property="remark" column="REMARK" />
+	 </resultMap>
+ 
+ <sql id="Base_Column_List">
+    ID,CONFIG_ID,ATTR01,ATTR02,ATTR03,ATTR04,ATTR05,STATUS,REMARK  </sql>
+ 
+    <select id="queryAssetEtlCompConfigPage" resultMap="assetEtlCompConfigMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM ASSET_ETL_COMP_CONFIG
+      	 <trim prefix="where"  prefixOverrides=" and | or ">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            ${searcher.__QUERYCON}
+	        </if>  
+	    </trim>
+    </select>
+</mapper>

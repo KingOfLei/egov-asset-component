@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.activiti.mapper.OwfActivityPermissionMapper" >
+  <resultMap id="owfActivityPermissionMap" type="com.bosssoft.egov.asset.activiti.entity.OwfActivityPermission" >
+         <result property="id" column="ID" />
+	     <result property="activityKey" column="ACTIVITY_KEY" />
+	     <result property="assignedUser" column="ASSIGNED_USER" />
+	     <result property="grantedGroups" column="GRANTED_GROUPS" />
+	     <result property="grantedUsers" column="GRANTED_USERS" />
+	     <result property="processDefinitionId" column="PROCESS_DEFINITION_ID" />
+	     <result property="opTime" column="OP_TIME" />
+	 </resultMap>
+ 
+ <sql id="Base_Column_List">
+    ID,ACTIVITY_KEY,ASSIGNED_USER,GRANTED_GROUPS,GRANTED_USERS,PROCESS_DEFINITION_ID,OP_TIME  </sql>
+ 
+    <select id="queryOwfActivityPermissionPage" resultMap="owfActivityPermissionMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM OWF_ACTIVITY_PERMISSION
+      	 <trim prefix="where"  prefixOverrides="and | or">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            ${searcher.__QUERYCON}
+	        </if>  
+	    </trim>
+    </select>
+    <select id="queryOwfActivityPermissionByProcessDefId" resultMap="owfActivityPermissionMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM OWF_ACTIVITY_PERMISSION
+      	 
+			WHERE PROCESS_DEFINITION_ID like #{defId} and ACTIVITY_KEY = #{userTaskId} order by OP_TIME desc
+
+    </select>
+    <select id="queryOwfActivityPermissionByProcessByDefId" resultMap="owfActivityPermissionMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM OWF_ACTIVITY_PERMISSION
+      	 
+			WHERE PROCESS_DEFINITION_ID = #{defId} order by OP_TIME desc
+
+    </select>
+
+	<select id="updateVersionQuery" resultMap="owfActivityPermissionMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM OWF_ACTIVITY_PERMISSION
+		WHERE PROCESS_DEFINITION_ID LIKE #{likeKey}
+	</select>
+
+	<update id="updateVersion">
+		UPDATE
+		OWF_ACTIVITY_PERMISSION
+		<set>
+			PROCESS_DEFINITION_ID = #{nowKey}
+		</set>
+		WHERE ID= #{id}
+	</update>
+
+	<delete id="deletePermissionWhenDeleteProcess">
+		DELETE FROM
+		OWF_ACTIVITY_PERMISSION
+		WHERE PROCESS_DEFINITION_ID like #{likeId}
+	</delete>
+
+	<select id="getListByRoleLike" resultMap="owfActivityPermissionMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM OWF_ACTIVITY_PERMISSION
+		WHERE  GRANTED_GROUPS like  #{like} and ACTIVITY_KEY = #{userTaskDef} and
+		PROCESS_DEFINITION_ID like #{pdefid}
+	</select>
+
+	<select id="getListByRoleCodeLike" resultMap="owfActivityPermissionMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM OWF_ACTIVITY_PERMISSION
+		WHERE GRANTED_GROUPS like #{like} and
+		PROCESS_DEFINITION_ID like #{pdefid}
+	</select>
+    
+</mapper>

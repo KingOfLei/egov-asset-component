@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.aims.api.account.mapper.AccountMapper" >
+   
+   <select id="queryDockingAccount" resultType="HashMap">
+       SELECT *
+         FROM VEXCHANGE_ORG_APPID
+        WHERE BIZ_STATUS=999999
+          AND DATA_ORG_ID=#{orgId}
+          <if test="bizDate !=null and bizDate != '' ">
+             AND SUBSTR(FETCH_START_DATE,1,7) &lt;=#{bizDate}
+          </if>
+   </select>
+   <select id="doRevoke" parameterType="HashMap" statementType="CALLABLE">
+      {call UP_ASSET_REVOKE_TO_ACCOUNT(
+         #{busId,jdbcType=VARCHAR,mode=IN},
+    	 #{orgCode,jdbcType=VARCHAR,mode=IN},
+    	 #{busType,jdbcType=VARCHAR,mode=IN},
+	     #{returnValue,jdbcType=INTEGER,mode=OUT},
+		 #{oErrStr,jdbcType=VARCHAR,mode=OUT}
+      )}
+   </select> 
+   
+   <!-- 提交到接口服务 -->
+   <select id="doSubmit" parameterType="HashMap" statementType="CALLABLE">
+      { call UP_ASSET_SUBMIT_TO_ACCOUNT(
+         s_serialno.nextval,
+         #{busId,jdbcType=NUMERIC,mode=IN},
+         #{vNewId,jdbcType=NUMERIC,mode=IN},
+         #{busType,jdbcType=VARCHAR,mode=IN},
+         #{vIsRevoke,jdbcType=INTEGER,mode=IN},
+         #{returnValue,jdbcType=INTEGER,mode=OUT},
+		 #{oErrStr,jdbcType=VARCHAR,mode=OUT}        
+      )}
+   </select>
+   
+</mapper>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.assettype.mapper.AssetClassifyOftenMapper" >
+  <resultMap id="assetClassifyOftenMap" type="com.bosssoft.egov.asset.assettype.entity.AssetClassifyOften" >
+         <result property="rgnId" column="RGN_ID" />
+	     <result property="rgnCode" column="RGN_CODE" />
+	     <result property="rgnName" column="RGN_NAME" />
+	     <result property="orgId" column="ORG_ID" />
+	     <result property="orgCode" column="ORG_CODE" />
+	     <result property="orgName" column="ORG_NAME" />
+	     <result property="assetTypeId" column="ASSET_TYPE_ID" />
+	     <result property="assetTypeCode" column="ASSET_TYPE_CODE" />
+	     <result property="assetTypeName" column="ASSET_TYPE_NAME" />
+	     <result property="assetClassifyId" column="ASSET_CLASSIFY_ID" />
+	     <result property="assetClassifyCode" column="ASSET_CLASSIFY_CODE" />
+	     <result property="assetClassifyName" column="ASSET_CLASSIFY_NAME" />
+	     <result property="assetClassifyPid" column="ASSET_CLASSIFY_PID" />
+	     <result property="assetClassifyPcode" column="ASSET_CLASSIFY_PCODE" />
+	     <result property="assetClassifyTitle" column="ASSET_CLASSIFY_TITLE" />
+	     <result property="rank" column="RANK" />
+	     <result property="isleaf" column="ISLEAF" />
+	     <result property="status" column="STATUS" />
+	     <result property="creator" column="CREATOR" />
+	     <result property="createdate" column="CREATEDATE" />
+	     <result property="jqAssetTypeId" column="JQ_ASSET_TYPE_ID" />
+	     <result property="jqAssetClassifyPid" column="JQ_ASSET_CLASSIFY_PID" />
+	     <result property="jqAssetClassifyId" column="JQ_ASSET_CLASSIFY_ID" />
+	     <result property="unit" column="UNIT" />  	     
+	     <result property="expectedDate" column="EXPECTED_DATE" />  	     
+	     <result property="deprModeCode" column="DEPR_MODE_CODE" />  	     
+	     <result property="deprModeName" column="DEPR_MODE_NAME" />  	     
+	     <result property="deprCode" column="DEPR_CODE" />  	     
+	     <result property="deprName" column="DEPR_NAME" />  	     
+	 </resultMap>
+ 
+ <sql id="Base_Column_List">
+    RGN_ID,RGN_CODE,RGN_NAME,ORG_ID,ORG_CODE,ORG_NAME,ASSET_TYPE_ID,ASSET_TYPE_CODE,ASSET_TYPE_NAME,ASSET_CLASSIFY_ID,ASSET_CLASSIFY_CODE,ASSET_CLASSIFY_NAME,ASSET_CLASSIFY_PID,ASSET_CLASSIFY_PCODE,ASSET_CLASSIFY_TITLE,RANK,ISLEAF,STATUS,CREATOR,CREATEDATE,JQ_ASSET_TYPE_ID,JQ_ASSET_CLASSIFY_PID,JQ_ASSET_CLASSIFY_ID  
+    ,UNIT,EXPECTED_DATE,DEPR_MODE_CODE,DEPR_MODE_NAME,DEPR_CODE,DEPR_NAME
+ </sql>
+ <sql id="Base_Insert_Column_List">
+    #{classifyOften.rgnId},#{classifyOften.rgnCode},#{classifyOften.rgnName},
+    #{classifyOften.orgId},#{classifyOften.orgCode},#{classifyOften.orgName},
+    #{classifyOften.assetTypeId},#{classifyOften.assetTypeCode},#{classifyOften.assetTypeName},
+    #{classifyOften.assetClassifyId},#{classifyOften.assetClassifyCode},#{classifyOften.assetClassifyName},
+    #{classifyOften.assetClassifyPid},#{classifyOften.assetClassifyPcode},#{classifyOften.assetClassifyTitle},
+    #{classifyOften.rank},#{classifyOften.isleaf},#{classifyOften.status},
+    #{classifyOften.creator},#{classifyOften.createdate},
+    #{classifyOften.jqAssetTypeId},#{classifyOften.jqAssetClassifyPid},#{classifyOften.jqAssetClassifyId},
+    #{classifyOften.unit},#{classifyOften.expectedDate},
+    #{classifyOften.deprModeCode},#{classifyOften.deprModeName},
+    #{classifyOften.deprCode},#{classifyOften.deprName}
+ </sql>
+    <select id="queryAssetClassifyOftenPage" resultMap="assetClassifyOftenMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM ASSET_CLASSIFY_OFTEN
+      	 <trim prefix="where"  prefixOverrides="and |or">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            #{searcher.__QUERYCON}
+	        </if>  
+	    </trim>
+    </select>
+    
+    <select id="queryClassify" resultMap="assetClassifyOftenMap">
+       SELECT 
+       <include refid="Base_Column_List" />
+       FROM ${tableName}
+       
+    </select>   
+    
+   <select id="queryAssetClassifyMapper" resultMap="assetClassifyOftenMap">
+	       SELECT     
+	    	<include refid="Base_Column_List" />
+	       FROM  ${table}	       
+	       WHERE ASSET_TYPE_ID = #{typeId} 
+	         AND ORG_ID = #{orgId}
+	         AND STATUS=1
+	    ORDER BY ASSET_CLASSIFY_CODE
+    </select>  
+      
+    <insert id="insertClassifyOftenSql">
+        INSERT INTO ${tableName}(
+           <include refid="Base_Column_List" />
+        ) VALUES (
+			<include refid="Base_Insert_Column_List"></include>
+		)
+    </insert>
+</mapper>

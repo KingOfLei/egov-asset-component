@@ -1,0 +1,65 @@
+$img-pick-path: "images/img-waterfall/";
+$img-size:90px;
+.img-pick {
+  padding: 20px;
+  ul, ol {
+    padding-left: 0;
+    list-style-type: none;
+    display: block;
+    li {
+      display: list-item;
+    }
+  }
+  .img-item {
+    margin-bottom: 20px;
+    margin-left: 40px;
+    border: 1px solid #e7e7eb;
+    float: left;
+    text-align: center;
+    .del {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+      display: inline-block;
+      position: absolute;
+      top: -15px;
+      right: -17px;
+      background: url("#{$img-pick-path}del.png");
+    }
+    .del:hover {
+      background: url("#{$img-pick-path}del-red.png");
+    }
+    .img-item-bd {
+      position: relative;
+      .img-span {
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+        width: $img-size;
+        height: $img-size;
+        cursor: pointer;
+        border-bottom: 1px solid #e7e7eb;
+        display: block;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+      }
+    }
+    //checkbox区域
+    .check-content {
+      .lbl-content {
+        display: inline-block;
+        padding: 0;
+        width: $img-size;
+
+        height: 32px;
+        line-height: 32px;
+        text-align: left;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+    }
+
+  }
+}

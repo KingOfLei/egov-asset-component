@@ -1,0 +1,203 @@
+// .app-upload {
+// 	margin:2px;
+// 	height:98%;
+// 	overflow:hidden;
+// 	position:relative;
+// 	background-color:white
+// }
+// .app-upload .fileList {
+// 	position:absolute!important;
+// 	height:auto!important;
+// 	position:relative;
+// 	height:100%;
+// 	width:100%;
+// 	text-align:center;
+// 	overflow:auto
+// }
+// .app-upload.toolbar-top .fileList {
+// 	top:34px!important;
+// 	top:-34px
+// }
+// .app-upload.toolbar-bottom .fileList {
+// 	top:0;
+// 	bottom:34px
+// }
+// .app-upload .fileList>div {
+// 	height:42px;
+// 	position:relative
+// }
+// .app-upload .fileList .upload-icon {
+// 	float:left
+// }
+// .app-upload .fileList .upload-infos {
+// 	overflow:hidden
+// }
+// .app-upload .fileList .fileName {
+// 	text-align:left;
+// 	font-weight:bold
+// }
+// .app-upload .fileList .fileInfos {
+// 	text-align:left
+// }
+// .app-upload .fileList .upload-undo .fileInfos>label {
+// 	color:#cbcbcb
+// }
+// .app-upload .fileList .upload-done .fileInfos>label {
+// 	color:green
+// }
+// .app-upload .fileList .upload-error .fileInfos>label {
+// 	color:red
+// }
+// .app-upload .fileList .deleteBtn {
+// 	width:38px;
+// 	position:absolute;
+// 	display:none;
+// 	height:41px;
+// 	top:1px;
+// 	left:2px;
+// 	border-width:0;
+// 	border-left-width:1px;
+// 	padding-top:10px;
+// 	cursor:pointer;
+// 	border:1px solid #ddd;
+// 	z-index:1;
+// 	background:#fff url($theme-icon-path+"button/toorBarbtnBg.png") repeat-x bottom left
+// }
+// .app-upload .fileList .deleteBtn i.btn-delete {
+// 	background-position:-143px -12px
+// }
+// .app-upload .fileList .deleteBtn:hover {
+// 	background:#f7f9fc url($theme-icon-path+"button/toorBarbtnBg.png") repeat-x bottom left
+// }
+// .app-upload .fileList input[type="file"] {
+// 	display:none
+// }
+// .app-upload .toolbar {
+// 	position:absolute;
+// 	width:100%;
+// 	padding:2px 1px 2px 1px;
+// 	overflow:hidden
+// }
+// .app-upload.toolbar-top .toolbar {
+// 	top:0;
+// 	border-bottom:1px solid #99bbe8
+// }
+// .app-upload.toolbar-bottom .toolbar {
+// 	bottom:0;
+// 	border-top:1px solid #99bbe8
+// }
+// .app-upload .toolbar i,.app-upload .toolbar span {
+// 	vertical-align:middle;
+// 	font-size:13px;
+// }
+// .app-upload .toolbar ul {
+// 	list-style:none;
+// 	display:block
+// }
+// .app-upload .toolbar ul li {
+// 	float:left;
+// 	height:28px;
+// 	line-height:28px;
+// 	margin:1px 6px 1px 0;
+// 	background:url($theme-icon-path+"button/toolsline.png") no-repeat scroll right center
+// }
+// .app-upload .toolbar ul li a {
+// 	cursor:pointer;
+// 	display:block;
+// 	font-size:14px;
+// 	height:28px;
+// 	line-height:26px;
+// 	border:1px solid #ddd;
+// 	padding:0 9px 0 9px;
+// 	width:98px;
+// 	border-radius:2px;
+// 	background:#fff url($theme-icon-path+"button/toorBarbtnBg.png") repeat-x bottom left
+// }
+// .app-upload .toolbar ul li a:hover {
+// 	border:1px solid #b2b8be;
+// 	background:#f7f9fc url($theme-icon-path+"button/toorBarbtnBg.png") repeat-x bottom left
+// }
+// .app-upload .toolbar ul li .selectFile {
+// 	position:relative;
+// 	max-width:110px
+// }
+// .app-upload .toolbar ul li i.btn-upload {
+// 	background-position:-213px -97px
+// }
+// #_alertMsgBox .btn>input[type=file],.app-upload .toolbar ul li .selectFile>input {
+// 	position:absolute;
+// 	top:-1px;
+// 	left:-1px;
+// 	width:100%;
+// 	height:100%;
+// 	opacity:0;
+// 	filter:alpha(opacity=0);
+// 	cursor:pointer
+// }
+// .app-upload .toolbar .selectFile.disabeld {
+// 	background:#eee
+// }
+// div.file-icon {
+// 	width:38px;
+// 	height:38px;
+// 	border:1px solid #d8d8d8;
+// 	background:url($theme-icon-path+"icons.png") no-repeat left top;
+// 	background-position:-6px -166px;
+// 	margin:2px;
+// 	position:relative
+// }
+// div.file-icon.icon-excel {
+// 	background-position:-11px -129px
+// }
+// div.file-icon.icon-pdf {
+// 	background-position:-47px -128px
+// }
+// div.file-icon.icon-zip {
+// 	background-position:-87px -128px
+// }
+// div.file-icon.icon-ppt {
+// 	background-position:-47px -168px
+// }
+// div.file-icon.icon-word {
+// 	background-position:-88px -168px
+// }
+// div.file-icon.icon-image {
+// 	background-position:-9px -206px
+// }
+// div.file-icon.icon-video {
+// 	background-position:-48px -206px
+// }
+// div.file-icon.icon-txt {
+// 	background-position:-125px -129px
+// }
+// div.file-icon.icon-rar {
+// 	background-position:-88px -206px
+// }
+// div.file-icon .complete {
+// 	width:12px;
+// 	height:12px;
+// 	background:url($theme-icon-path+"icons.png") no-repeat left top;
+// 	background-position:-246px -103px;
+// 	border:0;
+// 	position:absolute;
+// 	bottom:2px;
+// 	right:2px;
+// 	display:none
+// }
+// .app-upload .done div.file-icon .complete {
+// 	display:block
+// }
+// .app-progressbar {
+// 	overflow:hidden;
+// 	height:20px;
+// 	background-color:#f5f5f5;
+// 	border-radius:8px;
+// 	-webkit-box-shadow:inset 0 1px 2px rgba(0,0,0,.1);
+// 	box-shadow:inset 0 1px 2px rgba(0,0,0,.1);
+// 	position:relative
+// }
+// .app-progressbar.stripedbar>div {
+// 	background-image:-webkit-linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);
+// 	background-image:linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);
+// 	background-size:40px 40px
+// }

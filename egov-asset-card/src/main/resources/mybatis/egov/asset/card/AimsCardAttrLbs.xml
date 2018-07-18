@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.card.mapper.basic.AimsCardAttrLbsMapper" >
+  <resultMap id="aimsCardAttrLbsMap" type="com.bosssoft.egov.asset.card.entity.basic.AimsCardAttrLbs" >
+         <result property="id" column="ID" />
+	     <result property="assetId" column="ASSET_ID" />
+	     <result property="provincePid" column="PROVINCE_PID" />
+	     <result property="provinceId" column="PROVINCE_ID" />
+	     <result property="provinceCode" column="PROVINCE_CODE" />
+	     <result property="provinceName" column="PROVINCE_NAME" />
+	     <result property="cityId" column="CITY_ID" />
+	     <result property="cityCode" column="CITY_CODE" />
+	     <result property="cityName" column="CITY_NAME" />
+	     <result property="districtId" column="DISTRICT_ID" />
+	     <result property="districtCode" column="DISTRICT_CODE" />
+	     <result property="districtName" column="DISTRICT_NAME" />
+	     <result property="streetId" column="STREET_ID" />
+	     <result property="streetCode" column="STREET_CODE" />
+	     <result property="streetName" column="STREET_NAME" />
+	     <result property="address" column="ADDRESS" />
+	     <result property="zipCode" column="ZIP_CODE" />
+	     <result property="longitude" column="LONGITUDE" />
+	     <result property="latitude" column="LATITUDE" />
+	     <result property="creatorId" column="CREATOR_ID" />
+	     <result property="creator" column="CREATOR" />
+	     <result property="createDate" column="CREATE_DATE" />
+	     <result property="createTime" column="CREATE_TIME" />
+	     <result property="remark" column="REMARK" />
+	 </resultMap>
+ 
+ <sql id="Base_Column_List">
+    ID,ASSET_ID,PROVINCE_PID,PROVINCE_ID,PROVINCE_CODE,PROVINCE_NAME,CITY_ID,CITY_CODE,CITY_NAME,DISTRICT_ID,DISTRICT_CODE,DISTRICT_NAME,STREET_ID,STREET_CODE,STREET_NAME,ADDRESS,ZIP_CODE,LONGITUDE,LATITUDE,CREATOR_ID,CREATOR,CREATE_DATE,CREATE_TIME,REMARK  </sql>
+ 
+    <select id="queryAimsCardAttrLbsPage" resultMap="aimsCardAttrLbsMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM AIMS_CARD_ATTR_LBS
+      	 <trim prefix="where"  prefixOverrides="and |or">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            #{searcher.__QUERYCON}
+	        </if>  
+	    </trim>
+    </select>
+</mapper>

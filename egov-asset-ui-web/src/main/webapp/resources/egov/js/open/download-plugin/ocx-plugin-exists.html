@@ -1,0 +1,46 @@
+<div class="ocx-box-title">
+    <span>控件安装</span>
+</div>
+
+<div class="ocx-box-line"></div>
+
+<div class="ocx-tab">
+    <span class="ocx-col-left ocx-col-20">名称</span>
+    <span class="ocx-col-left ocx-col-35">描述</span>
+    <span class="ocx-col-left ocx-col-10">大小</span>
+    <span class="ocx-col-left ocx-col-10">安装状态</span>
+    <span class="ocx-col-left ocx-col-b-none ocx-col-10">下载</span>
+</div>
+
+<ul>
+    <li>
+        <span class="ocx-col-left-white ocx-col-20">打印插件</span>
+        <span class="ocx-col-left-white ocx-col-35"></span>
+        <span class="ocx-col-left-white ocx-col-10">1.11M</span>
+        <span class="ocx-col-left-white ocx-col-10 no">&nbsp</span>
+        <span class="ocx-col-left-white ocx-col-10 down">下载</span>
+    </li>
+    <li>
+        <span class="ocx-col-left-white ocx-col-20">ca登录插件</span>
+        <span class="ocx-col-left-white ocx-col-35"></span>
+        <span class="ocx-col-left-white ocx-col-10">5.11M</span>
+        <span class="ocx-col-left-white ocx-col-10 no">&nbsp</span>
+        <span class="ocx-col-left-white ocx-col-10 down">下载</span>
+    </li>
+</ul>
+
+<script>
+    $('.ocx-box ul li:eq(0) .down').on('click',function () {
+        $.fileDownload(_apiUrl +'/resources/bsnetfun/grbsctl5.exe')
+            .fail(function () {
+                alert('服务器繁忙，请稍后再试！1');
+            });
+    })
+    $('.ocx-box ul li:eq(1) .down').on('click',function () {
+        $.fileDownload('http://download.easyicon.net/png/1181377/128/')
+            .fail(function () {
+                alert('服务器繁忙，请稍后再试！');
+            });
+    })
+
+</script>

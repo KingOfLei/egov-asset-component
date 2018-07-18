@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page id="orgComparePage" layout="border"
+	templatePath="egov/asset/di/orgCompare.jsp"
+	js="resources/egov/js/asset/di/orgCompare.js"
+	jsId="orgCompare"
+	xmlns="http://www.bosssoft.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.bosssoft.org ../../../../../schema/uis/uitemplate-2.0.xsd">
+	<items>
+		<Panel id="orgCompare_north" region="north" layout="border" height="40">
+			<items>
+				<ToolBar id="orgCompare_btnarea" displayType="MENU">
+					<items>
+						<Button id="orgCompare_resetSelected" name="还原选中行" icon="btn-refresh" iconMode="LEFT"/>
+						<Button id="orgCompare_clearSelected" name="清除选中行" icon="btn-delete" iconMode="LEFT"/>
+						<Button id="orgCompare_setDestOrgName" name="单位匹配" icon="btn-edit" iconMode="LEFT"/>
+						<Button id="orgCompare_batchCreateOrgCode" name="计算下级" icon="btn-add" iconMode="LEFT"/>
+						<Button id="orgCompare_batchSetPcode" name="设置上级编码" icon="btn-add" iconMode="LEFT"/>
+					</items>
+				</ToolBar>
+			</items>
+		</Panel>
+		<Panel id="orgCompare_center" region="center" layout="border">
+			<items>
+				<XGrid id="orgCompare_grid" showTitle="false" pager="none" rownumbers="normal"
+					autoLoad="false" autoEndEdit="false" checkbox="true">
+					<columns>
+						<XGridColumn field="orgId" title="单位ID" hidden="true"/>
+						<XGridColumn field="orgCode" title="单位编码" hidden="true"/>
+						<XGridColumn field="orgName" title="单位名称" hidden="true"/>
+					
+						<XGridColumn field="srcOrgId" title="单位" hidden="true"/>
+						<XGridColumn field="srcOrg" title="导入单位"/>
+						<XGridColumn field="srcOrgCode" title="编码" align="left" width="80" parentColumn="srcOrg" showTitle="true"/>
+						<XGridColumn field="srcOrgName" title="名称" align="left" width="120" parentColumn="srcOrg" showTitle="true"/>
+						
+						<XGridColumn field="destOrgId" title="单位ID" hidden="true"/>
+						<XGridColumn field="destOrgPid" title="上级ID" hidden="true"/>
+						<XGridColumn field="destOrgIsleaf" title="是否最下级" hidden="true"/>
+						<XGridColumn field="destOrg" title="系统单位"/>
+						<XGridColumn field="destOrgCode" title="编码" align="left" width="80"
+							parentColumn="destOrg" showTitle="true" editorType="COMBOZTREE"
+							editorOptions="{
+								action: 'egov/asset/aims/basic/aimsbasicorg/loadOrgTree.do',
+								async: false,
+								idfield: 'orgId',
+								pidfield: 'orgPid',
+								textfield: 'treeNode',
+								valuefield: 'orgName',
+								panelwidth: 300,
+								multiple: false,
+								usesuggest: true,
+								acceptText: true,
+								clearbtn: true,
+								onChange: orgCompare.onChangeOrg
+							}"/>
+						<XGridColumn field="destOrgName" title="名称" align="left" width="120" 
+							parentColumn="destOrg" showTitle="true" editorType="TEXTBOX"
+							editorOptions="{clearbtn:true}"/>
+						<XGridColumn field="destOrgPcode" title="上级编码" align="left" width="80"
+						 	parentColumn="destOrg" showTitle="true" editorType="COMBOZTREE"
+						 	editorOptions="{
+								action: 'egov/asset/aims/basic/aimsbasicorg/loadAllOrgList.do',
+								async: false,
+								idfield: 'orgId',
+								pidfield: 'orgPid',
+								textfield: 'treeNode',
+								valuefield: 'orgName',
+								panelwidth: 300,
+								multiple: false,
+								usesuggest: true,
+								acceptText: true,
+								clearbtn: true,
+								onChange: orgCompare.onChangePOrg
+							}"/>
+						<XGridColumn field="destOrgRank" title="级次" align="center" width="30"
+							parentColumn="destOrg" showTitle="true"/>
+					</columns>
+				</XGrid>
+			</items>
+		</Panel>
+	</items>
+</Page>

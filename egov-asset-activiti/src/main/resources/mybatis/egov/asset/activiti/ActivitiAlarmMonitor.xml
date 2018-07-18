@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.activiti.mapper.ActivitiAlarmMonitorMapper" >
+  <resultMap id="activitiAlarmMonitorMap" type="com.bosssoft.egov.asset.activiti.entity.ActivitiAlarmMonitor" >
+         <result property="id" column="ID" />
+	     <result property="busType" column="BUS_TYPE" />
+	     <result property="busId" column="BUS_ID" />
+	     <result property="taskdefkeybegin" column="TASKDEFKEYBEGIN" />
+	     <result property="taskdefkeyend" column="TASKDEFKEYEND" />
+	     <result property="pid" column="PID" />
+	     <result property="isComplete" column="IS_COMPLETE" />
+	     <result property="prodefId" column="PRODEF_ID" />
+	     <result property="orgCode" column="ORG_CODE" />
+	     <result property="createTime" column="CREATE_TIME" />
+	     <result property="processDesc" column="PROCESS_DESC" />
+	     <result property="zone" column="ZONE" />
+	     <result property="currenttaskdef" column="CURRENT_TASKDEF" />
+	     <result property="authrolecode" column="AUTH_ROLE_CODE" />
+	     <result property="receivetime" column="RECEIVE_TIME" />
+	     <result property="endtime" column="END_TIME" />
+	     <result property="taskname" column="TASK_NAME" />
+	     <result property="description" column="DESCRIPTION" />
+	     <result property="isalarm" column="IS_ALARM" />
+	     <result property="formtype" column="FORM_TYPE" />
+	 </resultMap>
+ 
+ <sql id="Base_Column_List">
+    ID,BUS_TYPE,BUS_ID,TASKDEFKEYBEGIN,TASKDEFKEYEND,PID,IS_COMPLETE,PRODEF_ID
+    ,ORG_CODE,CREATE_TIME,PROCESS_DESC,TASK_NAME,DESCRIPTION,
+    ZONE,CURRENT_TASKDEF,AUTH_ROLE_CODE,RECEIVE_TIME
+    ,END_TIME,IS_ALARM,FORM_TYPE  </sql>
+ 
+    <select id="queryActivitiAlarmMonitorPage" resultMap="activitiAlarmMonitorMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM ACTIVITI_ALARM_MONITOR
+      	 <trim prefix="where"  prefixOverrides="and |or">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            ${searcher.__QUERYCON}
+	        </if>  
+	    </trim>
+    </select>
+    <select id="hasRecord" resultMap="activitiAlarmMonitorMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM ACTIVITI_ALARM_MONITOR
+      	 where BUS_ID= #{busId} and ( TASKDEFKEYBEGIN = #{taskdef} OR TASKDEFKEYEND = #{taskdef})  and PID = #{pid}
+    </select>
+    <select id="hasRecordNoPid" resultMap="activitiAlarmMonitorMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM ACTIVITI_ALARM_MONITOR
+      	 where  BUS_ID= #{busId} and ( TASKDEFKEYBEGIN = #{taskdef} OR TASKDEFKEYEND = #{taskdef})
+    </select>
+    <!-- 结束除该区域外的 -->
+    <update id="updateCompleteByBusIdExceptNowZone">
+		UPDATE
+		ACTIVITI_ALARM_MONITOR
+		<set>
+			IS_COMPLETE = #{complete}
+		</set>
+		 where BUS_ID= #{busId} and ( TASKDEFKEYBEGIN != #{taskdef} and TASKDEFKEYEND != #{taskdef})  and PID = #{pid}
+	</update>
+    <update id="updateCompleteByBusIdExceptNowZoneNoPid">
+		UPDATE
+		ACTIVITI_ALARM_MONITOR
+		<set>
+			IS_COMPLETE = #{complete}
+		</set>
+		 where BUS_ID= #{busId} and ( TASKDEFKEYBEGIN != #{taskdef} and TASKDEFKEYEND != #{taskdef})
+	</update>
+    
+    <select id="hasRecordNoComplete" resultMap="activitiAlarmMonitorMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM ACTIVITI_ALARM_MONITOR
+      	 where BUS_ID= #{busId} and ( TASKDEFKEYBEGIN = #{taskdef} OR TASKDEFKEYEND = #{taskdef})  and PID = #{pid}  and IS_COMPLETE = #{complete}
+    </select>
+    <select id="hasRecordNoCompleteNoPid" resultMap="activitiAlarmMonitorMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM ACTIVITI_ALARM_MONITOR
+      	 where  BUS_ID= #{busId} and ( TASKDEFKEYBEGIN = #{taskdef} OR TASKDEFKEYEND = #{taskdef}) and IS_COMPLETE = #{complete}
+    </select>
+    <select id="getMonitorsNoPid" resultMap="activitiAlarmMonitorMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM ACTIVITI_ALARM_MONITOR
+      	 where BUS_ID= #{busId}  and ZONE=#{zone}
+    </select>
+    <select id="getMonitors" resultMap="activitiAlarmMonitorMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM ACTIVITI_ALARM_MONITOR
+      	 where BUS_ID= #{busId} and PID = #{pid} and ZONE=#{zone}
+    </select>
+    
+    <update id="updateTimeByBusId">
+		UPDATE
+		ACTIVITI_ALARM_MONITOR
+		<set>
+			CREATE_TIME = #{time}
+		</set>
+		WHERE BUS_ID= #{busId}
+	</update>
+	
+	    <update id="updateTimeByBusIdComplete">
+		UPDATE
+		ACTIVITI_ALARM_MONITOR
+		<set>
+			END_TIME = #{time}
+		</set>
+		WHERE BUS_ID= #{busId} and IS_COMPLETE = #{complete}
+	</update>
+    
+    <update id="updateCompleteByBusId">
+		UPDATE
+		ACTIVITI_ALARM_MONITOR
+		<set>
+			IS_COMPLETE = #{complete}
+		</set>
+		WHERE BUS_ID= #{busId} and PID = #{pid}
+	</update>
+    <update id="updateCompleteByBusIdNoPid">
+		UPDATE
+		ACTIVITI_ALARM_MONITOR
+		<set>
+			IS_COMPLETE = #{complete}
+		</set>
+		WHERE BUS_ID= #{busId}
+	</update>
+	
+    <update id="updateCompleteEndTimeByBusId">
+		UPDATE
+		ACTIVITI_ALARM_MONITOR
+		<set>
+			IS_COMPLETE = #{complete}, END_TIME = #{endtime},
+			TASK_NAME = #{nodename}, DESCRIPTION =   #{nodedesc}
+		</set>
+		WHERE BUS_ID= #{busId} and PID= #{pid}
+	</update>
+    <update id="updateCompleteEndTimeByBusIdNoPid">
+		  UPDATE
+		ACTIVITI_ALARM_MONITOR
+		<set>
+			IS_COMPLETE = #{complete}, END_TIME = #{endtime},
+			TASK_NAME = #{nodename}, DESCRIPTION = #{nodedesc}
+		</set>
+		WHERE BUS_ID= #{busId}
+	</update>
+    <update id="updateCompleteEndTimeByBusIdByIsComplete">
+		UPDATE
+		ACTIVITI_ALARM_MONITOR
+		<set>
+			IS_COMPLETE = #{complete}, END_TIME = #{endtime}
+		</set>
+		WHERE BUS_ID= #{busId} and IS_COMPLETE = #{completebefore} and PID = #{pid}
+	</update>
+    <update id="updateCompleteEndTimeByBusIdByIsCompleteNoPid">
+		UPDATE
+		ACTIVITI_ALARM_MONITOR
+		<set>
+			IS_COMPLETE = #{complete}, END_TIME = #{endtime} 
+		</set>
+		WHERE BUS_ID= #{busId} and IS_COMPLETE = #{completebefore}
+	</update>
+	
+	<update id="updateCompleteAndtimeByBusId">
+		UPDATE
+		ACTIVITI_ALARM_MONITOR
+		<set>
+			IS_COMPLETE = #{complete}
+		</set>
+		WHERE BUS_ID= #{busId}
+	</update>
+	<update id="updateTimeCompleteByBusIdAndTaskdef">
+		UPDATE
+		ACTIVITI_ALARM_MONITOR
+		<set>
+			IS_COMPLETE = #{complete},CREATE_TIME =  #{time}
+		</set>
+		WHERE BUS_ID= #{busId} and TASKDEFKEYEND = #{taskdef}
+	</update>
+	
+	<update id="updateReceiveTimeCompleteByBusIdAndTaskdef">
+		UPDATE
+		ACTIVITI_ALARM_MONITOR
+		<set>
+			IS_COMPLETE = #{complete},RECEIVE_TIME =  #{time}
+		</set>
+		WHERE BUS_ID= #{busId} and TASKDEFKEYEND = #{taskdef} and PID = #{pid}
+	</update>
+	<update id="updateReceiveTimeCompleteByBusIdAndTaskdefNoPid">
+		UPDATE
+		ACTIVITI_ALARM_MONITOR
+		<set>
+			IS_COMPLETE = #{complete},RECEIVE_TIME =  #{time}
+		</set>
+		WHERE BUS_ID= #{busId} and TASKDEFKEYEND = #{taskdef}
+	</update>
+	<update id="updateReceiveTimeCreateTimeCompleteByBusIdAndTaskdef">
+		UPDATE
+		ACTIVITI_ALARM_MONITOR
+		<set>
+			IS_COMPLETE = #{complete},RECEIVE_TIME =  #{receiveTime},CREATE_TIME =  #{createTime} ,END_TIME = #{endTime}
+		</set>
+		WHERE BUS_ID= #{busId} and TASKDEFKEYEND = #{taskdef} and PID = #{pid} 
+	</update>
+	<update id="updateReceiveTimeCreateTimeCompleteByBusIdAndTaskdefNoPid">
+		UPDATE
+		ACTIVITI_ALARM_MONITOR
+		<set>
+			IS_COMPLETE = #{complete},RECEIVE_TIME =  #{receiveTime},CREATE_TIME =  #{createTime},END_TIME = #{endTime}
+			
+		</set>
+		WHERE BUS_ID= #{busId} and TASKDEFKEYEND = #{taskdef}
+	</update>
+	
+	<update id="updateReutrn">
+		UPDATE
+		ACTIVITI_ALARM_MONITOR
+		<set>
+			IS_COMPLETE = #{complete}, CREATE_TIME = #{time}
+		</set>
+		WHERE BUS_ID= #{busId}
+	</update>
+	<update id="updateTaskDefByBusId">
+		UPDATE
+		ACTIVITI_ALARM_MONITOR
+		<set>
+			TASKDEFKEYEND = #{taskdef}
+		</set>
+		WHERE BUS_ID= #{busId} and IS_COMPLETE = #{complete} and PID = #{pid}
+	</update>
+	<update id="updateTaskDefByBusIdNoPid">
+		UPDATE
+		ACTIVITI_ALARM_MONITOR
+		<set>
+			TASKDEFKEYEND = #{taskdef}
+		</set>
+		WHERE BUS_ID= #{busId} and IS_COMPLETE = #{complete}
+	</update>
+	<update id="updateCurrentTaskDefRoleCode">
+		UPDATE
+		ACTIVITI_ALARM_MONITOR
+		<set>
+			CURRENT_TASKDEF = #{currenttaskdef}, AUTH_ROLE_CODE = #{authrolecode}
+		</set>
+		WHERE BUS_ID= #{busId} and IS_COMPLETE = #{complete}
+	</update>
+	<update id="updateCurrentTaskDefRoleCodeTaskName">
+		UPDATE
+		ACTIVITI_ALARM_MONITOR
+		<set>
+			CURRENT_TASKDEF = #{currenttaskdef}, AUTH_ROLE_CODE = #{authrolecode}, TASK_NAME = #{taskName}
+		</set>
+		WHERE BUS_ID= #{busId} and IS_COMPLETE = #{complete} and PID = #{pid}
+	</update>
+	<update id="updateCurrentTaskDefRoleCodeTaskNameNoPid">
+		UPDATE
+		ACTIVITI_ALARM_MONITOR
+		<set>
+			CURRENT_TASKDEF = #{currenttaskdef}, AUTH_ROLE_CODE = #{authrolecode}, TASK_NAME = #{taskName}
+		</set>
+		WHERE BUS_ID= #{busId} and IS_COMPLETE = #{complete}
+	</update>
+	
+<!-- 	<update id="updateCurrentTaskDefRoleCodeReceiveTime">
+		UPDATE
+		ACTIVITI_ALARM_MONITOR  
+		<set>
+			CURRENT_TASKDEF = #{currenttaskdef}, AUTH_ROLE_CODE = #{authrolecode} ,RECEIVE_TIME = #{receivetime},
+			TASK_NAME = #{nodename}, DESCRIPTION = #{nodedesc}
+		</set>
+		WHERE BUS_ID= #{busId} and  ( TASKDEFKEYBEGIN = #{currenttaskdef} OR TASKDEFKEYEND = #{currenttaskdef}) and PID = #{pid}
+	</update> -->
+	
+	<update id="updateCurrentTaskDefRoleCodeReceiveTime">
+		UPDATE
+		ACTIVITI_ALARM_MONITOR  
+		<set>
+			CURRENT_TASKDEF = #{currenttaskdef}, AUTH_ROLE_CODE = #{authrolecode} ,IS_COMPLETE = #{complete},
+			TASK_NAME = #{nodename}, DESCRIPTION = #{nodedesc}
+		</set>
+		WHERE BUS_ID= #{busId} and  ( TASKDEFKEYBEGIN = #{currenttaskdef} OR TASKDEFKEYEND = #{currenttaskdef}) and PID = #{pid}
+		and IS_COMPLETE = 0
+	</update>
+	
+	<update id="updateCurrentTaskDefRoleCodeReceiveTimeNoPid">
+		UPDATE
+		ACTIVITI_ALARM_MONITOR  
+		<set>
+			CURRENT_TASKDEF = #{currenttaskdef}, AUTH_ROLE_CODE = #{authrolecode} ,IS_COMPLETE = #{complete},
+			TASK_NAME = #{nodename}, DESCRIPTION = #{nodedesc},IS_COMPLETE = #{complete}
+		</set>
+		WHERE BUS_ID= #{busId} and  ( TASKDEFKEYBEGIN = #{currenttaskdef} OR TASKDEFKEYEND = #{currenttaskdef})
+		and IS_COMPLETE = 0
+	</update>
+	
+	<update id="updateCurrentTaskDefRoleCodeReceiveTimeBack2Zone">
+		UPDATE
+		ACTIVITI_ALARM_MONITOR  
+		<set>
+			CURRENT_TASKDEF = #{currenttaskdef}, AUTH_ROLE_CODE = #{authrolecode} ,IS_COMPLETE = #{complete},
+			TASK_NAME = #{nodename}, DESCRIPTION = #{nodedesc},CREATE_TIME=#{receivetime}
+		</set>
+		WHERE BUS_ID= #{busId} and  ( TASKDEFKEYBEGIN = #{currenttaskdef} OR TASKDEFKEYEND = #{currenttaskdef}) and PID = #{pid}
+		and IS_COMPLETE = 1
+	</update>
+	
+	<update id="updateCurrentTaskDefRoleCodeReceiveTimeNoPidBack2Zone">
+		UPDATE
+		ACTIVITI_ALARM_MONITOR  
+		<set>
+			CURRENT_TASKDEF = #{currenttaskdef}, AUTH_ROLE_CODE = #{authrolecode} ,IS_COMPLETE = #{complete},
+			TASK_NAME = #{nodename}, DESCRIPTION = #{nodedesc},IS_COMPLETE = #{complete},CREATE_TIME=#{receivetime}
+		</set>
+		WHERE BUS_ID= #{busId} and  ( TASKDEFKEYBEGIN = #{currenttaskdef} OR TASKDEFKEYEND = #{currenttaskdef})
+		and IS_COMPLETE = 1
+	</update>
+<!-- 	<update id="updateCurrentTaskDefRoleCodeReceiveTimeNoPid">
+		UPDATE
+		ACTIVITI_ALARM_MONITOR  
+		<set>
+			CURRENT_TASKDEF = #{currenttaskdef}, AUTH_ROLE_CODE = #{authrolecode} ,RECEIVE_TIME = #{receivetime},
+			TASK_NAME = #{nodename}, DESCRIPTION = #{nodedesc},IS_COMPLETE = #{complete}
+		</set>
+		WHERE BUS_ID= #{busId} and  ( TASKDEFKEYBEGIN = #{currenttaskdef} OR TASKDEFKEYEND = #{currenttaskdef})
+	</update> -->
+	
+	<update id="updateCurrentTaskDefRoleCodeReceiveTimeMiddle">
+		UPDATE
+		ACTIVITI_ALARM_MONITOR  
+		<set>
+			CURRENT_TASKDEF = #{currenttaskdef}, AUTH_ROLE_CODE = #{authrolecode} ,RECEIVE_TIME = #{receivetime},
+			TASK_NAME = #{nodename}, DESCRIPTION = #{nodedesc}
+		</set>
+		WHERE BUS_ID= #{busId} and IS_COMPLETE = #{complete} and PID = #{pid}
+	</update>
+	
+	<update id="updateCurrentTaskDefRoleCodeReceiveTimeMiddleNoPid">
+		UPDATE
+		ACTIVITI_ALARM_MONITOR  
+		<set>
+			CURRENT_TASKDEF = #{currenttaskdef}, AUTH_ROLE_CODE = #{authrolecode} ,RECEIVE_TIME = #{receivetime},
+			TASK_NAME = #{nodename}, DESCRIPTION = #{nodedesc},IS_COMPLETE = #{complete}
+		</set>
+		WHERE BUS_ID= #{busId}  and IS_COMPLETE = #{complete}
+	</update>
+	
+	<delete id="deleteByBusId">
+		DELETE
+		ACTIVITI_ALARM_MONITOR
+		WHERE BUS_ID= #{busId} and PID = #{pid}
+	</delete>
+	<delete id="deleteByBusIdNoPid">
+		DELETE
+		ACTIVITI_ALARM_MONITOR
+		WHERE BUS_ID= #{busId}
+	</delete>
+	
+	<delete id="deleteByBusIdAndTaskdef">
+		DELETE
+		ACTIVITI_ALARM_MONITOR
+		WHERE BUS_ID= #{busId} and TASKDEFKEY = #{taskdef}
+	</delete>
+	<!-- 动态执行存储，在中间状态没办法及时更新的时候 -->
+	<update id="beginAlarmProcedure" statementType="CALLABLE">
+    	{call ProActivitiAlarm}
+    </update>
+    
+    <update id="dynamicAlarmPro" parameterMap="alarmMap" statementType="CALLABLE">
+    	{call ProActivitiAlarm_dynamic(
+    	    #{zoneFlag,jdbcType=VARCHAR,mode=IN},
+    	    #{busType,jdbcType=VARCHAR,mode=IN},
+    	    #{busId,jdbcType=VARCHAR,mode=IN}
+		)}
+    </update>
+    <parameterMap type="java.util.Map" id="alarmMap">
+    	<parameter property="zoneFlag" jdbcType="VARCHAR" mode="IN"/>
+    	<parameter property="busType" jdbcType="VARCHAR" mode="IN"/>
+    	<parameter property="busId" jdbcType="VARCHAR" mode="IN"/>
+    </parameterMap>
+    
+</mapper>

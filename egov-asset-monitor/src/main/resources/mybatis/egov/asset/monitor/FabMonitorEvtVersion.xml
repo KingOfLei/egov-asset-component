@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.monitor.mapper.FabMonitorEvtVersionMapper" >
+  <resultMap id="fabMonitorEvtVersionMap" type="com.bosssoft.egov.asset.monitor.entity.FabMonitorEvtVersion" >
+         <result property="fid" column="FID" />
+	     <result property="fevtid" column="FEVTID" />
+	     <result property="fevtcode" column="FEVTCODE" />
+	     <result property="fevtname" column="FEVTNAME" />
+	     <result property="fbusiversion" column="FBUSIVERSION" />
+	 </resultMap>
+ 
+ <sql id="Base_Column_List">
+    FID,FEVTID,FEVTCODE,FEVTNAME,FBUSIVERSION  </sql>
+ 
+    <select id="queryFabMonitorEvtVersionPage" resultMap="fabMonitorEvtVersionMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM FAB_MONITOR_EVT_VERSION
+      	 <trim prefix="where"  prefixOverrides="and |or">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            ${searcher.__QUERYCON}
+	        </if>  
+	    </trim>
+    </select>
+    
+        <!--  查询监控事项版本号表 -不分页 -->
+    <select id="queryList" resultMap="fabMonitorEvtVersionMap">
+        SELECT * FROM FAB_MONITOR_EVT_VERSION
+        <trim prefix="where" prefixOverrides="and |or">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            ${searcher.__QUERYCON}
+	        </if> 
+	    </trim>
+	    <if test="sortProperty != null">
+			ORDER BY ${sortProperty}
+			<if test="sortDirection != null">
+				${sortDirection}
+			</if>
+        </if>
+    </select>
+</mapper>

@@ -1,0 +1,63 @@
+$header-height: 30px;
+$header-bg-color: #62a9f1;
+$header-bg-active-color: #227dce;
+
+.etl-export-task-box{
+	position: absolute;
+	bottom: -200px;
+	right: 30px;
+	border: 1px solid $header-bg-color;
+
+	width: 450px;
+	height: 200px;
+	overflow: hidden;
+	&.active{
+		border: 1px solid $header-bg-active-color;
+	}
+
+	.task-header{
+		color: #fff;
+		height: $header-height;
+		line-height: $header-height;
+		font-size: 14px;
+		background: $header-bg-color;
+		cursor: move;
+		
+		&.active{
+			background: $header-bg-active-color;
+		}
+		
+		&>span{
+			display: inline-block;
+		}
+		&>.task-title{
+			margin-left: 5px;
+		}
+		&>.task-btn-list{
+			display: inline-block;
+			float: right;
+			height: $header-height;
+			
+			&>span{
+				width: $header-height;
+				height: $header-height;
+				line-height: $header-height;
+				cursor: pointer;
+				text-align: center;
+				display:inline-block;
+				top: 0;
+				&:hover{
+					background: $header-bg-active-color;
+				}
+			}
+		}
+	}
+	.task-body{
+		height: 200px;
+		
+		.exp-icon{
+			margin-top: 3px;
+			cursor: pointer;
+		}
+	}
+}

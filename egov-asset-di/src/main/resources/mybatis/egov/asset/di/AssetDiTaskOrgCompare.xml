@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.di.mapper.AssetDiTaskOrgCompareMapper" >
+  <resultMap id="assetDiTaskOrgCompareMap" type="com.bosssoft.egov.asset.di.entity.AssetDiTaskOrgCompare" >
+         <result property="orgId" column="ORG_ID" />
+	     <result property="orgCode" column="ORG_CODE" />
+	     <result property="orgName" column="ORG_NAME" />
+	     <result property="srcOrgId" column="SRC_ORG_ID" />
+	     <result property="srcOrgCode" column="SRC_ORG_CODE" />
+	     <result property="srcOrgName" column="SRC_ORG_NAME" />
+	     <result property="destOrgId" column="DEST_ORG_ID" />
+	     <result property="destOrgCode" column="DEST_ORG_CODE" />
+	     <result property="destOrgName" column="DEST_ORG_NAME" />
+	     <result property="destOrgPid" column="DEST_ORG_PID" />
+	     <result property="destOrgPcode" column="DEST_ORG_PCODE" />
+	     <result property="destOrgRank" column="DEST_ORG_RANK" />
+	     <result property="destOrgIsleaf" column="DEST_ORG_ISLEAF" />
+	 </resultMap>
+ 
+ <sql id="Base_Column_List">
+    ORG_ID,ORG_CODE,ORG_NAME,SRC_ORG_ID,SRC_ORG_CODE,SRC_ORG_NAME,DEST_ORG_ID,DEST_ORG_CODE,DEST_ORG_NAME,DEST_ORG_PID,DEST_ORG_PCODE,DEST_ORG_RANK,DEST_ORG_ISLEAF  </sql>
+ 
+    <select id="queryAssetDiTaskOrgComparePage" resultMap="assetDiTaskOrgCompareMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM ASSET_DI_TASK_ORG_COMPARE
+      	 <trim prefix="where"  prefixOverrides="and |or">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            ${searcher.__QUERYCON}
+	        </if>  
+	    </trim>
+    </select>
+    
+    <select id="getAssetDiTaskOrgCompareFromTmp" resultMap="assetDiTaskOrgCompareMap">
+       SELECT     
+    	<include refid="Base_Column_List" />
+        FROM ASSET_DI_TASK_ORG_COMPARE ORG
+        WHERE ORG.ORG_ID=#{orgId} 
+          AND EXISTS(
+          SELECT 1 
+            FROM ASSET_DI_TASK_ORG_COMPARE_TMP TMP
+           WHERE TMP.ID=#{batchId} AND TMP.SRC_ORG_ID=ORG.SRC_ORG_ID           
+        )
+        ORDER BY SRC_ORG_CODE
+    </select>
+</mapper>

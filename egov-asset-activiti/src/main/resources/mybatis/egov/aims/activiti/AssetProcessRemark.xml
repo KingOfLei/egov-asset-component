@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper
+	namespace="com.bosssoft.egov.asset.activiti.mapper.AssetProcessRemarkMapper">
+	<resultMap id="assetProcessRemarkMap"
+		type="com.bosssoft.egov.asset.activiti.entity.AssetProcessRemark">
+		<result property="appId" column="APP_ID" />
+		<result property="appName" column="APP_NAME" />
+		<result property="id" column="ID" />
+		<result property="busId" column="BUS_ID" />
+		<result property="operateDate" column="OPERATE_DATE" />
+		<result property="operatorId" column="OPERATOR_ID" />
+		<result property="operatorName" column="OPERATOR_NAME" />
+		<result property="taskId" column="TASK_ID" />
+		<result property="procInstId" column="PROC_INST_ID" />
+		<result property="remark" column="REMARK" />
+		<result property="checkResult" column="CHECK_RESULT" />
+		<result property="taskDuedate" column="TASK_DUEDATE" />
+		<result property="userTaskId" column="USER_TASK_ID" />
+		<result property="busType" column="BUS_TYPE" />
+		<result property="taskStatus" column="TASK_STATUS" />
+		<result property="taskName" column="TASK_NAME" />
+		<result property="nextNodeName" column="NEXT_NODE_NAME" />
+		<result property="nextNodeId" column="NEXT_NODE_ID" />
+		<result property="nextExecutorName" column="NEXT_EXECUTOR_NAME" />
+		<result property="creatorName" column="CREATOR_NAME" />
+		<result property="creatorId" column="CREATOR_ID" />
+		<result property="assignee" column="ASSIGNEE" />
+		<result property="nextExecutorCode" column="NEXT_EXECUTOR_CODE" />
+		<result property="currentTaskStatus" column="CURRENT_TASK_STATUS" />
+		<result property="nextTaskStatus" column="NEXT_TASK_STATUS" />
+		<result property="description" column="DESCRIPTION" />
+		<result property="type" column="TYPE" />
+		<result property="roleCode" column="ROLE_CODE" />
+		<result property="roleName" column="ROLE_NAME" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		APP_ID,APP_NAME,ID,BUS_ID,OPERATE_DATE,OPERATOR_ID
+		,OPERATOR_NAME,TASK_ID,PROC_INST_ID,REMARK,CHECK_RESULT,TASK_DUEDATE
+		,USER_TASK_ID,BUS_TYPE,TASK_STATUS,TASK_NAME,NEXT_NODE_NAME,NEXT_NODE_ID
+		,NEXT_EXECUTOR_NAME,CREATOR_NAME,CREATOR_ID,ASSIGNEE,NEXT_EXECUTOR_CODE
+		,NEXT_TASK_STATUS,CURRENT_TASK_STATUS,DESCRIPTION
+		,TYPE,ROLE_CODE,ROLE_NAME
+	</sql>
+
+	<select id="queryAssetProcessRemarkPage" resultMap="assetProcessRemarkMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM ASSET_PROCESS_REMARK
+		<trim prefix="where" prefixOverrides="and | or">
+			<if test="searcher != null and searcher.__QUERYCON != null">
+				${searcher.__QUERYCON}
+			</if>
+		</trim>
+	</select>
+
+	<select id="queryAuditorDesignatedBusRemarkByResult" resultMap="assetProcessRemarkMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM ASSET_PROCESS_REMARK where OPERATOR_ID = #{operatorId} and
+		BUS_TYPE LIKE #{busType} and CHECK_RESULT = #{checkResult}
+	</select>
+	<select id="queryAssetProcessRemarkDesigatedBusCheckPage"
+		resultMap="assetProcessRemarkMap">
+		select d.APP_ID,
+		d.APP_NAME,
+		d.ID,
+		d.BUS_ID,
+		d.OPERATE_DATE,
+		d.OPERATOR_ID,
+		d.OPERATOR_NAME,
+		d.TASK_ID,
+		d.PROC_INST_ID,
+		d.REMARK,
+		d.CHECK_RESULT,
+		d.TASK_DUEDATE,
+		d.USER_TASK_ID,
+		d.BUS_TYPE,
+		d.TASK_STATUS,
+		d.TASK_NAME,
+		d.NEXT_NODE_NAME,
+		d.NEXT_NODE_ID,
+		d.NEXT_EXECUTOR_NAME,
+		d.CREATOR_ID,
+		d.CREATOR_NAME,
+		d.ASSIGNEE,
+		d.NEXT_EXECUTOR_CODE
+		from (select b.BUS_ID,b.BUS_TYPE
+		from
+		ASSET_PROCESS_REMARK b
+		where b.OPERATOR_ID = #{operatorId}) a,
+		ASSET_PROCESS_REMARK d
+		where d.BUS_ID = a.BUS_ID and d.bus_type =
+		#{busType} order by bus_id desc
+		,operate_date desc
+	</select>
+
+	<select id="queryAssetProcessRemarkByActiviti" resultMap="assetProcessRemarkMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM ASSET_PROCESS_REMARK
+		WHERE BUS_ID IN
+		<foreach collection="params" open="(" item="in" separator=","
+			index="index" close=")">
+			#{in}
+		</foreach>
+		<trim prefix="and" prefixOverrides="and">
+			<if test="searcher != null and searcher.__QUERYCON != null">
+				${searcher.__QUERYCON}
+			</if>
+		</trim>
+	</select>
+
+
+	<select id="queryAssetProcessRemarkDesigatedPage" resultMap="assetProcessRemarkMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM ASSET_PROCESS_REMARK
+		WHERE BUS_ID = #{businessId} order by
+		operate_date desc
+	</select>
+	<select id="queryBusinessHistory" resultMap="assetProcessRemarkMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM ASSET_PROCESS_REMARK
+		WHERE BUS_ID = #{businessId} and
+		PROC_INST_ID= #{pId} order by operate_date desc
+	</select>
+
+	<select id="queryHisByUserIdPidBusId" resultMap="assetProcessRemarkMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM ASSET_PROCESS_REMARK
+		WHERE BUS_ID = #{busId} and PROC_INST_ID=
+		#{pId} and OPERATOR_ID = #{userId} order by operate_date desc
+	</select>
+
+	<select id="queryHisByUserIdBusId" resultMap="assetProcessRemarkMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM ASSET_PROCESS_REMARK
+		WHERE BUS_ID = #{busId} and OPERATOR_ID =
+		#{userId} order by operate_date desc
+	</select>
+
+	<select id="queryListByBusId" resultMap="assetProcessRemarkMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM ASSET_PROCESS_REMARK
+		WHERE BUS_ID = #{busId} order by operate_date desc
+	</select>
+
+	<select id="queryListByBusIdNoReturn" resultMap="assetProcessRemarkMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM ASSET_PROCESS_REMARK
+		WHERE BUS_ID = #{busId} and CHECK_RESULT not in (1,8,18,21,22,16,15) order by operate_date
+		desc
+	</select>
+
+
+	<select id="queryHistoryByPId" resultMap="assetProcessRemarkMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM ASSET_PROCESS_REMARK
+		WHERE PROC_INST_ID= #{pId} order by
+		operate_date desc
+	</select>
+
+	<update id="updatePIdByBusId">
+		UPDATE
+		ASSET_PROCESS_REMARK
+		<set>
+			PROC_INST_ID = #{pId},BUS_TYPE = #{busType}
+		</set>
+		WHERE BUS_ID= #{busId}
+	</update>
+	<update id="updatePIdByBusIdAndBusType">
+		UPDATE
+		ASSET_PROCESS_REMARK
+		<set>
+			PROC_INST_ID = #{pId}
+		</set>
+		WHERE BUS_ID= #{busId} and BUS_TYPE = #{busType}
+	</update>
+	<update id="updateBusTypeByBusIdAndPid">
+		UPDATE
+		ASSET_PROCESS_REMARK
+		<set>
+			 BUS_TYPE = #{busType}
+		</set>
+		WHERE BUS_ID= #{busId} and PROC_INST_ID = #{pId}
+	</update>
+
+	<delete id="deleteByBusIdAndPId">
+		DELETE
+		ASSET_PROCESS_REMARK
+		WHERE BUS_ID= #{busId} AND
+		PROC_INST_ID = #{pId}
+	</delete>
+	
+	<delete id="deleteRemarkByBusIdDeploymentTemp">
+		DELETE
+		ASSET_PROCESS_REMARK
+		WHERE BUS_ID= #{busId} AND
+		BUS_TYPE = #{deploymentKey} AND TASK_STATUS = #{status}
+	</delete>
+	<delete id="deleteRemarkByBusIdTemp">
+		DELETE
+		ASSET_PROCESS_REMARK
+		WHERE BUS_ID= #{busId} AND
+		BUS_TYPE = #{deploymentKey} AND TASK_STATUS = #{status}
+	</delete>
+
+	<update id="updateBusTypeByIdAndStatus">
+		UPDATE
+		ASSET_PROCESS_REMARK
+		<set>
+			 BUS_TYPE = #{busType}
+		</set>
+		WHERE BUS_ID= #{busId} and TASK_STATUS = #{status}
+	</update>
+	
+	<select id="queryRoleNameByRoleCode" resultType="java.lang.String">
+		SELECT role_name FROM AFA_ROLE where   role_code = #{roleCode}
+	</select>
+
+	<select id="getAssetProcessRemarkListByCondition" resultMap="assetProcessRemarkMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM ASSET_PROCESS_REMARK where 1=1
+		<trim prefix="AND" prefixOverrides="and | or ">
+			<if test="condition !=null and condition!=''">
+				<trim prefix="AND" prefixOverrides="and | or ">
+					${condition}
+				</trim>
+			</if>
+		</trim>
+	</select>
+
+</mapper>

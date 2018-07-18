@@ -1,0 +1,58 @@
+// flow-textarea 浮动文本域样式
+// author: zxy
+// date: 2017-04-12
+
+.flow-textarea{
+    min-width: 400px;
+    position: absolute;
+    border: 1px solid #999;
+    background-color: #fff;
+    text-align:right;
+    display:none;
+
+    .flow-content{
+        padding: 5px;
+        height: 85px;
+        overflow: hidden;
+
+        label{
+            display:inline-block;
+            float:left;
+            width:auto;
+        }
+    }
+
+    textarea{
+        width: 100%;
+        height: 55px;
+        resize: none;
+        border: 1px solid #257dd6;
+    }
+
+    .flow-toolbar{
+        padding: 3px 0;
+        width: 100%;
+        border-top: 1px solid #257dd6;
+        overflow: hidden;
+        background-color: #e1ecff;
+
+        label{
+            width: auto;
+            height: 25px;
+            line-height: 23px;
+            margin: 0 5px;
+            display: inline-block;
+            float: right;
+            border: 1px solid #257dd6;
+            background-color: #fff;
+            color: #257dd6;
+            padding: 0 10px;
+        }
+
+        label:hover{
+            background-color: #257dd6;
+            color: #fff;
+            cursor: pointer;
+        }
+    }
+}

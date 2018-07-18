@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:aop="http://www.springframework.org/schema/aop" 
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		   http://www.springframework.org/schema/context 
+		   http://www.springframework.org/schema/context/spring-context-3.1.xsd
+		   http://www.springframework.org/schema/aop  
+		   http://www.springframework.org/schema/aop/spring-aop-3.1.xsd           
+    ">
+   
+    <!-- 折旧定时任务 -->
+       <bean id="attachmentDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <!-- 调用的类   -->
+        <property name="targetObject" ref="attachmentQuartz"/>  
+        <!-- 调用类中的方法   -->
+        <property name="targetMethod" value="delPreviewFolder"/> 
+        
+       <!--   同步执行 上一任务未执行完，下一任务等待 -->
+        <property name="concurrent" value="false"></property>
+    </bean>
+    
+     <bean id="attachmentTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">  
+         <property name="jobDetail" ref="attachmentDetail" /> 
+         <!-- cron表达式   -->
+         <property name="cronExpression">  
+            <!--  每个天0：30分执行  -->
+             <value>0 30 0 * * ?</value>  
+         </property>  
+    </bean>
+</beans>

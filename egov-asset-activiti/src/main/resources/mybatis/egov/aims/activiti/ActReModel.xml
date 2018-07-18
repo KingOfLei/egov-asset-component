@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.activiti.mapper.ActReModelMapper" >
+  <resultMap id="actReModelMap" type="com.bosssoft.egov.asset.activiti.entity.ActReModel" >
+         <result property="id" column="ID_" />
+	     <result property="rev" column="REV_" />
+	     <result property="name" column="NAME_" />
+	     <result property="key" column="KEY_" />
+	     <result property="category" column="CATEGORY_" />
+	     <result property="createTime" column="CREATE_TIME_" />
+	     <result property="lastUpdateTime" column="LAST_UPDATE_TIME_" />
+	     <result property="version" column="VERSION_" />
+	     <result property="metaInfo" column="META_INFO_" />
+	     <result property="tenantId" column="TENANT_ID_" />
+	 </resultMap>
+ 
+ <sql id="Base_Column_List">
+    ID_,REV_,NAME_,KEY_,CATEGORY_,CREATE_TIME_,LAST_UPDATE_TIME_,VERSION_,META_INFO_,TENANT_ID_  </sql>
+ 
+    <select id="queryActReModelPage" resultMap="actReModelMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM ACT_RE_MODEL
+      	 <trim prefix="where"  prefixOverrides="and |or">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            #{searcher.__QUERYCON}
+	        </if>  
+	    </trim>
+    </select>
+</mapper>

@@ -1,0 +1,32 @@
+[
+	{
+		cacheName:"__EGOV_ASSET_OPER_LOG__",
+		cacheProperty:{
+			cacheLoader:"com.bosssoft.egov.asset.log.api.OperLogCacheLoader",
+			cacheProvider:"com.bosssoft.platform.cache.redis.RedisCacheProvider",
+			serverAddress:"127.0.0.1:6379",
+			cacheMode:"LOCAL",
+			maxElementsInMemory:"10000",
+			timeToLiveSeconds:"12000",
+			timeToIdleSeconds:"12000",
+			priority:"100",
+			isClustered:"false",
+			cacheModificationListener:""
+		}
+	},
+	{
+		cacheName:"__EGOV_ASSET_BIZ_LOG__",
+		cacheProperty:{
+			cacheLoader:"com.bosssoft.egov.asset.bizlog.api.BizLogCacheLoader",
+			cacheProvider:"com.bosssoft.platform.cache.redis.RedisCacheProvider",
+			serverAddress:"127.0.0.1:6379",
+			cacheMode:"LOCAL",
+			maxElementsInMemory:"10000",
+			timeToLiveSeconds:"12000",
+			timeToIdleSeconds:"12000",
+			priority:"100",
+			isClustered:"false",
+			cacheModificationListener:""
+		}
+	}
+] 

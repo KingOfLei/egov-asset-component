@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.activiti.mapper.ActHiTaskinstMapper" >
+  <resultMap id="actHiTaskinstMap" type="com.bosssoft.egov.asset.activiti.entity.ActHiTaskinst" >
+         <result property="id" column="ID_" />
+	     <result property="procDefId" column="PROC_DEF_ID_" />
+	     <result property="taskDefKey" column="TASK_DEF_KEY_" />
+	     <result property="procInstId" column="PROC_INST_ID_" />
+	     <result property="executionId" column="EXECUTION_ID_" />
+	     <result property="parentTaskId" column="PARENT_TASK_ID_" />
+	     <result property="name" column="NAME_" />
+	     <result property="description" column="DESCRIPTION_" />
+	     <result property="owner" column="OWNER_" />
+	     <result property="assignee" column="ASSIGNEE_" />
+	     <result property="startTime" column="START_TIME_" />
+	     <result property="claimTime" column="CLAIM_TIME_" />
+	     <result property="endTime" column="END_TIME_" />
+	     <result property="duration" column="DURATION_" />
+	     <result property="deleteReason" column="DELETE_REASON_" />
+	     <result property="priority" column="PRIORITY_" />
+	     <result property="dueDate" column="DUE_DATE_" />
+	     <result property="formKey" column="FORM_KEY_" />
+	     <result property="category" column="CATEGORY_" />
+	     <result property="tenantId" column="TENANT_ID_" />
+	 </resultMap>
+ 
+ <sql id="Base_Column_List">
+    ID_,PROC_DEF_ID_,TASK_DEF_KEY_,PROC_INST_ID_,EXECUTION_ID_,PARENT_TASK_ID_,NAME_,DESCRIPTION_,OWNER_,ASSIGNEE_,START_TIME_,CLAIM_TIME_,END_TIME_,DURATION_,DELETE_REASON_,PRIORITY_,DUE_DATE_,FORM_KEY_,CATEGORY_,TENANT_ID_  </sql>
+ 
+    <select id="queryActHiTaskinstPage" resultMap="actHiTaskinstMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM ACT_HI_TASKINST
+      	 <trim prefix="where"  prefixOverrides="and |or">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            #{searcher.__QUERYCON}
+	        </if>  
+	    </trim>
+    </select>
+</mapper>

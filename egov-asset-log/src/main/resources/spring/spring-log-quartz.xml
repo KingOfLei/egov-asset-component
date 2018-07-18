@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:aop="http://www.springframework.org/schema/aop" 
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		   http://www.springframework.org/schema/context 
+		   http://www.springframework.org/schema/context/spring-context-3.1.xsd
+		   http://www.springframework.org/schema/aop  
+		   http://www.springframework.org/schema/aop/spring-aop-3.1.xsd           
+    ">
+   <!-- 业务日志 -->  
+    <bean id="bizLogDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+        <!-- 调用的类 -->  
+        <property name="targetObject" ref="assetBizLogService"/>  
+        <!-- 调用类中的方法 -->  
+        <property name="targetMethod" value="saveBizLog" />      
+        
+        <!-- 同步执行 上一任务未执行完，下一任务等待 -->
+        <property name="concurrent" value="false"></property>
+    </bean>
+    
+    <bean id="bizLogTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">  
+            <property name="jobDetail" ref="bizLogDetail" /> 
+            <!-- cron表达式 -->  
+            <property name="cronExpression">  
+                <!-- 每隔10秒执行一次-->  
+                <value>${biz.log.timing}</value>  
+            </property>  
+    </bean>   
+    
+    <bean id="operLogDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <!-- 调用的类 -->  
+        <property name="targetObject" ref="assetOperLogService"/>  
+        <!-- 调用类中的方法 -->  
+        <property name="targetMethod" value="saveOperLog"/> 
+        
+         <!-- 同步执行 上一任务未执行完，下一任务等待 -->
+        <property name="concurrent" value="false"></property>
+    </bean>
+    
+     <bean id="operLogTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">  
+         <property name="jobDetail" ref="operLogDetail" /> 
+         <!-- cron表达式 -->  
+         <property name="cronExpression">  
+             <!-- 每隔10秒执行一次-->  
+             <value>${oper.log.timing}</value>  
+         </property>  
+    </bean>   
+    
+    <!-- <bean id="logConfiguration" class="com.bosssoft.egov.asset.log.LogQuartzConfiguration">
+      <property name="schedulerFactoryBean" ref="logTaskManager"></property>
+    </bean> -->
+</beans>

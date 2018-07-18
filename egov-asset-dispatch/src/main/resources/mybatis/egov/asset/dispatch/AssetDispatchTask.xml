@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.dispatch.mapper.AssetDispatchTaskMapper" >
+  <resultMap id="assetDispatchTaskMap" type="com.bosssoft.egov.asset.dispatch.entity.AssetDispatchTask" >
+         <result property="id" column="ID" />
+	     <result property="code" column="CODE" />
+	     <result property="name" column="NAME" />
+	     <result property="quartzExp" column="QUARTZ_EXP" />
+	     <result property="jobId" column="JOB_ID" />
+	     <result property="jobCode" column="JOB_CODE" />
+	     <result property="jobName" column="JOB_NAME" />
+	     <result property="params" column="PARAMS" />
+	     <result property="status" column="STATUS" />
+	     <result property="reamrk" column="REAMRK" />
+	 </resultMap>
+ 
+ <sql id="Base_Column_List">
+    ID,CODE,NAME,QUARTZ_EXP,JOB_ID,JOB_CODE,JOB_NAME,PARAMS,STATUS,REAMRK  </sql>
+ 
+    <select id="queryAssetDispatchTaskPage" resultMap="assetDispatchTaskMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM ASSET_DISPATCH_TASK
+      	 <trim prefix="where"  prefixOverrides="and |or">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            #{searcher.__QUERYCON}
+	        </if>  
+	    </trim>
+    </select>
+</mapper>

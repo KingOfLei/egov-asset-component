@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>                       
+<Page id="assetWorkorderPage" layout="border" 
+	templatePath="egov/asset/workorder/assetworkorder_add.jsp" 
+	js="resources/egov/js/asset/workorder/assetworkorder_add.js"
+	jsId="assetworkorder_add" 
+	xmlns="http://www.bosssoft.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.bosssoft.org ../../../schema/uis/uitemplate-2.0.xsd">
+	<items>
+ 
+	<Panel  id="aimsWorkOrderPage_form_panel"  region="center" layout="border" >
+	  <items>
+	  <Panel id="aimsWorkOrder_Button_1panel" region="center" >
+	   <items>
+	   <Form  id="aimsWorkOrderPage_form"  colCount="2"  layout="table" modelKey="aimsWorkOrder">
+		 <items>            
+			<Row>
+			  <items>
+			     <FormItem id="orgName" name="编制单位" align="center" readOnly="true" visible="false"></FormItem>
+			     <FormItem id="rgnId" name="rgnId" align="center" readOnly="true"  visible="false"></FormItem>
+			     <FormItem id="rgnCode" name="rgnCode" align="center" readOnly="true" visible="false"></FormItem>
+			     <FormItem id="rgnName" name="rgnName" align="center" readOnly="true" visible="false"></FormItem>
+		         <FormItem id="orgId" name="orgId" align="center" readOnly="true" visible="false"></FormItem>
+			     <FormItem id="orgCode" name="orgCode" align="center" readOnly="true" visible="false"></FormItem>		   
+			     <FormItem id="billId" name="单据ID" visible="false"   />
+			     <FormItem id="billStatus" name="" visible="false"   />
+			     <FormItem id="bizStatus" name="" visible="false"   />
+			     <FormItem id="bizStatusName" name="" visible="false"   /> 
+			    
+			    
+			    <FormItem id="prioritylevel" name="优先级" editorType="RADIOBOX" required="true" 
+			              data="[{'value':'紧急','text':'紧急          '},
+			                     {'value':'重要','text':'重要          '},
+			                     {'value':'一般','text':'一般'}]"/>
+			    
+			    <FormItem id="billCode" name="工单编号" editorType="TEXTBOX" readOnly="true" />
+			    <FormItem id="orderApplicant" name="申请人" editorType="TEXTBOX" required="true" />
+			    <FormItem id="billDate" name="申请日期" editorType="DATETIME"  required="true" 
+					editOptions="{
+						format: 'yyyy-mm-dd',
+						valueFormat: 'yyyy-mm-dd'
+					}"/>
+			    <FormItem id="busTypeCode" name="业务类型" editorType="TEXTBOX" visible="false" />
+			    		
+			    <FormItem id="busTypeName" name="业务类型" editorType="COMBOBOX"
+			         required="true" showField="busTypeName" comboFieldText="itemName"
+			         comboFieldValue="itemCode" 
+			         editOptions="{
+			            action:'egov/asset/workorder/getWorkOrderType.do',
+			            textfield:'itemName',
+			            valuefield:'itemName',
+			            afterSelected:assetworkorder_add.busTypeAfterSelect
+			         }"
+			         action="" />
+			    <FormItem id="busTypeId" name="业务编号" editorType="TEXTBOX" colSpan="1" fill="false"/>
+			    <FormItem id="problemDescibe" name="问题描述" editorType="TEXTBOX" required="true" colSpan="3" fill="false" style="width:100%;height:28px;resize: none;" />				
+              </items>
+			 </Row>					              
+			</items>
+		</Form>
+		</items>
+	  </Panel>
+	  
+	 </items>
+	 
+   </Panel>			 
+  </items>
+</Page>

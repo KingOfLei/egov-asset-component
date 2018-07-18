@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>                       
+<Page id="assetOperLogPage" layout="border" 
+	templatePath="egov/asset/log/assetoperlog/assetoperlog_index.jsp" 
+	js="resources/egov/js/asset/log/assetoperlog/assetoperlog_index.js"
+	jsId="assetoperlog_index" 
+	xmlns="http://www.bosssoft.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.bosssoft.org ../../../../schema/uis/uitemplate-2.0.xsd">
+	<items>
+		<Panel id="assetOperLogPage_panel_top" region="north" height="5">
+		<items>			
+	<Query id="assetOperLogPage_query" queryTarget="assetOperLogPage_grid" isAdvance="true" style="display:none;" manual="false" advColCount="2" showMoreButton="true">
+		<quicks>
+			<QueryItem id="userCode" field="USER_CODE" name="用户编码" editorType="TEXTBOX" width="120px" operator="like" editOptions="{clearbtn:true}"/>
+			<QueryItem id="userName" field="USER_Name" name="用户名" editorType="TEXTBOX" width="120px" operator="like" editOptions="{clearbtn:true}"/>
+			<QueryItem id="operIp" field="OPER_IP" name="访问IP" editorType="TEXTBOX" operator="like" editOptions="{clearbtn:true}"/>
+			
+			<QueryItem id="startTime" field="OPER_DATE" name="操作日期" editorType="DATETIME" width="150px" operator="&gt;=" editOptions="{onlySelect:true,clearbtn:true,dateend:'endTime'}" />
+			<QueryItem id="endTime" field="OPER_DATE" name="至" editorType="DATETIME" width="150px" operator="&lt;=" editOptions="{onlySelect:true,clearbtn:true,datebegin:'startTime'}"/>
+			</quicks>
+		<advances>
+		   	<QueryItem id="userCode" field="USER_CODE" name="用户编码" editorType="TEXTBOX" operator="like" editOptions="{clearbtn:true}"  colSpan="2" />
+			<QueryItem id="userName" field="USER_Name" name="用户名" editorType="TEXTBOX" operator="like" editOptions="{clearbtn:true}"  colSpan="2" />
+			<QueryItem id="operIp" field="OPER_IP" name="访问IP" editorType="TEXTBOX"  operator="like" editOptions="{clearbtn:true}"  colSpan="2" />
+			<QueryItem id="beanName" field="EXT_PARAMS" name="请求类名" editorType="TEXTBOX"  operator="like" editOptions="{clearbtn:true}"  colSpan="2" />
+			<QueryItem id="extParams" field="EXT_PARAMS" name="功能说明" editorType="TEXTBOX"  operator="like" editOptions="{clearbtn:true}"  colSpan="2" />
+			<QueryItem id="startTime" field="OPER_DATE" name="操作日期" editorType="DATETIME" operator="&gt;=" editOptions="{onlySelect:true,clearbtn:true,dateend:'endTime'}" />
+			<QueryItem id="endTime" field="OPER_DATE" name="至" editorType="DATETIME" operator="&lt;=" editOptions="{onlySelect:true,clearbtn:true,datebegin:'startTime'}"/>
+			<QueryItem id="totalTimemillisBegin" field="TOTAL_TIMEMILLIS" name="总耗时"  editorType="TEXTBOX" operator="&gt;=" editOptions="{clearbtn:true}"/>
+			<QueryItem id="totalTimemillisEnd" field="TOTAL_TIMEMILLIS" name="至" editorType="TEXTBOX" operator="&lt;=" editOptions="{clearbtn:true}"/>
+		
+		</advances>
+	</Query>		
+</items>
+	</Panel>
+	<Panel id="assetOperLogPage_panel_bottom" region="center">
+		<items>
+			<XGrid id="assetOperLogPage_grid"  
+						url="egov/asset/log/assetoperlog/queryAssetOperLogPage.do"
+						rownumbers="normal"
+						autoLoad="false"
+						pager="up"
+						title="操作日志"
+						sort="true">
+					  <columns>					
+						<XGridColumn field="appId" title="应用ID"  align="left"  hidden="true"/>
+						<XGridColumn field="logId" title="日志ID"  align="left" hidden="true" />
+						<XGridColumn field="userCode" title="用户编码"  align="left" width="140" showTitle="true"   />
+						<XGridColumn field="userName" title="用户名"  align="left"  width="100" showTitle="true"  />
+						<XGridColumn field="operTime" title="操作时间"  align="left" width="130" showTitle="true"   />
+						<XGridColumn field="operDate" title="操作日期"  align="left" hidden="true" showTitle="true"   />
+						<XGridColumn field="operIp" title="ip"  align="left" width="100" showTitle="true"   />
+						<XGridColumn field="menuId" title="菜单ID"  align="left" hidden="true"  showTitle="true"  />
+						<XGridColumn field="menuName" title="菜单名称"  align="left"  width="100" hidden="true"  />
+						<XGridColumn field="extParams" title="功能说明"  align="left"  width="150" showTitle="true"  />
+						
+						<XGridColumn field="beanName" title="类名"  align="left"  width="452" showTitle="true"  />
+						<XGridColumn field="beanMethodName" title="方法名"  align="left"  width="165" showTitle="true"  />
+						<XGridColumn field="beanParams" title="参数"  align="left" hidden="true" showTitle="true"   />
+						<XGridColumn field="returnParams" title="返回参数"  align="left"  hidden="true"   />
+						<XGridColumn field="url" title="url"  align="left"  hidden="true"   />
+						<XGridColumn field="startTime" title="开始时间"  align="left"  hidden="true"   />
+						<XGridColumn field="endTime" title="结束时间"  align="left" hidden="true"    />
+						<XGridColumn field="totalTimemillis" title="总耗时(ms)"  align="right" width="100"  />
+						<XGridColumn field="exception" title="异常"  align="left"  hidden="true" showTitle="true" formatter="$funcs.transferGridColumn"  />
+						<XGridColumn field="isError" title="是否异常"  align="left"  width="100" showTitle="true"  />
+						<XGridColumn field="usedMemory" title="已使用内存"  align="left" hidden="true"    />
+						<XGridColumn field="freeMemory" title="空闲内存"  align="left"  hidden="true"   />
+						<XGridColumn field="str01" title="备用1"  align="left"  hidden="true"   />
+						<XGridColumn field="str02" title="备用2"  align="left"  hidden="true"   />
+						<XGridColumn field="str03" title="备用3"  align="left"  hidden="true"   />
+						<XGridColumn field="str04" title="备用4"  align="left"  hidden="true"   />
+						<XGridColumn field="str05" title="备用5"  align="left"  hidden="true"   />
+					</columns>
+					<frozenColumnsRight>
+					</frozenColumnsRight>
+				  </XGrid>		</items>
+	</Panel>	</items>
+</Page>

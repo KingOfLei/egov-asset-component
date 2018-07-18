@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.lifecycle.mapper.AssetLifeLogMapper" >
+  <resultMap id="assetLifeLogMap" type="com.bosssoft.egov.asset.lifecycle.entity.AssetLifeLog" >
+         <result property="id" column="ID" />
+	     <result property="createDate" column="CREATE_DATE" />
+	     <result property="createTime" column="CREATE_TIME" />
+	     <result property="orgId" column="ORG_ID" />
+	     <result property="busType" column="BUS_TYPE" />
+	     <result property="msg" column="MSG" />
+	     <result property="status" column="STATUS" />
+	     <result property="busId" column="BUS_ID" />
+	     <result property="isAudit" column="IS_AUDIT" />
+	 </resultMap>
+ 
+ <sql id="Base_Column_List">
+    ID,CREATE_DATE,CREATE_TIME,ORG_ID,BUS_TYPE,MSG,STATUS,BUS_ID,IS_AUDIT  </sql>
+ 
+    <select id="queryAssetLifeLogPage" resultMap="assetLifeLogMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM ASSET_LIFE_LOG
+      	 <trim prefix="where"  prefixOverrides="and |or">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            #{searcher.__QUERYCON}
+	        </if>  
+	    </trim>
+    </select>
+    <delete id="delAssetLifeLog">
+       delete from asset_life_log where 
+         id =#{assetLifeLog.id}
+    </delete>
+</mapper>

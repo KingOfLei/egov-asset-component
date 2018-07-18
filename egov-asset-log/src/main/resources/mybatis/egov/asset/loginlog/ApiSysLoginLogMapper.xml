@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bosssoft.egov.asset.loginlog.mapper.LoginLogMapper">
+	<resultMap id="BaseResultMap" type="com.bosssoft.platform.appframe.api.entity.ApiLoginLog">
+		<!--
+			  WARNING - @mbggenerated
+			-->
+		<id column="LOG_ID" jdbcType="VARCHAR" property="logId" />
+		<result column="SESSION_ID" jdbcType="VARCHAR" property="sesssionId" />
+		<result column="USER_ID" jdbcType="VARCHAR" property="userId" />
+		<result column="USER_NAME" jdbcType="VARCHAR" property="userName" />
+		<result column="USER_CODE" jdbcType="VARCHAR" property="userCode" />
+		<result column="IP" jdbcType="VARCHAR" property="ip" />
+		<result column="LASTEST_LOGIN_TIME" jdbcType="TIMESTAMP" property="lastestLoginTime" />
+		<result column="LASTEST_LOGOUT_TIME" jdbcType="TIMESTAMP" property="lastestLogoutTime" />
+		<result column="STATE" jdbcType="VARCHAR" property="state" />
+		<result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+	</resultMap>
+  
+  	<resultMap id="OnlineUserMap" type="com.bosssoft.platform.shiro.domain.OnlineUser">
+		<result column="USER_CODE" jdbcType="VARCHAR" property="userCode" />
+		<result column="USER_NAME" jdbcType="VARCHAR" property="userName" />
+		<result column="NICK_NAME" jdbcType="VARCHAR" property="nickName" />
+		<result column="SESSION_ID" jdbcType="VARCHAR" property="sessionId" />
+		<result column="LAST_LOGIN_TIME" jdbcType="TIMESTAMP" property="lastLoginTime" />
+	</resultMap>
+  
+	<sql id="Base_Column_List">
+  		LOG_ID,SESSION_ID,USER_ID,USER_NAME,USER_CODE,IP,LASTEST_LOGIN_TIME,LASTEST_LOGOUT_TIME,STATE,CREATE_TIME
+	</sql>
+	
+	<sql id="OnlineUser_Column_List">
+  		USER_CODE,USER_NAME,USER_NAME AS NICK_NAME,SESSION_ID,LASTEST_LOGIN_TIME AS LAST_LOGIN_TIME
+	</sql>
+	
+	<select id="queryApiSysLoginLogPage" resultMap="BaseResultMap">
+    	SELECT 
+		<include refid="Base_Column_List" />
+		 FROM AFA_SYS_LOGIN_LOG
+		<trim prefix="where"  prefixOverrides="and |or">  
+			<if test="searcher != null and searcher.__QUERYCON != null">  
+	            ${searcher.__QUERYCON}
+			</if>  	
+		</trim>
+		ORDER BY CREATE_TIME DESC
+	</select>
+	<select id="getLastestLoginLog" resultMap="BaseResultMap">
+		SELECT <include refid="Base_Column_List" /> 
+		FROM AFA_SYS_LOGIN_LOG 
+		WHERE SESSION_ID = #{sessionId} AND USER_CODE = #{userCode} ORDER BY CREATE_TIME DESC
+	</select>
+	
+	<delete id="doDeleteSeletions" >
+		DELETE FROM AFA_SYS_LOGIN_LOG
+		WHERE LOG_ID IN 
+		<foreach collection="loginlog" item="log" index="index" open="(" separator="," close=")" >
+			#{log.logId}
+		</foreach>
+	</delete>
+	
+	<update id="statusOutlineBySessionId" >
+		UPDATE AFA_SYS_LOGIN_LOG
+		SET STATE = 'OUTLINE'
+		WHERE SESSION_ID = #{sessionId}
+	</update>
+	
+	<select id="getOnlineUser" resultMap="OnlineUserMap" >
+		SELECT <include refid="OnlineUser_Column_List" /> 
+		FROM AFA_SYS_LOGIN_LOG WHERE SESSION_ID IN 
+		<foreach collection="sessions" item="session" index="index" open="(" separator="," close=")">
+			#{session}
+		</foreach>
+		AND STATE = 'ONLINE'
+	</select>
+</mapper>

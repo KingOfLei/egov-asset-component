@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.asset.etl.mapper.AssetEtlConfigMapper" >
+  <resultMap id="assetEtlConfigMap" type="com.bosssoft.asset.etl.entity.AssetEtlConfig" >
+         <result property="id" column="ID" />
+	     <result property="configCode" column="CONFIG_CODE" />
+	     <result property="configName" column="CONFIG_NAME" />
+	     <result property="inType" column="IN_TYPE" />
+	     <result property="outType" column="OUT_TYPE" />
+	     <result property="beanName" column="BEAN_NAME" />
+	     <result property="ktr" column="KTR" />
+	     <result property="templete" column="TEMPLETE" />
+	     <result property="templeteName" column="TEMPLETE_NAME" />
+	     <result property="templeteName" column="TEMPLETE_NAME" />
+	     <result property="fileExts" column="FILE_EXTS" />
+	     <result property="fileMaxSize" column="FILE_MAX_SIZE" />
+	     <result property="status" column="STATUS" />
+	     <result property="remark" column="REMARK" />
+	 </resultMap>
+ 
+ <sql id="Base_Column_List">
+    ID,CONFIG_CODE,CONFIG_NAME,IN_TYPE,OUT_TYPE,BEAN_NAME,KTR,TEMPLETE,TEMPLETE_NAME,FILE_EXTS,FILE_MAX_SIZE,STATUS,REMARK  </sql>
+ 
+    <select id="queryAssetEtlConfigPage" resultMap="assetEtlConfigMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM ASSET_ETL_CONFIG
+      	 <trim prefix="where"  prefixOverrides=" and | or ">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            ${searcher.__QUERYCON}
+	        </if>  
+	    </trim>
+    </select>
+</mapper>

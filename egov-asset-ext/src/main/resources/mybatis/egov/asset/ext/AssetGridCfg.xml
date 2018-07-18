@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.ext.mapper.AssetGridCfgMapper">
+	<resultMap id="BaseResultMap" type="com.bosssoft.egov.asset.ext.entity.AssetGridCfg">
+		<result property="cfgId" column="CFG_ID"/>
+		<result property="cfgName" column="CFG_NAME"/>
+		<result property="userCode" column="USER_CODE"/>
+		<result property="gridId" column="GRID_ID"/>
+		<result property="bizType" column="BIZ_TYPE"/>
+		<result property="bizTypeName" column="BIZ_TYPE_NAME"/>
+		<result property="attr" column="ATTR"/>
+		<result property="levelCount" column="LEVEL_COUNT"/>
+		<result property="status" column="STATUS"/>
+		<result property="remark" column="REMARK"/>
+		<result property="endTime" column="END_TIME"/>
+		<result property="useStatus" column="USE_STATUS"/>
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+		CFG_ID, CFG_NAME, USER_CODE, GRID_ID, BIZ_TYPE, BIZ_TYPE_NAME, ATTR, LEVEL_COUNT, STATUS, REMARK, END_TIME, USE_STATUS
+	</sql>
+	
+	<select id="getGridCfgByUserGrid" resultMap="BaseResultMap">
+		SELECT <include refid="Base_Column_List"/>
+		FROM asset_grid_cfg
+		<where>
+			status = 1
+			AND user_code = #{userCode}
+			AND grid_id = #{gridId}
+			AND biz_type = #{bizType}
+		</where>
+		order by cfg_id desc
+	</select>
+	
+	<delete id="clearGridCfg">
+		DELETE asset_grid_cfg
+		<where>
+			AND user_code = #{userCode}
+			AND grid_id = #{gridId}
+			AND biz_type = #{bizType}
+		</where>
+	</delete>
+	
+	<select id="getGridCfgByCfgId" resultMap="BaseResultMap">
+		SELECT <include refid="Base_Column_List"/>
+		FROM asset_grid_cfg
+		<where>
+			cfg_id = ${cfgId}
+		</where>
+	</select>
+	
+	<update id="resetUseStatus">
+		UPDATE asset_grid_cfg
+		<set>
+			use_status = '0'
+		</set>
+		<where>
+			AND user_code = #{userCode}
+			AND grid_id = #{gridId}
+			AND biz_type = #{bizType}
+		</where>
+	</update>
+</mapper>

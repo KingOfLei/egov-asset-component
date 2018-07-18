@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.ext.mapper.AssetGridQueryHistoryMapper">
+	<resultMap id="BaseResultMap" type="com.bosssoft.egov.asset.ext.entity.AssetGridQueryHistory">
+		<result property="queryId" column="QUERY_ID"/>
+		<result property="queryName" column="QUERY_NAME"/>
+		<result property="userCode" column="USER_CODE"/>
+		<result property="gridId" column="GRID_ID"/>
+		<result property="bizType" column="BIZ_TYPE"/>
+		<result property="createTime" column="CREATE_TIME"/>
+		<result property="endTime" column="END_TIME"/>
+		<result property="attr" column="ATTR"/>
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		query_id, query_name, user_code, grid_id, biz_type, create_time, end_time, attr
+	</sql>
+	
+	<select id="getQueryHistory" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List"/>
+		from asset_grid_query_history
+		<where>
+			user_code = #{userCode}
+			and grid_id = #{gridId}
+			and biz_type = #{bizType}
+		</where>		
+		order by end_time desc
+	</select>
+
+	<delete id="removeQueryHistory">
+		delete asset_grid_query_history
+		<where>
+			user_code = #{userCode}
+			and grid_id = #{gridId}
+			and biz_type = #{bizType}
+		</where>
+	</delete>
+</mapper>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.dispatch.mapper.AssetDispatchJobMapper" >
+  <resultMap id="assetDispatchJobMap" type="com.bosssoft.egov.asset.dispatch.entity.AssetDispatchJob" >
+         <result property="id" column="ID" />
+	     <result property="jobCode" column="JOB_CODE" />
+	     <result property="jobName" column="JOB_NAME" />
+	     <result property="jobClassName" column="JOB_CLASS_NAME" />
+	     <result property="isDurable" column="IS_DURABLE" />
+	     <result property="status" column="STATUS" />
+	     <result property="ramark" column="RAMARK" />
+	 </resultMap>
+ 
+ <sql id="Base_Column_List">
+    ID,JOB_CODE,JOB_NAME,JOB_CLASS_NAME,IS_DURABLE,STATUS,RAMARK  </sql>
+ 
+    <select id="queryAssetDispatchJobPage" resultMap="assetDispatchJobMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM ASSET_DISPATCH_JOB
+      	 <trim prefix="where"  prefixOverrides="and |or">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            #{searcher.__QUERYCON}
+	        </if>  
+	    </trim>
+    </select>
+</mapper>

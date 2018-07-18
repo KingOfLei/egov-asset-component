@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.codegen.mapper.AssetCodegenRuleMapper" >
+  <resultMap id="assetCodegenRuleMap" type="com.bosssoft.egov.asset.codegen.entity.AssetCodegenRule" >
+         <result property="id" column="ID" />
+	     <result property="cfgId" column="CFG_ID" />
+	     <result property="sxh" column="SXH" />
+	     <result property="ruleName" column="RULE_NAME" />
+	     <result property="ruleValue" column="RULE_VALUE" />
+	     <result property="fillWay" column="FILL_WAY" />
+	     <result property="length" column="LENGTH" />
+	     <result property="fillChar" column="FILL_CHAR" />
+	     <result property="initValue" column="INIT_VALUE" />
+	     <result property="status" column="STATUS" />
+	     <result property="creatorId" column="CREATOR_ID" />
+	     <result property="creator" column="CREATOR" />
+	     <result property="createTime" column="CREATE_TIME" />
+	     <result property="str01" column="STR01" />
+	     <result property="str02" column="STR02" />
+	     <result property="str03" column="STR03" />
+	     <result property="str04" column="STR04" />
+	     <result property="str05" column="STR05" />
+	     <result property="remark" column="REMARK" />
+	 </resultMap>
+ 
+ <sql id="Base_Column_List">
+    ID,CFG_ID,SXH,RULE_NAME,RULE_VALUE,FILL_WAY,LENGTH,FILL_CHAR,INIT_VALUE,STATUS,CREATOR_ID,CREATOR,CREATE_TIME,STR01,STR02,STR03,STR04,STR05,REMARK  </sql>
+ 
+    <select id="queryAssetCodegenRulePage" resultMap="assetCodegenRuleMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM asset_codegen_rule
+      	 <trim prefix="where"  prefixOverrides="and |or">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            #{searcher.__QUERYCON}
+	        </if>  
+	    </trim>
+    </select>
+</mapper>

@@ -1,0 +1,95 @@
+/* tab切换插件提示插件
+ * author: zhangxiaoyun
+ * date: 2017-12-05
+*/
+/*html,body,div,ul,li,ol,p,h1,h2,h3,h4,h5{ margin: 0; padding: 0; box-sizing: border-box;}*/
+
+.tabswitch{
+    min-height: 36px;
+    position: relative;
+}
+
+/*标题样式*/
+.tabswitch>.tabswitch-header{
+    width: 100%;
+    height: 36px;
+    position: absolute;
+}
+.tabswitch>.tabswitch-header>ul{
+    overflow: hidden;
+    width: auto; 
+    height: 100%;
+    display: inline-block;
+    border: 2px solid orange;
+}
+.tabswitch>.tabswitch-header>ul>li{
+    display: inline-block;
+    float: left;
+    position: relative;  
+    padding:0px 5px;
+    margin-right: 20px;
+    background-color: $theme-color;
+}
+.tabswitch>.tabswitch-header>ul>li:before, .tabswitch>.tabswitch-header>ul>li:after{
+    content: " ";  
+    display: block;
+    position: absolute;  
+    width: 0;
+    height: 0;
+    border:16px solid transparent;
+}
+.tabswitch>.tabswitch-header>ul>li>a{
+    display: inline-block;
+    line-height: 32px;
+    padding-left: 10px;
+    cursor: pointer;
+    color: #fff;
+    font-size: 14px;
+}
+.tabswitch>.tabswitch-header>ul>li:before{ 
+    top:0px;
+    left:-16px;
+    border-top-color: $theme-color;
+    border-right-color: $theme-color;
+    border-bottom-color: $theme-color;
+}
+.tabswitch>.tabswitch-header>ul>li:after{ 
+    top:0px;
+    left: 100%;
+    border-left-color: $theme-color;
+}
+.tabswitch>.tabswitch-header>ul>li>a:hover{
+
+}
+.tabswitch>.tabswitch-header>ul>li.tabswitch-header-active{
+    background-color: orange;
+}
+.tabswitch>.tabswitch-header>ul>li.tabswitch-header-active:after{
+    border-left-color: orange;
+}
+.tabswitch>.tabswitch-header>ul>li.tabswitch-header-active:before{
+    border-top-color: orange;
+    border-right-color: orange;
+    border-bottom-color: orange;
+}
+.tabswitch>.tabswitch-header>ul>li.tabswitch-header-last{
+    margin-right: 0px;
+}
+.tabswitch>.tabswitch-header>ul>li.tabswitch-header-last:after{
+    border-left-color: transparent;
+}
+
+.tabswitch>.tabswitch-header>ul>li.tabswitch-header-unread>sup:before{
+    content: "●";
+    color: red;
+}
+
+/*内容部分样式*/
+.tabswitch>.tabswitch-content{
+    padding-top: 32px;
+}
+.tabswitch>.tabswitch-content>.tabswitch-content-center{
+    width: 100%;
+    height: 100%;
+    background-color: #ddd;
+}

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.attach.mapper.AssetAttachFileMapper" >
+  <resultMap id="assetAttachFileMap" type="com.bosssoft.egov.asset.attach.entity.AssetAttachFile" >
+         <result property="appId" column="APP_ID" />
+	     <result property="attachId" column="ATTACH_ID" />
+	     <result property="name" column="ATTACH_NAME" />
+	     <result property="contentType" column="CONTENT_TYPE" />
+	     <result property="fileSize" column="FILE_SIZE" />
+	     <result property="filePath" column="FILE_PATH" />
+	     <result property="bizId" column="BIZ_ID" />
+	     <result property="bizType" column="BIZ_TYPE" />
+	     <result property="createDate" column="CREATE_DATE" />
+	     <result property="creator" column="CREATOR" />
+	     <result property="remark" column="REMARK" />
+	     
+	     <result property="status" column="STATUS" />
+	     <result property="creatorIp" column="CREATOR_IP" />
+	     <result property="uploadType" column="UPLOAD_TYPE" />
+	     
+	     <result property="thumbPath" column="THUMB_PATH" />
+	     
+	 </resultMap>
+ 
+ <sql id="Base_Column_List">
+    APP_ID,ATTACH_ID,ATTACH_NAME,CONTENT_TYPE,FILE_SIZE,FILE_PATH,BIZ_ID,BIZ_TYPE,CREATE_DATE,CREATOR,REMARK,
+    STATUS,CREATOR_IP,UPLOAD_TYPE,THUMB_PATH
+ </sql>
+ <sql id="Base_Insert_Column_List">
+    #{fileInfo.appId}, #{fileInfo.attachId},#{fileInfo.name}, #{fileInfo.contentType},
+    #{fileInfo.fileSize}, #{fileInfo.attachId},#{fileInfo.bizId}, #{fileInfo.bizType},
+    #{fileInfo.createDate}, #{fileInfo.creator},#{fileInfo.remark},#{fileInfo.status},
+    #{fileInfo.creatorIp},#{fileInfo.uploadType},#{fileInfo.thumbPath}    
+ </sql>
+    <select id="queryAssetAttachFilePage" resultMap="assetAttachFileMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM asset_attach_file
+      	 <trim prefix="where"  prefixOverrides="and |or">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            ${searcher.__QUERYCON}
+	        </if>  
+	    </trim>
+    </select>
+    
+    <insert id="insertAttachFileInfo">
+       INSERT INTO ${tableName}(
+         <include refid="Base_Column_List"></include>
+       ) VALUES (
+         <include refid="Base_Insert_Column_List"></include>
+       )
+       
+    </insert>
+    
+    <update  id="updateAttachFileByBizId">
+				update asset_attach_file t
+                    set t.status      = #{assetAttachFile.status},
+                        t.create_date = #{assetAttachFile.createDate}
+                 where biz_id like #{assetAttachFile.bizId}||'%'
+    </update>    
+</mapper>

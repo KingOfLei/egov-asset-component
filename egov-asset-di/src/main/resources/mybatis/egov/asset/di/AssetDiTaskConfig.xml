@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.di.mapper.AssetDiTaskConfigMapper" >
+  <resultMap id="assetDiTaskConfigMap" type="com.bosssoft.egov.asset.di.entity.AssetDiTaskConfig" >
+         <result property="taskMxId" column="F_TASK_MX_ID" />
+	     <result property="configNo" column="F_CONFIG_NO" />
+	     <result property="srctype" column="F_SRCTYPE" />
+	     <result property="title" column="F_TITLE" />
+	     <result property="srcfieldname" column="F_SRCFIELDNAME" />
+	     <result property="srcfieldtype" column="F_SRCFIELDTYPE" />
+	     <result property="srcsize" column="F_SRCSIZE" />
+	     <result property="destfieldname" column="F_DESTFIELDNAME" />
+	     <result property="destfieldtype" column="F_DESTFIELDTYPE" />
+	     <result property="destsize" column="F_DESTSIZE" />
+	     <result property="converttype" column="F_CONVERTTYPE" />
+	     <result property="converttable" column="F_CONVERTTABLE" />
+	     <result property="convertid" column="F_CONVERTID" />
+	     <result property="filtertype" column="F_FILTERTYPE" />
+	     <result property="compfield" column="F_COMPFIELD" />
+	     <result property="valuefield" column="F_VALUEFIELD" />
+	     <result property="value" column="F_VALUE" />
+	     <result property="valuesrcfield" column="F_VALUESRCFIELD" />
+	 </resultMap>
+ 
+ <sql id="Base_Column_List">
+    F_TASK_MX_ID,F_CONFIG_NO,F_SRCTYPE,F_TITLE,F_SRCFIELDNAME,F_SRCFIELDTYPE,F_SRCSIZE,F_DESTFIELDNAME,F_DESTFIELDTYPE,F_DESTSIZE,F_CONVERTTYPE,F_CONVERTTABLE,F_CONVERTID,F_FILTERTYPE,F_COMPFIELD,F_VALUEFIELD,F_VALUE,F_VALUESRCFIELD  </sql>
+ 
+    <select id="queryAssetDiTaskConfigPage" resultMap="assetDiTaskConfigMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM ASSET_DI_TASK_CONFIG
+      	 <trim prefix="where"  prefixOverrides="and |or">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            ${searcher.__QUERYCON}
+	        </if>  
+	    </trim>
+    </select>
+</mapper>

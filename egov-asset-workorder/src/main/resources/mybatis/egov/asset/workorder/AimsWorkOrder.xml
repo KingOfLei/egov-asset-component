@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.workorder.mapper.AimsWorkOrderMapper" >
+  <resultMap id="aimsWorkOrderMap" type="com.bosssoft.egov.asset.workorder.entity.AimsWorkOrder" >
+         <result property="rgnId" column="RGN_ID" />
+	     <result property="rgnCode" column="RGN_CODE" />
+	     <result property="rgnName" column="RGN_NAME" />
+	     <result property="orgId" column="ORG_ID" />
+	     <result property="orgCode" column="ORG_CODE" />
+	     <result property="orgName" column="ORG_NAME" />
+	     <result property="financeBudgetCode" column="FINANCE_BUDGET_CODE" />
+	     <result property="billId" column="BILL_ID" />
+	     <result property="billCode" column="BILL_CODE" />
+	     <result property="billDate" column="BILL_DATE" />
+	     <result property="billStatus" column="BILL_STATUS" />
+	     <result property="bizStatus" column="BIZ_STATUS" />
+	     <result property="bizStatusName" column="BIZ_STATUS_NAME" />
+	     <result property="bizNext" column="BIZ_NEXT" />
+	     <result property="bizNextName" column="BIZ_NEXT_NAME" />
+	     <result property="creatorCode" column="CREATOR_CODE" />
+	     <result property="creatorName" column="CREATOR_NAME" />
+	     <result property="createDate" column="CREATE_DATE" />
+	     <result property="updateTime" column="UPDATE_TIME" />
+	     <result property="auditor" column="AUDITOR" />
+	     <result property="auditdate" column="AUDITDATE" />
+	     <result property="accountStatus" column="ACCOUNT_STATUS" />
+	     <result property="voucherOrgCode" column="VOUCHER_ORG_CODE" />
+	     <result property="voucherOrgName" column="VOUCHER_ORG_NAME" />
+	     <result property="voucherZi" column="VOUCHER_ZI" />
+	     <result property="voucherTzCode" column="VOUCHER_TZ_CODE" />
+	     <result property="voucherTzName" column="VOUCHER_TZ_NAME" />
+	     <result property="voucherPeriod" column="VOUCHER_PERIOD" />
+	     <result property="voucherId" column="VOUCHER_ID" />
+	     <result property="voucherNo" column="VOUCHER_NO" />
+	     <result property="voucherDate" column="VOUCHER_DATE" />
+	     <result property="voucherStatus" column="VOUCHER_STATUS" />
+	     <result property="attachCount" column="ATTACH_COUNT" />
+	     <result property="attachItemType" column="ATTACH_ITEM_TYPE" />
+	     <result property="remark" column="REMARK" />
+	     <result property="createTime" column="CREATE_TIME" />
+	     <result property="orderApplicant" column="ORDER_APPLICANT" />
+	     <result property="busId" column="BUS_ID" />
+	     <result property="busTypeCode" column="BUS_TYPE_CODE" />
+	     <result property="busTypeName" column="BUS_TYPE_NAME" />
+	     <result property="busTypeId" column="BUS_TYPE_ID" />
+	     <result property="problemDescibe" column="PROBLEM_DESCIBE" />
+	     <result property="prioritylevel" column="PRIORITYLEVEL" />
+	     <result property="str01" column="STR01" />
+	     <result property="str02" column="STR02" />
+	     <result property="str03" column="STR03" />
+	     <result property="str04" column="STR04" />
+	     <result property="str05" column="STR05" />
+	     <result property="str06" column="STR06" />
+	     <result property="str07" column="STR07" />
+	     <result property="str08" column="STR08" />
+	     <result property="str09" column="STR09" />
+	     <result property="str10" column="STR10" />
+	     <result property="str11" column="STR11" />
+	     <result property="str12" column="STR12" />
+	     <result property="str13" column="STR13" />
+	     <result property="str14" column="STR14" />
+	     <result property="str15" column="STR15" />
+	     <result property="str16" column="STR16" />
+	     <result property="str17" column="STR17" />
+	     <result property="str18" column="STR18" />
+	     <result property="str19" column="STR19" />
+	     <result property="str20" column="STR20" />
+	 </resultMap>
+ 
+ <sql id="Base_Column_List">
+    RGN_ID,RGN_CODE,RGN_NAME,ORG_ID,ORG_CODE,ORG_NAME,FINANCE_BUDGET_CODE,BILL_ID,BILL_CODE,BILL_DATE,BILL_STATUS,BIZ_STATUS,BIZ_STATUS_NAME,BIZ_NEXT,BIZ_NEXT_NAME,CREATOR_CODE,CREATOR_NAME,CREATE_DATE,UPDATE_TIME,AUDITOR,AUDITDATE,ACCOUNT_STATUS,VOUCHER_ORG_CODE,VOUCHER_ORG_NAME,VOUCHER_ZI,VOUCHER_TZ_CODE,VOUCHER_TZ_NAME,VOUCHER_PERIOD,VOUCHER_ID,VOUCHER_NO,VOUCHER_DATE,VOUCHER_STATUS,ATTACH_COUNT,ATTACH_ITEM_TYPE,REMARK,CREATE_TIME,ORDER_APPLICANT,BUS_ID,BUS_TYPE_CODE,BUS_TYPE_NAME,BUS_TYPE_ID,PROBLEM_DESCIBE,PRIORITYLEVEL,STR01,STR02,STR03,STR04,STR05,STR06,STR07,STR08,STR09,STR10,STR11,STR12,STR13,STR14,STR15,STR16,STR17,STR18,STR19,STR20  </sql>
+ 
+    <select id="queryAimsWorkOrderPage" resultMap="aimsWorkOrderMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM AIMS_WORK_ORDER
+      	 <trim prefix="where"  prefixOverrides="and |or">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            ${searcher.__QUERYCON}
+	        </if>  
+	    </trim>
+    </select>
+</mapper>

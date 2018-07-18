@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Page id="aimsDisposeAttachPage" layout="border"
+	templatePath="egov/asset/workorder/workorder_attach.jsp"
+	js="resources/egov/js/asset/workorder/workorder_attach.js" 			
+	jsId="workorder_attach"
+xmlns="http://www.bosssoft.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.bosssoft.org ../../../schema/uis/uitemplate-2.0.xsd">
+	<items>
+		<Panel id="workorder_attach" region="center"  height="100%">
+		</Panel>
+	</items>
+</Page>

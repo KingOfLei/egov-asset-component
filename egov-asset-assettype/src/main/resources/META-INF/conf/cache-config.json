@@ -1,0 +1,32 @@
+[
+	{
+		cacheName:"ASSET-DICT-TYPE-CLASSIFY-CACHE",
+		cacheProperty:{
+			cacheLoader:"com.bosssoft.egov.asset.assettype.cacheloader.AssetTypeCacheLoader",
+			cacheProvider:"com.bosssoft.platform.cache.redis.RedisCacheProvider",
+			serverAddress:"127.0.0.1:6379",
+			cacheMode:"LOCAL",
+			maxElementsInMemory:"10000",
+			timeToLiveSeconds:"12000",
+			timeToIdleSeconds:"12000",
+			priority:"100",
+			isClustered:"false",
+			cacheModificationListener:""
+		}
+	},
+		{
+		cacheName:"ASSET-DICT-ONFTEN-TYPE-CLASSIFY-CACHE",
+		cacheProperty:{
+			cacheLoader:"com.bosssoft.egov.asset.assettype.cacheloader.AssetTypeOftenCacheLoader",
+			cacheProvider:"com.bosssoft.platform.cache.redis.RedisCacheProvider",
+			serverAddress:"127.0.0.1:6379",
+			cacheMode:"LOCAL",
+			maxElementsInMemory:"10000",
+			timeToLiveSeconds:"12000",
+			timeToIdleSeconds:"12000",
+			priority:"100",
+			isClustered:"false",
+			cacheModificationListener:""
+		}
+	}
+] 

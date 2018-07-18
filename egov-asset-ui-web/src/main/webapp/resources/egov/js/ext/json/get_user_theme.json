@@ -1,0 +1,25 @@
+{
+    "datas": {
+    	"skinList": [{
+    		"_id": "skin_default",
+			"name": "default",
+			"imgUrl": "resources/egov/js/ext/theme/images/common-icon/skin-thumbnail/default.png"
+    	},{
+            "_id": "skin_red",
+            "name": "red",
+            "imgUrl": "resources/egov/js/ext/theme/images/common-icon/skin-thumbnail/red.png"
+        },{
+            "_id": "skin_purple",
+            "name": "purple",
+            "imgUrl": "resources/egov/js/ext/theme/images/common-icon/skin-thumbnail/purple.png"
+        },{
+            "_id": "skin_orange",
+            "name": "orange",
+            "imgUrl": "resources/egov/js/ext/theme/images/common-icon/skin-thumbnail/orange.png"
+        },{
+            "_id": "skin_brown",
+            "name": "brown",
+            "imgUrl": "resources/egov/js/ext/theme/images/common-icon/skin-thumbnail/brown.png"
+        }]
+    }
+}

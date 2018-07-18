@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.dictionary.impl.mapper.AssetBasicDictMapper" >
+  <resultMap id="assetBasicDictMap" type="com.bosssoft.egov.asset.dictionary.impl.entity.AssetBasicDict" >
+         <result property="appId" column="APP_ID" />
+	     <result property="dictId" column="DICT_ID" />
+	     <result property="dictCode" column="DICT_CODE" />
+	     <result property="dictName" column="DICT_NAME" />
+	     <result property="codeMode" column="CODE_MODE" />
+	     <result property="codeRule" column="CODE_RULE" />
+	     <result property="isbuiltin" column="ISBUILTIN" />
+	     <result property="remark" column="REMARK" />
+	     <result property="creator" column="CREATOR" />
+	     <result property="createDate" column="CREATE_DATE" />
+	 </resultMap>
+ 
+ <sql id="Base_Column_List">
+    APP_ID,DICT_ID,DICT_CODE,DICT_NAME,CODE_MODE,CODE_RULE,ISBUILTIN,REMARK,CREATOR,CREATE_DATE  </sql>
+ 
+    <select id="queryAssetBasicDictPage" resultMap="assetBasicDictMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM asset_basic_dict
+      	 <trim prefix="where"  prefixOverrides="and |or">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            #{searcher.__QUERYCON}
+	        </if>  
+	    </trim>
+    </select>
+    
+    <select id="getAssetBasicDictList" resultMap="assetBasicDictMap">
+    	SELECT 
+    	<include refid="Base_Column_List"/>
+    	FROM ASSET_BASIC_DICT
+    </select>
+    
+    <!-- 根据ID修改字典信息 -->
+    <update id="updateById" parameterType="com.bosssoft.egov.asset.dictionary.impl.entity.AssetBasicDict">
+    	UPDATE ASSET_BASIC_DICT
+    	<set>
+    		<if test="appId!=null">APP_ID=#{appId},</if>
+    		<if test="dictId!=null">DICT_ID=#{dictId},</if>
+    		<if test="dictCode!=null">DICT_CODE=#{dictCode},</if>
+    		<if test="dictName!=null">DICT_NAME=#{dictName},</if>
+    		<if test="codeMode!=null">CODE_MODE=#{codeMode},</if>
+    		<if test="codeRule!=null">CODE_RULE=#{codeRule},</if>
+    		<if test="isbuiltin!=null">ISBUILTIN=#{isbuiltin},</if>
+    		<if test="remark!=null">REMARK=#{remark},</if>
+    		<if test="creator!=null">CREATOR=#{creator},</if>
+    		<if test="createDate!=null">CREATE_DATE=#{createDate},</if>
+    	</set>
+    	WHERE DICT_ID=#{dictId}
+    </update>
+    
+    <!-- 根据ID删除字典信息 -->
+    <delete id="deleteById" parameterType="com.bosssoft.egov.asset.dictionary.impl.entity.AssetBasicDict">
+    	DELETE FROM ASSET_BASIC_DICT WHERE DICT_ID=#{dictId}
+    </delete>
+    
+    <select id="searchListByKey" resultMap="assetBasicDictMap">
+    	SELECT 
+    	<include refid="Base_Column_List"/>
+    	FROM ASSET_BASIC_DICT
+    	WHERE DICT_CODE LIKE #{_key}
+    	OR DICT_NAME LIKE #{_key}
+    
+    </select>
+</mapper>

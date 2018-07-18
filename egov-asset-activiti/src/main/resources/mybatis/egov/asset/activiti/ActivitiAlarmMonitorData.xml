@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.activiti.mapper.ActivitiAlarmMonitorDataMapper" >
+  <resultMap id="activitiAlarmMonitorDataMap" type="com.bosssoft.egov.asset.activiti.entity.ActivitiAlarmMonitorData" >
+         <result property="id" column="ID" />
+	     <result property="busId" column="BUS_ID" />
+	     <result property="createTimeProcess" column="CREATE_TIME_PROCESS" />
+	     <result property="createTimeBill" column="CREATE_TIME_BILL" />
+	     <result property="processName" column="PROCESS_NAME" />
+	     <result property="orgName" column="ORG_NAME" />
+	     <result property="orgCode" column="ORG_CODE" />
+	     <result property="orgId" column="ORG_ID" />
+	     <result property="rgnId" column="RGN_ID" />
+	     <result property="roleCode" column="ROLE_CODE" />
+	     <result property="billCode" column="BILL_CODE" />
+	     <result property="assetClassifyCode" column="ASSET_CLASSIFY_CODE" />
+	     <result property="assetClassifyName" column="ASSET_CLASSIFY_NAME" />
+	     <result property="totalMoney" column="TOTAL_MONEY" />
+	     <result property="remark" column="REMARK" />
+	     <result property="bizCode" column="BIZ_CODE" />
+	     <result property="intevalDay" column="INTEVAL_DAY" />
+	     <result property="isComplete" column="IS_COMPLETE" />
+	     <result property="endTime" column="END_TIME" />
+	     <result property="pid" column="PID" />
+	 </resultMap>
+ 
+ <sql id="Base_Column_List">
+    ID,BUS_ID,CREATE_TIME_PROCESS,CREATE_TIME_BILL,PROCESS_NAME,ORG_NAME,ORG_CODE,ORG_ID,RGN_ID,ROLE_CODE,BILL_CODE,ASSET_CLASSIFY_CODE,ASSET_CLASSIFY_NAME,TOTAL_MONEY,REMARK,BIZ_CODE,INTEVAL_DAY,IS_COMPLETE ,PID </sql>
+ 
+    <select id="queryActivitiAlarmMonitorDataPage" resultMap="activitiAlarmMonitorDataMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM ACTIVITI_ALARM_MONITOR_DATA
+      	 <trim prefix="where"  prefixOverrides="and |or">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            #{searcher.__QUERYCON}
+	        </if>  
+	    </trim>
+    </select>
+    
+    <select id="queryBySql" resultMap="activitiAlarmMonitorDataMap">
+		<if test="querysql!=null">
+			${querysql}
+		</if>
+	</select>
+	
+   <delete id="delActivitiAlarmMonitorDataAll">
+		DELETE
+		FROM ACTIVITI_ALARM_MONITOR_DATA
+	</delete>
+   <delete id="delActivitiAlarmMonitorDataByComplete">
+		DELETE
+		FROM ACTIVITI_ALARM_MONITOR_DATA WHERE IS_COMPLETE = #{c}
+	</delete>
+	
+	<update id="updateCompleteTimeByBusId">
+		UPDATE
+		ACTIVITI_ALARM_MONITOR_data
+		<set>
+			IS_COMPLETE = #{isComplete} , END_TIME = #{endTime}
+		</set>
+		WHERE BUS_ID= #{busId} and PID = #{pid} and IS_COMPLETE =0
+	</update>
+	
+	<update id="updateCompleteTimeByBusIdNoPid">
+		UPDATE
+		ACTIVITI_ALARM_MONITOR_data
+		<set>
+			IS_COMPLETE = #{isComplete} , END_TIME = #{endTime}
+		</set>
+		WHERE BUS_ID= #{busId} and IS_COMPLETE =0
+	</update>
+	
+	<update id="updateRoleCodeBusId">
+		UPDATE
+		ACTIVITI_ALARM_MONITOR_data
+		<set>
+			ROLE_CODE = #{roleCode}
+		</set>
+		WHERE BUS_ID= #{busId} and PID = #{pid} and IS_COMPLETE = #{isComplete}
+	</update>
+	<update id="updateRoleCodeBusIdNoPid">
+		UPDATE
+		ACTIVITI_ALARM_MONITOR_data
+		<set>
+			ROLE_CODE = #{roleCode}
+		</set>
+		WHERE BUS_ID= #{busId} and IS_COMPLETE = #{isComplete}
+	</update>
+	
+	<insert id="insertBySql">
+		${insertsql}
+	</insert>
+	
+	<update id="addAlarmPro" statementType="CALLABLE">
+    	{call ProActivitiAlarm}
+    </update>
+<!-- 	<update id="addAlarmPro" parameterMap="alarmMap" statementType="CALLABLE">
+    	{call ProActivitiAlarm(
+    	    #{intevalDay,jdbcType=INTEGER,mode=IN},
+    	    #{expiredDay,jdbcType=INTEGER,mode=IN},
+    	    #{zoneFlag,jdbcType=VARCHAR,mode=IN},
+    	    #{busType,jdbcType=VARCHAR,mode=IN},
+    	    #{busDetail,jdbcType=VARCHAR,mode=IN}
+		)}
+    </update> -->
+    <parameterMap type="java.util.Map" id="alarmMap">
+    	<parameter property="intevalDay" jdbcType="INTEGER" mode="IN"/>
+    	<parameter property="expiredDay" jdbcType="INTEGER" mode="IN"/>
+    	<parameter property="zoneFlag" jdbcType="VARCHAR" mode="IN"/>
+    	<parameter property="busType" jdbcType="VARCHAR" mode="IN"/>
+    	<parameter property="busDetail" jdbcType="VARCHAR" mode="IN"/>
+    </parameterMap>
+    
+</mapper>

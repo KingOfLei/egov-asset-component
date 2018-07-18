@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Page id="userManageTodoIndex" layout="border"
+	templatePath="egov/asset/amcuser/showTodoIndex.jsp"
+	js="resources/egov/js/asset/amcuser/showTodoIndex.js"
+	jsId="userManageTodoIndex" xmlns="http://www.bosssoft.org"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.bosssoft.org ../../../../schema/uis/uitemplate-2.0.xsd">
+	<items>
+
+		<Panel id="userManageTodoIndex_panel_left" region="west" width="150" split="true" style="margin:0px">
+			<items>
+		    <Tree id="todoTypeTree" hasRoot="false" hasQry="true" isAsync="true"  width="100%"
+				idField="itemCode" parentField="itemPcode" nameField="itemName" showLine="true"				           
+				loadUrl="egov/asset/amcuser/getDictItemByCode.do?dictCode=TODO_TREE_YEAR_USER_MANAGE" >	
+				<events>
+					<Event id="onClick" param1="event" param2="treeId" param3="treeNode" param4="clickFlag">userManageTodoIndex.loadData(event,treeId,treeNode,clickFlag)</Event>
+				</events> 			         
+			</Tree> 
+			</items>
+		</Panel>
+		
+		<Panel id="userManageTodoIndex_panel_bottom" region="center" layout="border">
+			<items>
+				<Panel id="userManageTodoIndex_panel_top" region="north" height="40">
+					<items>
+						<ToolBar id="mybtnarea" displayType="MENU">
+							<items>
+								<Button id="userManageTodoIndexDetail" name="查看"   icon="btn-detail"  iconMode="LEFT" />
+							</items>
+						</ToolBar>
+						<Query id="userManageTodoIndex_query" queryTarget="userManageTodoIndex_grid"
+							isAdvance="true" style="display:none;" manual="false" advColCount="2">
+							<quicks>
+								<QueryItem id="year" field="YEAR" editorType="TEXTBOX" operator="=" name="年度" visible="false"/>
+						  		<QueryItem id="userName" field="USER_NAME" name="用户名" editorType="TEXTBOX" operator="like" colSpan="2" editOptions="{clearbtn:true}" />						  
+						  		<QueryItem id="userCode" field="USER_CODE" name="用户账号" editorType="TEXTBOX" operator="like" colSpan="2" editOptions="{clearbtn:true}"/>
+						  		<!-- <QueryItem id="mobileNo" field="T.MOBILE_NO" name="手机号码"  operator="like"   editorType="TEXTBOX" editOptions="{clearbtn:true}"/> -->
+						 		<QueryItem id="orgId" field="MAIN_ORGID" name="所属机构" operator="=" editorType="COMBOZTREE"
+							suggest="true"
+							width="270"
+							editOptions="{
+								action:'egov/asset/aims/basic/aimsbasicorg/loadAllOrgList.do',
+								idfield : 'orgId',
+								pidfield : 'orgPid',
+								textfield : 'treeNode',
+								valuefield : 'orgId',
+								rootpidvalue : '0',
+								panelwidth:300,
+								clearbtn:true
+							}"/>
+						 	</quicks>
+						</Query>
+					</items>
+				</Panel>
+				<Panel id="userManageTodoIndex_panel_right" region="center" css="xgridStyle">
+						<items>
+						<XGrid id="userManageTodoIndex_grid" url="egov/asset/amcuser/queryShowTodoPage.do"
+							rownumbers="normal" autoLoad="false" title="用户管理办结库" summaryPos="top"
+							checkbox="true">
+						<toolbar>
+			         	      <Button id="userManageTodoIndex_export" name="列表导出"  icon="btn-print"  iconMode="LEFT" />
+			         	</toolbar>
+						<columns>
+							<XGridColumn field="userName" title="用户名称" showTitle="true" align="left"/>
+							<XGridColumn field="userCode" title="用户账号" showTitle="true" width="150" align="left"/>
+							<XGridColumn field="creator" title="身份证号" showTitle="true" align="left"/>
+							<XGridColumn field="mobileNo" title="手机号码" showTitle="true"  align="left"/>
+							<XGridColumn field="mainOrgName" title="所属机构" showTitle="true" width="230" align="left"/>
+							<XGridColumn field="mainPosName" title="所属岗位" showTitle="true" width="230" align="left"/>		
+						</columns>
+					<frozenColumnsRight>
+					</frozenColumnsRight>
+						</XGrid>
+					</items>
+				</Panel>
+			</items>
+		</Panel>
+	</items>
+</Page>

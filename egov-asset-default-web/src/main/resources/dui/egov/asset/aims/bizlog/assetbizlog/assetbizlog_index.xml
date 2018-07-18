@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Page id="assetBizLogPage" layout="border"
+	templatePath="egov/asset/aims/bizlog/assetbizlog/assetbizlog_index.jsp"
+	js="resources/egov/js/asset/aims/bizlog/assetbizlog/assetbizlog_index.js"
+	jsId="assetbizlog_index" xmlns="http://www.bosssoft.org"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.bosssoft.org ../../../../../schema/uis/uitemplate-2.0.xsd">
+	<items>
+		<Panel id="assetBizLogPage_panel_top" region="north" height="5">
+			<items>
+				<Query id="assetBizLogPage_query" queryTarget="assetBizLogPage_grid"
+					isAdvance="true" style="display:none;" manual="false" advColCount="2" showMoreButton="true">
+					<quicks>
+						<#if !params.isLeaf>
+						<QueryItem id="userCode" field="USER_CODE" name="用户编码" editorType="TEXTBOX" operator="like"></QueryItem>
+						<QueryItem id="userName" field="USER_NAME" name="用户名" editorType="TEXTBOX" operator="like"></QueryItem>
+						</#if>
+						<QueryItem id="bizType" field="BIZ_TYPE" name="业务类型" editorType="TEXTBOX" operator="like"></QueryItem>
+						<QueryItem id="operType" field="BIZ_OPER_TYPE" editorType="COMBOBOX" name="操作类型" editOptions="{
+						    data:[{id:'ADD',name:'新增'},{id:'UPDATE',name:'更新'},{id:'DELETE',name:'删除'},
+						    {id:'AUDIT',name:'审核'},{id:'OTHER',name:'其他'}]
+						}" width="100"></QueryItem>
+						</quicks>
+					<advances>
+					  <#if !params.isLeaf>
+						<QueryItem id="userCode" field="USER_CODE" name="用户编码" editorType="TEXTBOX" operator="like"  colSpan="2" ></QueryItem>
+						<QueryItem id="userName" field="USER_NAME" name="用户名" editorType="TEXTBOX" operator="like"  colSpan="2" ></QueryItem>
+						</#if>
+						<QueryItem id="bizType" field="BIZ_TYPE" name="业务类型" editorType="TEXTBOX" operator="like"></QueryItem>
+						<QueryItem id="operType" field="BIZ_OPER_TYPE" editorType="COMBOBOX" name="操作类型" editOptions="{
+						    data:[{id:'ADD',name:'新增'},{id:'UPDATE',name:'更新'},{id:'DELETE',name:'删除'},
+						    {id:'AUDIT',name:'审核'},{id:'OTHER',name:'其他'}]
+						}"></QueryItem>
+						<QueryItem id="billStartDate" field="OPER_DATE" width="200px" editorType="DATETIME" editOptions="{onlySelect:true,clearbtn:true,dateend:'billEndDate'}" name="操作日期" operator="&gt;=" />
+						<QueryItem id="billEndDate" field="OPER_DATE"  editorType="DATETIME"  name="至" operator="&lt;=" editOptions="{onlySelect:true,clearbtn:true}"  />
+					
+					</advances>
+				</Query>
+			</items>
+		</Panel>
+		<Panel id="assetBizLogPage_panel_bottom" region="center" css="xgridStyle">
+			<items>
+				<XGrid id="assetBizLogPage_grid"
+					url="egov/asset/aims/bizlog/assetbizlog/queryAssetBizLogPage.do" 
+					rownumbers="normal" autoLoad="true" fit="true" title="业务日志">
+					<columns>
+						<XGridColumn field="id" title="ID" align="left" hidden="true"/>
+						<XGridColumn field="appId" title="ID" align="left" hidden="true"/>
+						<XGridColumn field="userId" title="ID" align="left" hidden="true"/>
+						<#if !params.isLeaf>
+						<XGridColumn field="userCode" title="用户编码" align="left" showTitle="true"/>
+						<XGridColumn field="userName" title="用户名" align="left" showTitle="true"/>
+						</#if>
+						<XGridColumn field="rgnId" title="ID" align="left" hidden="true"/>
+						<XGridColumn field="rgnCode" title="ID" align="left" hidden="true"/>
+						<XGridColumn field="rgnName" title="ID" align="left" hidden="true"/>
+						<XGridColumn field="orgId" title="组织机构GUID" align="left" hidden="true" />
+						<XGridColumn field="orgCode" title="组织机构编码" align="left" hidden="true"/>
+						<XGridColumn field="orgName" title="组织机构名称" align="left" hidden="true"/>
+						<XGridColumn field="bizType" title="业务类型" align="left" hidden="true"/>
+						<XGridColumn field="bizTypeName" title="业务类型" align="left" showTitle="true"/>
+						<XGridColumn field="bizOperType" title="操作类型" align="left" showTitle="true" formatter="assetbizlog_index.formaterOperType"/>
+						<XGridColumn field="operDesc" title="操作说明" align="left" width="200" showTitle="true"/>
+						<XGridColumn field="operDate" title="操作日期" align="left" showTitle="true"/>
+						<XGridColumn field="createTime" title="操作时间" align="left" hidden="true"/>
+					</columns>
+				</XGrid>
+			</items>
+		</Panel>
+	</items>
+</Page>

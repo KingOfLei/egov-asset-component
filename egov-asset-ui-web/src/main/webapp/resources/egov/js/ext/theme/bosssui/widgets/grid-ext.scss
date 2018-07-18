@@ -1,0 +1,173 @@
+// 自定义网格样式
+$btnBgColor: #fff;
+$fontSize: 14px;
+$borderColor: #62a9f1;
+$height: 30px;
+
+.custom-grid{
+	&>* {
+		width: 100%;
+	}
+	.custom-grid-header{
+		height: 40px;
+		line-height: 40px;
+		border-bottom: 1px solid #62a9f1;
+		padding-left: 10px;
+	}
+	.custom-grid-body{
+		height: 390px;
+		& > div{
+			display: inline-block;
+			float: left;
+		}
+		
+		.item-box{
+			width: 45%;
+			padding: 10px;
+			
+			.item-list{
+				border: 1px solid $borderColor;
+				border-radius: 3px;
+				height: 350px;
+				background: #fff;
+				overflow: auto;
+				
+				.item{
+					min-height: $height;
+					line-height: $height;
+					padding-left: 10px;
+					padding-bottom: 2px;
+					margin-bottom: 1px;
+					font-size: $fontSize;
+					cursor: pointer;
+					background: #e7e7ff;
+					
+					&:hover{
+						background: #cadfff;
+					}
+					& .child-item-list{
+						margin-top: -5px;
+						padding: 2px;
+						
+						& .item{
+							border-top: 1px;
+							border-bottom: 1px;
+							border-left: 2px;
+							border-right: 2px;
+							border-style: solid;
+							border-color: #fff;
+							margin-bottom: 0;
+						}
+					}
+				}
+				.selected-item{
+					background: #93cdff;
+				}
+				.item-placeholder{
+					min-height: $height;
+					line-height: $height;
+					background: rgba(0, 0, 255, .1);
+					border: 1px dashed $borderColor;
+				}
+			}
+			& .item-list-hover{
+				background: #fff;
+			}
+			
+			&.right-item-box{
+				& .item-asc:after{
+					content: '';
+					margin-top: 8px;
+				    width: 16px;
+				    height: 16px;
+				    float: right;
+				    background-image: url('./images/blue-skin/glyphicons-halflings.png');
+				    background-position: -287px -97px;
+				}
+				& .item-desc:after{
+					content: '';
+					margin-top: 8px;
+					width: 16px;
+				    height: 16px;
+				    float: right;
+				    background-image: url('./images/blue-skin/glyphicons-halflings.png');
+				    background-position: -310px -97px;
+				}
+			}
+		}
+		.button-box{
+			width: 10%;
+			margin: 0 auto;
+			padding-top: 80px;
+			text-align: center;
+			
+			.item-selected-btn{
+				text-decoration: none;
+				display: block;
+			    width: 50px;
+			    height: $height;
+			    line-height: 24px;
+			    margin: 25px auto;
+			}
+		}
+	}
+	.dialog-footer{
+		text-align: right;
+		
+		.list-footer-btn{
+			display: inline-block;
+			height: 26px;
+			text-decoration: none;
+			margin-right: 20px;
+		}
+	}
+}
+.app-grid{
+	.pager-tool-ext{
+		height: 30px;
+		float: left;
+	}
+}
+span{
+	&.icon{
+		&.icon-ext-query{
+			background-position-x:-48px;
+		}
+		&.icon-ext-config{
+			background-position-x:-432px;
+		}
+		&.icon-ext-export{
+			background-position:-120px -72px;
+		}
+		&.icon-ext-task{
+			background-position:-265px -24px;
+		}
+		&.icon-ext-funnel{
+			background-position: -408px -144px;
+		}
+	}
+}
+.grid-pager-ext{
+	float:left;
+	padding-top:3px;
+	margin-left:5px;
+	
+	.grid-ext-btn{
+		padding:2px 5px;
+		font-size:13px;
+		text-decoration:none;
+		color: #434343;
+		cursor: pointer;
+		border: 1px solid #fff;
+		
+		&:hover{
+			border-color: #62a9f1;
+			border-radius: 2px;
+			background: #e0ecff;
+		}
+		&>span{
+			margin-right: 2px;
+			color: #62a9f1;
+		}
+	}
+}

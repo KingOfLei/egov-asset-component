@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.attach.mapper.AssetAttachRemarkMapper" >
+  <resultMap id="assetAttachRemarkMap" type="com.bosssoft.egov.asset.attach.entity.AssetAttachRemark" >
+         <result property="id" column="ID" />
+	     <result property="bizId" column="BIZ_ID" />
+	     <result property="bizType" column="BIZ_TYPE" />
+	     <result property="remark" column="REMARK" />
+	     <result property="str01" column="STR01" />
+	     <result property="str02" column="STR02" />
+	     <result property="str03" column="STR03" />
+	     <result property="str04" column="STR04" />
+	     <result property="str05" column="STR05" />
+	 </resultMap>
+ 
+ <sql id="Base_Column_List">
+    ID,BIZ_ID,BIZ_TYPE,REMARK,STR01,STR02,STR03,STR04,STR05  </sql>
+ 
+    <select id="queryAssetAttachRemarkPage" resultMap="assetAttachRemarkMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM ASSET_ATTACH_REMARK
+      	 <trim prefix="where"  prefixOverrides="and |or">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            #{searcher.__QUERYCON}
+	        </if>  
+	    </trim>
+    </select>
+</mapper>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.activiti.mapper.AssetActivitiConfigMapper" >
+  <resultMap id="assetActivitiConfigMap" type="com.bosssoft.egov.asset.activiti.entity.AssetActivitiConfig" >
+         <result property="id" column="ID" />
+	     <result property="prodefkey" column="PRODEFKEY" />
+	     <result property="usertaskdef" column="USERTASKDEF" />
+	     <result property="usertaskname" column="USERTASKNAME" />
+	     <result property="processname" column="PROCESSNAME" />
+	     <result property="groupId" column="GROUP_ID" />
+	 </resultMap>
+ 
+ <sql id="Base_Column_List">
+    ID,PRODEFKEY,USERTASKDEF,USERTASKNAME,PROCESSNAME,GROUP_ID  </sql>
+ 
+    <select id="queryAssetActivitiConfigPage" resultMap="assetActivitiConfigMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM ASSET_ACTIVITI_CONFIG
+      	 <trim prefix="where"  prefixOverrides="and | or">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            ${searcher.__QUERYCON}
+	        </if>  
+	    </trim>
+    </select>
+</mapper>

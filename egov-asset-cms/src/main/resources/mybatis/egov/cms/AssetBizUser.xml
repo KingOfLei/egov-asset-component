@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.cms.mapper.AssetBizUserMapper" >
+  <resultMap id="assetBizUserMap" type="com.bosssoft.egov.cms.entity.AssetBizUser" >
+         <result property="id" column="ID" />
+	     <result property="bizId" column="BIZ_ID" />
+	     <result property="bizType" column="BIZ_TYPE" />
+	     <result property="userId" column="USER_ID" />
+	     <result property="userCode" column="USER_CODE" />
+	     <result property="count" column="COUNT" />
+	     <result property="readTime" column="READ_TIME" />
+	 </resultMap>
+ 
+ <sql id="Base_Column_List">
+    ID,BIZ_ID,BIZ_TYPE,USER_ID,USER_CODE,COUNT,READ_TIME  </sql>
+ 
+    <select id="queryAssetBizUserPage" resultMap="assetBizUserMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM ASSET_BIZ_USER
+      	 <trim prefix="where"  prefixOverrides="and |or">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            #{searcher.__QUERYCON}
+	        </if>  
+	    </trim>
+    </select>
+    
+    <delete id="batchDeleteByBizId" parameterType="com.bosssoft.egov.cms.entity.AssetBizUser">
+		DELETE FROM ASSET_BIZ_USER 
+		WHERE BIZ_TYPE=#{bizType} AND BIZ_ID IN
+		<foreach collection="bizIds" open="(" item="bizId" separator="," index="index" close=")">
+			#{bizId}
+		</foreach>
+	</delete>
+</mapper>

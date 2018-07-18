@@ -1,0 +1,364 @@
+/*
+index.css 覆盖
+ */
+
+
+/*左侧菜单栏图标*/
+
+
+
+/***重写头部导航样式样式*****/
+.header{
+    width: 100%;
+    height:auto;
+    // background: url("images/skins/blue/head.png") left top repeat-x;
+    background-color: $skin-bgcolor;
+    // padding:10px 10px 0 10px;
+    min-height: 65px;
+}
+.header>.header-bg{
+    width: 100%;
+    height:auto;
+    overflow: hidden;
+    padding: 10px 0px 0px 10px;
+    background: url($cover-image-path+"skins/blue/head_bg.png") left top no-repeat;
+}
+.logo{ 
+    width: auto;
+    float: left;
+}
+.logo-text{
+    font-weight: bold;
+    font-size: 30px;
+    padding-left: 40px;
+    height: 35px;
+    line-height: 35px;
+    color: $skin-fontcolor;
+}
+.logo-version{
+    font-size: 18px;
+}
+.hover-change:hover,.login-info i:hover{
+    color: orange;
+    cursor: pointer;
+}
+.login-info{
+    float: right;
+    color: $skin-fontcolor;
+
+    li{
+        float: left;
+        border-right: 1px solid #ffffff;
+        padding: 0px 5px;
+        margin-right: 5px;
+
+        >span{
+            margin-left: 15px;
+        }
+        i{
+            height:auto;
+            width: 15px;
+        }
+    }
+    li.logininfo-down{
+        background: url($cover-theme-path+"head/logininfo-down.png") left center no-repeat;
+    }
+    li.logininfo-down:hover{
+        background-image: url($cover-theme-path+"head/logininfo-down-hover.png");
+    }
+
+    li.logininfo-user{
+        background: url($cover-theme-path+"head/logininfo-user.png") left center no-repeat;
+    }
+    li.logininfo-user:hover{
+        background-image: url($cover-theme-path+"head/logininfo-user-hover.png");
+    }
+
+    li.logininfo-time{
+        background: url($cover-theme-path+"head/logininfo-time.png") left center no-repeat;
+    }
+
+    li.logininfo-skin{
+        cursor: pointer;
+        background: url($cover-theme-path+"head/logininfo-skin.png") left center no-repeat;
+    }
+
+    li.logininfo-skin:hover{
+        background-image: url($cover-theme-path+"head/logininfo-skin-hover.png");
+    }
+    // li.logininfo-time:hover{
+    //     background: url("images/skins/logininfo-time-hover.png") left center no-repeat;
+    // }
+
+}
+.selected{  
+    background-color: $skin-hoverbgcolor !important;
+}
+.selected span{
+    color: $font-hover-color !important;
+}
+
+
+.header .app-list{
+    overflow: hidden;
+    float: left;
+    margin: 10px 0 0 15px;
+}
+.header .app-list ul{
+    margin: 0px;
+    padding: 0px;
+    -webkit-padding-start: 0px;
+}
+.header .app-list ul li{
+    height: 35px;
+    line-height: 35px;
+    float: left;
+    padding: 0 8px;
+    cursor: pointer;
+}
+
+.header .app-list li span{
+    padding-left: 0px;
+    padding-right: 0px;
+    text-align: center;
+    font-family: "微软雅黑", verdana;
+    font-size: 15px;
+    font-weight:bold;   
+    color: $skin-fontcolor;
+    height: 35px;
+    margin-top: 0px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+ 
+.navbar-collapse.pull-left+.navbar-custom-menu{display:block;position:absolute;top:0;right:40px}
+.main-sidebar,.left-side{
+    min-height:100%;
+    // padding-top:5px;
+    padding:0px;
+    width:150px;
+    z-index:810;
+    -webkit-transition:-webkit-transform .3s ease-in-out,width .3s ease-in-out;
+    -moz-transition:-moz-transform .3s ease-in-out,width .3s ease-in-out;
+    -o-transition:-o-transform .3s ease-in-out,width .3s ease-in-out;
+    transition:transform .3s ease-in-out,width .3s ease-in-out;
+}
+
+/***重写头部导航样式样式结束****/
+
+// 公用自定义样式
+.form-readonly{
+    background-color: #ddd; 
+    width: 196px; 
+    height: 23px;
+}
+
+
+// 公用遮罩层样式
+.alert-mask {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    z-index: 99999;
+    display: table;
+    background: rgba(0, 0, 0, 0.3);
+    _background: 0 0;
+    _border: 0;
+    filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#77000000', EndColorStr='#77000000');
+    
+    .alert-mask-cell {
+        display: table-cell;
+        vertical-align: middle;
+        text-align: center;
+        cursor: default;
+
+        >.switch-btn {
+            width: 48px;
+            height: 48px;
+            position: fixed;
+            top: 45%;
+        }
+
+        .alert-mask-left {
+            background: url($cover-image-path+'btn/left.png') center center no-repeat;
+            left: 10px;
+        }
+
+        .alert-mask-right {
+            background: url($cover-image-path+'btn/right.png') center center no-repeat;
+            right: 10px;
+        }
+
+        .alert-mask-close {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            width: 32px;
+            height: 32px;
+            cursor: pointer;
+            background: url($cover-image-path+'btn/close.png') center center no-repeat;
+        }
+
+        .alert-mask-center {
+            width: 100%;
+            height: 100%;
+            margin: 0 auto;
+            overflow: auto;
+
+            // 模拟弹框样式
+            >.alert-dialog-main{
+                width: 580px;
+                height: 400px;
+                margin: 0 auto;
+                background-color: #fff;
+                overflow: hidden;
+                -moz-border-radius: 10px; /* Firefox */
+                -webkit-border-radius: 10px; /* Safari 和 Chrome */
+                border-radius: 10px; /* Opera 10.5+, 以及使用了IE-CSS3的IE浏览器 */
+                -webkit-box-shadow: 0 3px 7px rgba(0,0,0,0.3);
+                -moz-box-shadow: 0 3px 7px rgba(0,0,0,0.3);
+                box-shadow: 0 3px 7px rgba(0,0,0,0.3);
+
+                position: relative;
+                
+                >span.alert-dialog-close{
+                    position: absolute;
+                    top: 8px;
+                    right: 10px;
+                    cursor: pointer;
+                    color: #fff;
+                    float: right;
+                    font-size: 29px;
+                    text-decoration: none;
+                    font-weight: bold;
+                    opacity: 1;
+                    display: inline-block;
+                }
+                >span.alert-dialog-close:hover{
+                    color: #fff;
+                    opacity: 1;
+                    font-size: 30px;
+                }
+
+                // 标题
+                >h4{
+                    width: 100%;
+                    line-height: 40px;
+                    color: #fff;
+                    background: url("../images/skins/blue/head_bg.png") $dialog-title-bgcolor left top no-repeat;
+                    position: absolute;
+                    top: 0;
+                }
+                
+                // 网格
+                >div.alert-dialog-content{
+                    width: 100%;
+                    height: 100%;
+                    padding: 50px 20px 20px 20px;
+                    overflow: hidden;
+
+                    >ul{
+                        height: 100%;
+                        overflow: auto;
+                    }
+
+                    // 皮肤切换弹框内容
+                    >ul.skin-switch{
+
+                        >li{
+                            display: inline-block;
+                            float: left;
+                            margin: 8px 0px 0px 8px;
+                            cursor: pointer;
+                            border: 2px solid #fff;
+                            border-radius: 10px;
+
+                            >img{
+                                width: 120px;
+                                height: 120px;
+                                display: inline-block;
+                            }
+                        }
+                        >li:hover, li.on-selected{
+                            border-color: $theme-color;
+                            box-shadow: 0px 0px 2px 2px $theme-match-color;
+                        }
+                    }
+
+                    // 在线人数弹框内容
+                    >ul.online-info{
+
+                        >li{
+                            width: 100%;
+                            height: 100px;
+                            border-bottom: 1px solid #999;
+                            padding: 5px 0px;
+
+                            >img{
+                                display: inline-block;
+                                float: left;
+                                width: 90px;
+                                height: 90px;
+                                border-radius: 5px;
+                                border: 1px solid #ccc;
+                                background: url($cover-image-path+'btn/head_portrait.png') center center no-repeat;
+                            }
+
+                            >ul{
+                                display: inline-block;
+                                float: left;
+                                max-width: 260px;
+                                height: 100%;
+                                overflow: hidden;
+                                padding: 0px 5px;
+
+                                >li{
+                                    text-align: left;
+                                    width: 100%;
+                                    overflow: hidden;
+                                    word-break: keep-all;
+                                    white-space: nowrap;
+                                    text-overflow: ellipsis;
+                                }
+                            }
+                        }
+                        >li:hover{
+                            background-color: $skin-moduletitle-bgcolor;
+                        }
+                    }
+                }
+                
+                // 底部按钮栏
+                >div.alert-dialog-btns{
+                    position: absolute;
+                    bottom: 0;
+                    width: 100%;
+                    line-height: 40px;
+                    border-top: 1px solid $theme-color;
+
+                    >span{
+                        display: inline-block;
+                        border: 1px solid $theme-color;
+                        color: $theme-color;
+                        line-height: 28px;
+                        padding: 0px 15px;
+                        border-radius: 5px;
+                        margin: 0 5px;
+                        cursor: pointer;
+                        font-size: 14px;
+                    }
+                    >span:hover{
+                        background-color: $theme-color;
+                        color: #fff;
+                    }
+                }
+
+            }
+        }
+
+    }
+}
+// 公用遮罩层样式结束

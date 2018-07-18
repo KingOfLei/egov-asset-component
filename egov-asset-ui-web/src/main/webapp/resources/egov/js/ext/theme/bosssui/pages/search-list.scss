@@ -1,0 +1,63 @@
+// 选择操作单位页面--查询列表样式
+// author: zhangxiaoyun
+// date: 2017-11-13
+
+.search-orglist-by-user{
+    height: 100%;
+
+	// 搜索栏
+	>.search-org{
+		text-align: left;
+	    line-height: 40px;
+	    border-bottom: 1px solid #ccc;
+
+		// 输入框
+		>input{
+		    width: 90%;
+		    height: 40px;
+		    line-height: 40px;
+		    border: none;
+		    border-right: 1px solid #ccc;
+		}
+
+		// 搜索按钮
+		>a{
+			display: inline-block;
+		    width: 8%;
+		    cursor: pointer;
+		    text-align: center;
+		}
+	}
+
+	// 结果列表
+	>.org-list{
+		text-align: left;
+		padding: 10px;
+		height: 270px;
+	    overflow: auto;
+
+		>ul{
+		    margin-left: 20px;
+
+			>li{
+				list-style-type: square;
+			
+				>a{
+					cursor: pointer;
+				    padding: 0px 10px;
+				}
+				>a:hover{
+					color: orange;
+					text-decoration: none;
+				}
+			}
+
+			>li.on-select{
+				>a{
+				    border: 1px solid orange;
+				    background-color: #f1ddb9;
+				}
+			}
+		}
+	}
+}

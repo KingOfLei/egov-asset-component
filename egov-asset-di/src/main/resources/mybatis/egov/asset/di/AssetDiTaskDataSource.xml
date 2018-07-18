@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.di.mapper.AssetDiTaskDataSourceMapper" >
+	<resultMap id="BaseResultMap" type="com.bosssoft.egov.asset.di.entity.AssetDiTaskDataSource" >
+		<result property="dbId" column="F_DB_ID"/>
+		<result property="dbType" column="F_DB_TYPE" />
+		<result property="title" column="F_TITLE" />
+		<result property="ip" column="F_IP" />
+		<result property="port" column="F_PORT" />
+		<result property="dbName" column="F_DB_NAME" />
+		<result property="userName" column="F_USER_NAME" />
+		<result property="password" column="F_PASSWORD" />
+ 	</resultMap>
+ 
+	<sql id="Base_Column_List">
+	    f_db_id, f_db_type, f_title, f_ip, f_port, f_db_name, f_user_name, f_password
+	</sql>
+ 
+ 	<select id="getDataSourceList" resultMap="BaseResultMap">
+ 		select <include refid="Base_Column_List"/>
+ 		from asset_di_task_data_source
+ 	</select>
+</mapper>

@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.attach.mapper.AssetAttachItemMapper" >
+  <resultMap id="assetAttachItemMap" type="com.bosssoft.egov.asset.attach.entity.AssetAttachItem" >
+         <result property="appId" column="APP_ID" />
+	     <result property="id" column="ID" />
+	     <result property="bizType" column="BIZ_TYPE" />
+	     <result property="bizName" column="BIZ_NAME" />
+	     <result property="sxh" column="SXH" />
+	     <result property="itemType" column="ITEM_TYPE" />
+	     <result property="itemCode" column="ITEM_CODE" />
+	     <result property="itemName" column="ITEM_NAME" />
+	     <result property="itemExts" column="ITEM_EXTS" />
+	     <result property="itemMaxSize" column="ITEM_MAX_SIZE" />
+	     <result property="itemRemark" column="ITEM_REMARK" />
+	     <result property="required" column="REQUIRED" />
+	     <result property="status" column="STATUS" />
+	     <result property="remark" column="REMARK" />
+	     <result property="grade" column="GRADE" />
+	 </resultMap>
+ 
+ <sql id="Base_Column_List">
+    APP_ID,ID,BIZ_TYPE,BIZ_NAME,SXH,ITEM_TYPE,ITEM_CODE,ITEM_NAME,ITEM_EXTS,ITEM_MAX_SIZE,ITEM_REMARK,REQUIRED,STATUS,REMARK,GRADE  </sql>
+ 
+    <select id="queryAssetAttachItemPage" resultMap="assetAttachItemMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM ASSET_ATTACH_ITEM
+      	 <trim prefix="where"  prefixOverrides=" and |or ">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            ${searcher.__QUERYCON}
+	        </if>  
+	    </trim>
+    </select>
+    
+    <select id="checkAttachmentRequired" resultMap="assetAttachItemMap">
+       SELECT     
+       <include refid="Base_Column_List" />
+       FROM(
+          select i.*
+          from asset_attach_item i
+          where i.status = 1 and i.required = 1 and i.app_id = #{appId}
+          <trim prefix="and" prefixOverrides=" and | or ">
+             <if test="grade != null and grade != ''">
+                    (grade &lt;= #{grade} or grade is null)
+             </if>     
+          </trim>
+           <if test="bizType != null and bizType.size > 0">
+	           <trim prefix="and" prefixOverrides=" and | or ">
+	             i.biz_type in 
+	             <foreach collection="bizType" item="type" index="index" open="(" close=")" separator=",">
+	               #{type}
+	             </foreach>    
+	          </trim>
+           </if>
+           <if test="itemType != null and itemType.size > 0">
+	           <trim prefix="and" prefixOverrides=" and | or ">
+	             i.item_type in 
+	             <foreach collection="itemType" item="type" index="index" open="(" close=")" separator=",">
+	               #{type}
+	             </foreach>    
+	          </trim>
+           </if>
+           <if test="excludeItemCode != null and excludeItemCode.size > 0">
+	           <trim prefix="and" prefixOverrides=" and | or ">
+	             i.item_code not in 
+	             <foreach collection="excludeItemCode" item="type" index="index" open="(" close=")" separator=",">
+	               #{type}
+	             </foreach>    
+	          </trim>
+           </if>
+          and not exists(
+            select 1
+          from asset_attach_file f
+         where f.biz_id = #{bizId}||'_'|| i.biz_type||'_'||i.item_code
+           and f.status =1
+          )
+       ) i
+       where not exists(select 1 from ASSET_ATTACH_REMARK r where 
+        r.biz_id = #{bizId}||'_'|| i.biz_type||'_'||i.item_code
+        and length(r.remark) >=10
+        )
+        
+        UNION ALL
+         SELECT     
+       <include refid="Base_Column_List" />
+       FROM(
+         select i.*
+          from asset_attach_item i
+          where i.status = 1 and i.required = 2 and i.app_id = #{appId}
+          <trim prefix="and" prefixOverrides=" and | or ">
+             <if test="grade != null and grade != ''">
+                    (grade &lt;= #{grade} or grade is null)
+             </if>     
+          </trim>
+           <if test="bizType != null and bizType.size > 0">
+	           <trim prefix="and" prefixOverrides=" and | or ">
+	             i.biz_type in 
+	             <foreach collection="bizType" item="type" index="index" open="(" close=")" separator=",">
+	               #{type}
+	             </foreach>    
+	          </trim>
+           </if>
+           <if test="itemType != null and itemType.size > 0">
+	           <trim prefix="and" prefixOverrides=" and | or ">
+	             i.item_type in 
+	             <foreach collection="itemType" item="type" index="index" open="(" close=")" separator=",">
+	               #{type}
+	             </foreach>    
+	          </trim>
+           </if>
+           <if test="excludeItemCode != null and excludeItemCode.size > 0">
+	           <trim prefix="and" prefixOverrides=" and | or ">
+	             i.item_code not in 
+	             <foreach collection="excludeItemCode" item="type" index="index" open="(" close=")" separator=",">
+	               #{type}
+	             </foreach>    
+	          </trim>
+           </if>           
+          and not exists(
+            select 1
+          from asset_attach_file f
+         where f.biz_id = #{bizId}||'_'|| i.biz_type||'_'||i.item_code
+           and f.status =1
+          ) 
+       ) i
+        order by sxh
+    </select>
+    <!-- 统计附件文件个数 -->
+    <select id="queryAttachmentFileCount" resultMap="assetAttachItemMap">
+           SELECT     
+       <include refid="Base_Column_List" />
+       FROM(
+          select i.*
+          from asset_attach_item i
+          where i.status = 1 and i.required = 1 and i.app_id = #{appId}
+          <trim prefix="and" prefixOverrides=" and | or ">
+             <if test="grade != null and grade != ''">
+                    (grade &lt;= #{grade} or grade is null)
+             </if>     
+          </trim>
+           <if test="bizType != null and bizType.size > 0">
+	           <trim prefix="and" prefixOverrides=" and | or ">
+	             i.biz_type in 
+	             <foreach collection="bizType" item="type" index="index" open="(" close=")" separator=",">
+	               #{type}
+	             </foreach>    
+	          </trim>
+           </if>
+           <if test="itemType != null and itemType.size > 0">
+	           <trim prefix="and" prefixOverrides=" and | or ">
+	             i.item_type in 
+	             <foreach collection="itemType" item="type" index="index" open="(" close=")" separator=",">
+	               #{type}
+	             </foreach>    
+	          </trim>
+           </if>
+           <if test="excludeItemCode != null and excludeItemCode.size > 0">
+	           <trim prefix="and" prefixOverrides=" and | or ">
+	             i.item_code not in 
+	             <foreach collection="excludeItemCode" item="type" index="index" open="(" close=")" separator=",">
+	               #{type}
+	             </foreach>    
+	          </trim>
+           </if>
+          and exists(
+            select 1
+          from asset_attach_file f
+         where f.biz_id = #{bizId}||'_'|| i.biz_type||'_'||i.item_code
+           and f.status =1
+          )
+       ) i
+    </select>
+</mapper>

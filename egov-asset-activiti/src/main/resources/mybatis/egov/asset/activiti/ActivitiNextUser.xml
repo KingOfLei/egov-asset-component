@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.activiti.mapper.ActivitiNextUserMapper" >
+  <resultMap id="activitiNextUserMap" type="com.bosssoft.egov.asset.activiti.entity.ActivitiNextUser" >
+         <result property="id" column="ID" />
+	     <result property="busId" column="BUS_ID" />
+	     <result property="userCode" column="USER_CODE" />
+	     <result property="userName" column="USER_NAME" />
+	     <result property="userId" column="USER_ID" />
+	     <result property="orgCode" column="ORG_CODE" />
+	     <result property="taskId" column="TASK_ID" />
+	     <result property="procInstId" column="PROC_INST_ID" />
+	     <result property="userTaskId" column="USER_TASK_ID" />
+	     <result property="taskName" column="TASK_NAME" />
+	     <result property="phone" column="PHONE" />
+	     <result property="remarkId" column="REMARK_ID" />
+	     <result property="roleCode" column="ROLE_CODE" />
+	     <result property="roleName" column="ROLE_NAME" />
+	     <result property="busType" column="BUS_TYPE" />
+	     <result property="orgId" column="ORG_ID" />
+	     <result property="read" column="READ" />
+	     <result property="status" column="STATUS" />
+	     <result property="creatorId" column="CREATOR_ID" />
+	     <result property="creator" column="CREATOR" />
+	     <result property="createTime" column="CREATE_TIME" />
+	     <result property="receiveTime" column="RECEIVE_TIME" />
+	     <result property="nextTaskName" column="NEXT_TASK_NAME" />
+	     <result property="rgnId" column="RGN_ID" />
+	     <result property="rgnCode" column="RGN_CODE" />
+	     <result property="rgnName" column="RGN_NAME" />
+	     <result property="orgName" column="ORG_NAME" />
+	     <result property="busTypeName" column="BUS_TYPE_NAME" />
+	     <result property="isTodo" column="IS_TODO" />
+	     <result property="isRequest" column="IS_REQUEST" />
+	 </resultMap>
+ 
+ <sql id="Base_Column_List">
+    ID,BUS_ID,USER_CODE,USER_NAME,USER_ID,ORG_CODE,TASK_ID,PROC_INST_ID,USER_TASK_ID,TASK_NAME,PHONE,REMARK_ID,ROLE_CODE,ROLE_NAME,BUS_TYPE,ORG_ID,READ,STATUS,CREATOR_ID,CREATOR,CREATE_TIME,RECEIVE_TIME,NEXT_TASK_NAME,RGN_ID,RGN_CODE,RGN_NAME,ORG_NAME,BUS_TYPE_NAME,IS_TODO,IS_REQUEST  </sql>
+ 
+    <select id="queryActivitiNextUserPage" resultMap="activitiNextUserMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM ACTIVITI_NEXT_USER
+      	 <trim prefix="where"  prefixOverrides="and | or">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            ${searcher.__QUERYCON}
+	        </if>  
+	    </trim>
+    </select>
+</mapper>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>                       
+<Page id="showTemplate" layout="border" 
+	templatePath="egov/asset/template/showTemplate.jsp" 
+	js="resources/egov/js/asset/template/showTemplate.js"
+	jsId="showTemplate"  
+	xmlns="http://www.bosssoft.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.bosssoft.org ../../../../../schema/uis/uitemplate-2.0.xsd">
+	<items>
+	<Panel id="aimsTemplateDetailPage_panel_bottom" region="center" layout="border"  >
+		<items>
+		<Panel id="aimsTemplateDetailPage_panel_right" region="center" style="margin-left:1%;margin-right:1%;">
+				<items>
+					<XGrid id="_print_grid"  
+						url="egov/asset/template/queryTemplateDetailPage.do"
+						radiobox="true"
+						autoLoad="false"
+						title="打印模板">
+						<!-- checkbox="true"
+						rownumbers="normal"
+						autoLoad="false"
+						pageSize="50"
+						pager="up"
+						pageList="30,50,200,500" -->
+					  <columns>					
+						<XGridColumn field="moduleItemId" title="ID"  align="left" hidden="true"    />
+						<XGridColumn field="moduleItemCode" title="编码"  align="center" width="30"   />
+						<XGridColumn field="moduleItemName" title="名称"  align="center" width="100"    />
+						<XGridColumn field="moduleId" title="模板ID"  align="left" hidden="true"    />
+						<XGridColumn field="moduleCode" title="模板编码"  align="left" hidden="true"    />
+						<XGridColumn field="moduleName" title="模板名称"  align="left"  hidden="true"   />
+						<XGridColumn field="isGloabl" title="是否全局"  align="center" width="100" formatter="$funcs.transferGridColumn" hidden="true"  />
+						<XGridColumn field="createDate" title="创建时间"  align="left" hidden="true"    />
+						<XGridColumn field="creator" title="创建者"  align="left" hidden="true"    />
+						<XGridColumn field="modifyDate" title="修改时间"  align="left" hidden="true"    />
+						<XGridColumn field="version" title="版本"  align="left" width="100" hidden="true"   />
+						<XGridColumn field="isDefault" title="是否默认"  align="center"  width="100" hidden="true" formatter="$funcs.transferGridColumn" />
+						<XGridColumn field="isPublic" title="是否公用"  align="center"  width="100" formatter="$funcs.transferGridColumn" hidden="true" />
+						<XGridColumn field="status" title="状态"  align="center" width="100" formatter="$funcs.transferGridColumn"  hidden="true" />
+						<XGridColumn field="orgId" title="单位ID"  align="left" hidden="true"    />
+						<XGridColumn field="orgCode" title="单位编码"  align="left" width="100" hidden="true"   />
+						<XGridColumn field="orgName" title="单位名称"  align="left" width="200" hidden="true"   />
+						<XGridColumn field="rgnId" title="区划ID"  align="left" hidden="true"   />
+						<XGridColumn field="rgnCode" title="区划编码"  align="left" hidden="true"    />
+						<XGridColumn field="rgnName" title="区划名称"  align="left" hidden="true"    />
+						<XGridColumn field="str01" title="自定义字段1"  align="left" hidden="true"    />
+						<XGridColumn field="str02" title="自定义字段2"  align="left" hidden="true"    />
+						<XGridColumn field="str03" title="自定义字段3"  align="left" hidden="true"    />
+						<XGridColumn field="str04" title="自定义字段4"  align="left" hidden="true"    />
+						<XGridColumn field="str05" title="自定义字段5"  align="left" hidden="true"    />
+					</columns>
+				  </XGrid>				
+				  </items>
+			</Panel>
+		</items>
+	</Panel>	</items>
+</Page>

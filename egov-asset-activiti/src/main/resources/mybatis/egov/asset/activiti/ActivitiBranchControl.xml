@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.activiti.mapper.ActivitiBranchControlMapper" >
+  <resultMap id="activitiBranchControlMap" type="com.bosssoft.egov.asset.activiti.entity.ActivitiBranchControl" >
+         <result property="id" column="ID" />
+	     <result property="userTaskDefkey" column="USER_TASK_DEFKEY" />
+	     <result property="processKey" column="PROCESS_KEY" />
+	     <result property="typeCode" column="TYPE_CODE" />
+	     <result property="typeValue" column="TYPE_VALUE" />
+	     <result property="explanation" column="EXPLANATION" />
+	 </resultMap>
+ 
+ <sql id="Base_Column_List">
+    ID,USER_TASK_DEFKEY,PROCESS_KEY,TYPE_CODE,TYPE_VALUE,EXPLANATION  </sql>
+ 
+    <select id="queryActivitiBranchControlPage" resultMap="activitiBranchControlMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM ACTIVITI_BRANCH_CONTROL
+      	 <trim prefix="where"  prefixOverrides="and |or">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            #{searcher.__QUERYCON}
+	        </if>  
+	    </trim>
+    </select>
+</mapper>

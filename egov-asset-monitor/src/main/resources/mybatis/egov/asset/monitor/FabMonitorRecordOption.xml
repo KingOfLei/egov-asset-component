@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.monitor.mapper.FabMonitorRecordOptionMapper" >
+  <resultMap id="fabMonitorRecordOptionMap" type="com.bosssoft.egov.asset.monitor.entity.FabMonitorRecordOption" >
+         <result property="id" column="ID" />
+	     <result property="userCode" column="USER_CODE" />
+	     <result property="busId" column="BUS_ID" />
+	     <result property="type" column="TYPE" />
+	     <result property="typename" column="TYPENAME" />
+	     <result property="title" column="TITLE" />
+	 </resultMap>
+ 
+ <sql id="Base_Column_List">
+    ID,USER_CODE,BUS_ID,TYPE,TYPENAME,TITLE
+    
+      </sql>
+ 
+    <select id="queryFabMonitorRecordOptionPage" resultMap="fabMonitorRecordOptionMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM FAB_MONITOR_RECORD_OPTION
+      	 <trim prefix="where"  prefixOverrides="and |or">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            ${searcher.__QUERYCON}
+	        </if>  
+	    </trim>
+    </select>
+</mapper>

@@ -1,0 +1,4 @@
+ConstCodeRule=com.bosssoft.egov.asset.codegen.rules.ConstCodeRule
+SeqCodeRule=com.bosssoft.egov.asset.codegen.rules.SeqCodeRule
+DateCodeRule=com.bosssoft.egov.asset.codegen.rules.DateCodeRule
+CustomCodeRule=com.bosssoft.egov.asset.codegen.rules.CustomCodeRule

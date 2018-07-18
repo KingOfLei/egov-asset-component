@@ -1,0 +1,79 @@
+// 流转状态页面通用样式
+// author: zhangxiaoyun
+// date: 2017-09-22
+
+.circulation-state-header{
+	margin: 5px 0px 0px 25px;
+
+	.circulation-code{
+		margin-left:1%;
+		font-size:14px;
+	}
+
+	.circulation-type{
+		margin-left:1%;
+		font-size:14px;
+	}
+
+	.circulation-reason{
+		margin-left:1%;
+		font-size:14px;
+		word-break: keep-all; 
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		width: 95%;
+	}
+}
+
+.circulation-state{
+	margin: 0px 30px;
+	>li{
+		margin: 5px 0px;
+		text-indent: 20px;
+		overflow: hidden;
+		background: url($cover-image-path+"common-icon/node.png") left 2px no-repeat;
+
+		>span{
+			font-size: 16px;
+		    color: #666;
+		    font-weight: bold;
+		}
+
+		>span.node-info{
+			font-size: 14px;
+		    color: #444;
+		}
+
+		>ul{
+		    border-left: 1px solid #999;
+		    overflow: hidden;
+	        padding: 7px 0px 7px 30px;
+		    margin-left: 7px;
+
+			>li{
+			    width: 230px;
+			    float: left;
+
+			    >span{
+			    	display: inline;
+			    	vertical-align: initial;
+			    	font-weight: bold;
+				    margin-right: 5px;
+			    }
+			} 
+
+			>li.remark{
+				width: 100%;
+			}
+		}
+	}
+
+	>li.active-node{
+		background: url($cover-image-path+"common-icon/active-node.png") left 2px no-repeat;
+
+		>span{
+		    color: #ed6c6c;
+		}
+	}
+}

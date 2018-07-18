@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.dictionary.impl.mapper.AimsDictFinancesRelateMapper" >
+  <resultMap id="aimsDictFinancesRelationMap" type="com.bosssoft.egov.asset.dictionary.impl.entity.AimsDictFinancesRelation" >
+         <result property="financesRelationId" column="FINANCES_RELATION_ID" />
+	     <result property="financesRelationPid" column="FINANCES_RELATION_PID" />
+	     <result property="financesRelationCode" column="FINANCES_RELATION_CODE" />
+	     <result property="financesRelationPcode" column="FINANCES_RELATION_PCODE" />
+	     <result property="financesRelationName" column="FINANCES_RELATION_NAME" />
+	     <result property="financesRelationRank" column="FINANCES_RELATION_RANK" />
+	     <result property="financesRelationIsleaf" column="FINANCES_RELATION_ISLEAF" />
+	     <result property="financesRelationStatus" column="FINANCES_RELATION_STATUS" />
+	     <result property="creator" column="CREATOR" />
+	     <result property="financesRelationPname" column="FINANCES_RELATION_PNAME" />
+	     <result property="createdate" column="CREATEDATE" />
+	 </resultMap>
+ 
+ <sql id="Base_Column_List">
+    FINANCES_RELATION_ID,FINANCES_RELATION_PID,FINANCES_RELATION_CODE,FINANCES_RELATION_PCODE,FINANCES_RELATION_NAME,FINANCES_RELATION_RANK,FINANCES_RELATION_ISLEAF,FINANCES_RELATION_STATUS,CREATOR,FINANCES_RELATION_PNAME,CREATEDATE  </sql>
+ 
+    <select id="queryAimsDictFinancesRelationPage" resultMap="aimsDictFinancesRelationMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM AIMS_DICT_FINANCES_RELATION
+      	 <trim prefix="where"  prefixOverrides="and |or">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            #{searcher.__QUERYCON}
+	        </if>  
+	    </trim>
+    </select>
+</mapper>

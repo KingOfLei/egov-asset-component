@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.lifecycle.mapper.AssetLifeConfigMapper" >
+  <resultMap id="assetLifeConfigMap" type="com.bosssoft.egov.asset.lifecycle.entity.AssetLifeConfig" >
+         <result property="configType" column="CONFIG_TYPE" />
+	     <result property="configOperation" column="CONFIG_OPERATION" />
+	     <result property="configStatus" column="CONFIG_STATUS" />
+	     <result property="auditStatus" column="AUDIT_STATUS" />
+	     <result property="sourceViewName" column="SOURCE_VIEW_NAME" />
+	     <result property="remark" column="REMARK" />
+	     <result property="sourceCondition" column="SOURCE_CONDITION" />
+	     <result property="orgCode" column="ORG_CODE" />
+	     <result property="id" column="ID" />
+	     <result property="busConfigId" column="BUS_CONFIG_ID" />
+	     <result property="dictConfigId" column="DICT_CONFIG_ID" />
+	     <result property="commonConfigId" column="COMMON_CONFIG_ID" />
+	 </resultMap>
+ 
+ <sql id="Base_Column_List">
+    CONFIG_TYPE,CONFIG_OPERATION,CONFIG_STATUS,AUDIT_STATUS,SOURCE_VIEW_NAME,REMARK,SOURCE_CONDITION,ORG_CODE,ID,BUS_CONFIG_ID,DICT_CONFIG_ID,COMMON_CONFIG_ID  </sql>
+ 
+    <select id="queryAssetLifeConfigPage" resultMap="assetLifeConfigMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM ASSET_LIFE_CONFIG
+      	 <trim prefix="where"  prefixOverrides="and |or">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            #{searcher.__QUERYCON}
+	        </if>  
+	    </trim>
+    </select>
+    
+    <select id="getAssetLifeConfig" resultMap="assetLifeConfigMap">
+	     SELECT     
+		    <include refid="Base_Column_List" />
+		    FROM asset_life_config a
+		   WHERE EXISTS
+		   (SELECT 1
+		            FROM asset_life_config b
+		           WHERE (select org_code from aims_basic_org where org_id=#{orgId}) LIKE b.ORG_CODE || '%'
+		              OR b.ORG_CODE = '-' HAVING MAX(ORG_CODE) = a.ORG_CODE) 
+		             and a.CONFIG_STATUS =1 
+		             and a.audit_status=#{auditStatus}
+		             and a.CONFIG_type=#{configType} 
+		      <if test="logFlag==1">
+		       and CONFIG_OPERATION in('DELETE_LIFE_LOG','INSERT_LIFE_LOG')
+		      </if>
+		      <if test="logFlag==null or logFlag==0">
+		       and CONFIG_OPERATION not in('DELETE_LIFE_LOG','INSERT_LIFE_LOG')
+		      </if>
+   </select>
+</mapper>

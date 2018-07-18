@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.di.mapper.AssetDiTaskMapper" >
+  <resultMap id="assetDiTaskMap" type="com.bosssoft.egov.asset.di.entity.AssetDiTask" >
+         <result property="taskId" column="F_TASK_ID" />
+	     <result property="taskName" column="F_TASK_NAME" />
+	     <result property="taskSrcConn" column="F_TASK_SRC_CONN" />
+	     <result property="taskDestConn" column="F_TASK_DEST_CONN" />
+	     <result property="taskType" column="F_TASK_TYPE" />
+	     <result property="taskSrcAuxiliary" column="F_TASK_SRC_AUXILIARY" />
+	     <result property="taskDestAuxiliary" column="F_TASK_DEST_AUXILIARY" />
+	     <result property="taskSrcAuxiliary2" column="F_TASK_SRC_AUXILIARY2" />
+	     <result property="taskExpConfigXml" column="F_TASK_EXP_CONFIG_XML" />
+	     <result property="taskExpDataPrefix" column="F_TASK_EXP_DATA_PREFIX" />
+	     <result property="taskExpFileName" column="F_TASK_EXP_FILE_NAME" />
+	 </resultMap>
+ 
+ <sql id="Base_Column_List">
+    F_TASK_ID,F_TASK_NAME,F_TASK_SRC_CONN,F_TASK_DEST_CONN,F_TASK_TYPE,F_TASK_SRC_AUXILIARY,F_TASK_DEST_AUXILIARY,F_TASK_SRC_AUXILIARY2,F_TASK_EXP_CONFIG_XML,
+    F_TASK_EXP_DATA_PREFIX,F_TASK_EXP_FILE_NAME  </sql>
+ 
+    <select id="queryAssetDiTaskPage" resultMap="assetDiTaskMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM ASSET_DI_TASK
+      	 <trim prefix="where"  prefixOverrides="and |or">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            ${searcher.__QUERYCON}
+	        </if>  
+	    </trim>
+    </select>
+</mapper>

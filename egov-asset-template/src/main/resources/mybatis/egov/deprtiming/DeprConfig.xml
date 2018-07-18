@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.deprtiming.mapper.DeprConfigMapper" >
+  <resultMap id="deprConfigMap" type="com.bosssoft.egov.asset.deprtiming.entity.DeprConfig" >
+         <result property="orgId" column="ORG_ID" />
+	     <result property="orgCode" column="ORG_CODE" />
+	     <result property="orgName" column="ORG_NAME" />
+	     <result property="beginDeprMonth" column="BEGIN_DEPR_MONTH" />
+	     <result property="deprTotal" column="DEPR_TOTAL" />
+	     <result property="initMoney" column="INIT_MONEY" />
+	     <result property="rgnId" column="RGN_ID" />
+	     <result property="rgnCode" column="RGN_CODE" />
+	     <result property="rgnName" column="RGN_NAME" />
+	     <result property="financeBudgetCode" column="FINANCE_BUDGET_CODE" />
+	     <result property="curDeprMonth" column="CUR_DEPR_MONTH" />
+	     <result property="accountStandard" column="ACCOUNT_STANDARD" />
+	     <result property="initDepr" column="INIT_DEPR" />
+	     <result property="assetType6Code" column="ASSET_TYPE6_CODE" />
+	     <result property="assetType6Name" column="ASSET_TYPE6_NAME" />
+	     <result property="deprDateSrc" column="DEPR_DATE_SRC" />
+	     <result property="remark" column="REMARK" />
+	     <result property="deprDateSrcName" column="DEPR_DATE_SRC_NAME" />
+	     <result property="busProcessBean" column="BUS_PROCESS_BEAN" />
+	     <result property="deprId" column="DEPR_ID" />
+	     <result property="startDeprAssetType" column="START_DEPR_ASSET_TYPE" />
+	     <result property="startDeprAssetTypeCode" column="START_DEPR_ASSET_TYPE_CODE" />
+	     <result property="startDeprAssetTypeName" column="START_DEPR_ASSET_TYPE_NAME" />
+	     <result property="endDeprAssetType" column="END_DEPR_ASSET_TYPE" />
+	     <result property="endDeprAssetTypeCode" column="END_DEPR_ASSET_TYPE_CODE" />
+	     <result property="endDeprAssetTypeName" column="END_DEPR_ASSET_TYPE_NAME" />
+	 </resultMap>
+ 
+ <sql id="Base_Column_List">
+    ORG_ID,ORG_CODE,ORG_NAME,BEGIN_DEPR_MONTH,DEPR_TOTAL,INIT_MONEY,RGN_ID,RGN_CODE,RGN_NAME,
+    FINANCE_BUDGET_CODE,CUR_DEPR_MONTH,ACCOUNT_STANDARD,INIT_DEPR,ASSET_TYPE6_CODE,ASSET_TYPE6_NAME,
+    DEPR_DATE_SRC,REMARK,DEPR_DATE_SRC_NAME,BUS_PROCESS_BEAN,START_DEPR_ASSET_TYPE,END_DEPR_ASSET_TYPE,
+    START_DEPR_ASSET_TYPE_CODE,START_DEPR_ASSET_TYPE_NAME,END_DEPR_ASSET_TYPE_CODE,END_DEPR_ASSET_TYPE_NAME
+     
+     </sql>
+ 
+ <sql id="Column_List">
+    ORG_ID,ORG_CODE,ORG_NAME,BEGIN_DEPR_MONTH,DEPR_TOTAL,INIT_MONEY,RGN_ID,RGN_CODE,RGN_NAME,
+    FINANCE_BUDGET_CODE,CUR_DEPR_MONTH,ACCOUNT_STANDARD,INIT_DEPR,ASSET_TYPE6_CODE,ASSET_TYPE6_NAME,
+    DEPR_DATE_SRC,REMARK,DEPR_DATE_SRC_NAME,BUS_PROCESS_BEAN,DEPR_ID,START_DEPR_ASSET_TYPE,END_DEPR_ASSET_TYPE
+     </sql>
+     <select id="queryAimsDeprConfigPage" resultMap="deprConfigMap">		  
+    	SELECT<include refid="Column_List" />
+    	FROM(  
+      		SELECT T.*,INFO.DEPR_ID, org.ORG_ISLEAF
+      		FROM 
+      		AIMS_BASIC_ORG org	RIGHT JOIN	AIMS_DEPR_CONFIG T 
+      		ON org.ORG_ID = T.ORG_ID
+      		LEFT JOIN  AIMS_DEPR_INFO INFO 
+      		ON T.ORG_ID = INFO.ORG_ID
+      		AND org.ORG_ISLEAF = 1
+      		AND T.ASSET_TYPE6_CODE = INFO.ASSET_TYPE6_CODE
+      		AND months_between(to_date(info.cur_depr_date,'yyyy-mm'),add_months(to_date(t.begin_depr_month,
+      			'yyyy-mm'),-1)) = 0
+      		) T
+			<trim prefix="where"  prefixOverrides="and">  
+	        	<if test="searcher != null and searcher.__QUERYCON != null">  
+	            	${searcher.__QUERYCON} AND T.ORG_ISLEAF = 1
+	        	</if>  
+	    	</trim>
+	    	${DRC_SQL}
+	    	ORDER BY ORG_CODE ASC	
+   	 </select>
+    
+    <!-- 根据单位ID和单位编码查询单位折旧配置 -->
+    <select id="queryOneByOrgId" resultMap="deprConfigMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM AIMS_DEPR_CONFIG T
+        WHERE T.ORG_ID = #{orgId} and t.ASSET_TYPE6_CODE=#{assetType6Code}
+    </select>
+    <!-- 根据条件查询 -->
+    <select id="queryOneByCondition" resultMap="deprConfigMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM AIMS_DEPR_CONFIG T
+        WHERE 1=1
+        ${condition}
+    </select>
+    
+    <!-- 根据单位id和assetType6Code修改折旧配置 -->
+    <update id="updateById" parameterType="com.bosssoft.egov.asset.deprtiming.entity.DeprConfig">
+    	UPDATE AIMS_DEPR_CONFIG
+    	<set>
+    		<if test="orgId!=null"> ORG_ID=#{orgId}, </if>
+    		<if test="orgCode!=null"> ORG_CODE=#{orgCode}, </if>
+    		<if test="orgName!=null"> ORG_NAME=#{orgName}, </if>
+    		<if test="beginDeprMonth!=null"> BEGIN_DEPR_MONTH=#{beginDeprMonth}, </if>
+    		<if test="deprTotal!=null"> DEPR_TOTAL=#{deprTotal}, </if>
+    		<if test="initMoney!=null"> INIT_MONEY=#{initMoney}, </if>
+    		<if test="deprDateSrc!=null"> DEPR_DATE_SRC=#{deprDateSrc}, </if>
+    		<if test="startDeprAssetType!=null"> START_DEPR_ASSET_TYPE=#{startDeprAssetType}, </if>
+    		<if test="startDeprAssetTypeCode!=null"> START_DEPR_ASSET_TYPE_CODE=#{startDeprAssetTypeCode}, </if>
+    		<if test="startDeprAssetTypeName!=null"> START_DEPR_ASSET_TYPE_NAME=#{startDeprAssetTypeName}, </if>
+    		<if test="endDeprAssetType!=null"> END_DEPR_ASSET_TYPE=#{endDeprAssetType}, </if>
+    		<if test="endDeprAssetTypeCode!=null"> END_DEPR_ASSET_TYPE_CODE=#{endDeprAssetTypeCode}, </if>
+    		<if test="endDeprAssetTypeName!=null"> END_DEPR_ASSET_TYPE_NAME=#{endDeprAssetTypeName}, </if>
+    		<if test="curDeprMonth!=null"> CUR_DEPR_MONTH=#{curDeprMonth} </if>
+    	</set>
+    		WHERE ORG_ID=#{orgId} AND ASSET_TYPE6_CODE=#{assetType6Code}
+    </update>
+    
+    <select id="queryConfigGroup" resultMap="deprConfigMap">
+       SELECT ORG_CODE,ASSET_TYPE6_CODE
+         FROM AIMS_DEPR_CONFIG T
+     GROUP BY ORG_CODE,ASSET_TYPE6_CODE
+    </select>
+</mapper>

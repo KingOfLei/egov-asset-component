@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.dictionary.impl.mapper.AssetBasicDictItemMapper" >
+  <resultMap id="assetBasicDictItemMap" type="com.bosssoft.egov.asset.dictionary.impl.entity.AssetBasicDictItem" >
+         <result property="appId" column="APP_ID" />
+	     <result property="dictId" column="DICT_ID" />
+	     <result property="dictCode" column="DICT_CODE" />
+	     <result property="itemId" column="ITEM_ID" />
+	     <result property="itemCode" column="ITEM_CODE" />
+	     <result property="itemName" column="ITEM_NAME" />
+	     <result property="itemPid" column="ITEM_PID" />
+	     <result property="itemPcode" column="ITEM_PCODE" />
+	     <result property="itemLevel" column="ITEM_LEVEL" />
+	     <result property="itemIsleaf" column="ITEM_ISLEAF" />
+	     <result property="creator" column="CREATOR" />
+	     <result property="createDate" column="CREATE_DATE" />
+	     <result property="remark" column="REMARK" />
+	     <result property="isenable" column="ISENABLE" />
+	     <result property="customField1" column="CUSTOM_FIELD1" />
+	     <result property="customField2" column="CUSTOM_FIELD2" />
+	     <result property="customField3" column="CUSTOM_FIELD3" />
+	     <result property="customField4" column="CUSTOM_FIELD4" />
+	     <result property="customField5" column="CUSTOM_FIELD5" />
+	 </resultMap>
+ 
+ <sql id="Base_Column_List">
+    APP_ID,DICT_ID,DICT_CODE,ITEM_ID,ITEM_CODE,ITEM_NAME,ITEM_PID,ITEM_PCODE,ITEM_LEVEL,ITEM_ISLEAF,CREATOR,CREATE_DATE,REMARK,ISENABLE,CUSTOM_FIELD1,CUSTOM_FIELD2,CUSTOM_FIELD3,CUSTOM_FIELD4,CUSTOM_FIELD5  </sql>
+ 
+    <select id="queryAssetBasicDictItemPage" resultMap="assetBasicDictItemMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM asset_basic_dict_item
+      	 <trim prefix="where"  prefixOverrides="and |or">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            ${searcher.__QUERYCON} 	AND DICT_ID=#{dictId}
+	        </if> 
+	        <if test="searcher == null or searcher.__QUERYCON == null">
+	        	DICT_ID=#{dictId}
+	        </if> 
+	    </trim>
+	    ORDER BY DICT_CODE,ITEM_CODE
+    </select>
+    
+    <select id="queryDictItemList" resultMap="assetBasicDictItemMap">
+    	SELECT 
+    	<include refid="Base_Column_List"/>
+    	FROM ASSET_BASIC_DICT_ITEM
+    	WHERE DICT_ID=#{dictId}
+    	<if test="itemLevel!=null"> AND ITEM_LEVEL=#{itemLevel}</if>
+    	<if test="itemPid!=null"> AND ITEM_PID=#{itemPid}</if>
+    </select>
+    
+    <!-- 根据字典项ID修改字典项信息 -->
+    <update id="updateById" parameterType="com.bosssoft.egov.asset.dictionary.impl.entity.AssetBasicDictItem">
+    	UPDATE ASSET_BASIC_DICT_ITEM
+    	<set>
+    		<if test="appId!=null"> APP_ID=#{appId}, </if>
+    		<if test="dictId!=null"> DICT_ID=#{dictId}, </if>
+    		<if test="dictCode!=null"> DICT_CODE=#{dictCode}, </if>
+    		<if test="itemId!=null"> ITEM_ID=#{itemId}, </if>
+    		<if test="itemCode!=null"> ITEM_CODE=#{itemCode}, </if>
+    		<if test="itemName!=null"> ITEM_NAME=#{itemName}, </if>
+    		<if test="itemPid!=null"> ITEM_PID=#{itemPid}, </if>
+    		<if test="itemPcode!=null"> ITEM_PCODE=#{itemPcode}, </if>
+    		<if test="itemLevel!=null"> ITEM_LEVEL=#{itemLevel}, </if>
+    		<if test="itemIsleaf!=null"> ITEM_ISLEAF=#{itemIsleaf}, </if>
+    		<if test="creator!=null"> CREATOR=#{creator}, </if>
+    		<if test="createDate!=null"> CREATE_DATE=#{createDate}, </if>
+    		<if test="remark!=null"> REMARK=#{remark}, </if>
+    		<if test="isenable!=null"> ISENABLE=#{isenable}, </if>
+    		<if test="customField1!=null"> CUSTOM_FIELD1=#{customField1}, </if>
+    		<if test="customField2!=null"> CUSTOM_FIELD2=#{customField2}, </if>
+    		<if test="customField3!=null"> CUSTOM_FIELD3=#{customField3}, </if>
+    		<if test="customField4!=null"> CUSTOM_FIELD4=#{customField4}, </if>
+    		<if test="customField5!=null"> CUSTOM_FIELD5=#{customField5} </if>
+    	</set>
+    	WHERE DICT_ID=#{dictId} AND ITEM_ID=#{itemId}
+    </update>
+    
+    <!-- 根据字典项ID删除字典项信息 -->
+    <delete id="deleteById" parameterType="com.bosssoft.egov.asset.dictionary.impl.entity.AssetBasicDictItem">
+    	DELETE FROM ASSET_BASIC_DICT_ITEM WHERE DICT_ID=#{dictId} AND ITEM_ID=#{itemId}
+    </delete>
+</mapper>

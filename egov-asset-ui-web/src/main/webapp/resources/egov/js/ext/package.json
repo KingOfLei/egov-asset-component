@@ -1,0 +1,24 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "description": "this is a test",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://www.bosssoft.com.cn/"
+  },
+  "keywords": [
+    "bosssoft"
+  ],
+  "author": "xx",
+  "license": "BSD",
+  "devDependencies": {
+    "bower": "^1.8.0"
+    //"gulp": "^3.9.1",
+    //"gulp-sass": "^3.0.0"
+  },
+  "dependencies": {}
+}

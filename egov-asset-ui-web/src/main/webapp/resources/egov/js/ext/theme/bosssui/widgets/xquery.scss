@@ -1,0 +1,162 @@
+.xquery {
+	// display:inline-block;
+	background: #f7f7f7;
+	// width:100%;
+	border-bottom:1px solid $skin-bordercolor;
+	// text-align:left;
+	// height:40px;
+	// margin-top:0;
+	padding: 3px;
+	// position:relative;
+	border-top:1px dotted $skin-bordercolor;
+	// margin-top:-1px
+}
+// 统一覆盖页面上高级查询输入框的宽度 
+.toolbar-item>.app-xquerybox{
+	width:170px !important;
+}
+.xquery .xquery-quick-button {
+	margin-top: 3px;
+}
+.xquery div.queryleft {
+// 	float:left;
+// 	clear:both;
+// 	width:100%;
+	form{
+		display: inline-block;
+		float: left;
+	}
+}
+.xquery div.queryleft span.queryitem {
+	line-height:28px;
+	display:inline;
+	margin:0px 0px 0px 10px;
+}
+.xquery div.queryleft span.queryitem label {
+
+	padding:0;
+	margin:6px 6px 0 0
+}
+// .xquery div.queryleft span.queryitem .multipleboxDiv,div.dialog div#morequery .multipleboxDiv {
+// 	padding:6px 0 2px 0;
+// 	height:28px
+// }
+.xquery div.queryleft span.queryitem>span {
+	display:inline-block;
+
+}
+.xquery div.queryleft .queryquick {
+	margin-top:0px;
+	margin-left:15px;
+	background:url($theme-icon-path+"query/searchbtn.png") no-repeat left bottom;
+	border:0;
+	height:30px;
+
+	padding:3px!important;
+	width:60px;
+
+	display:inline;
+}
+// .xquery div.queryleft .queryadv {
+
+// 	width:60px;
+// 	padding:0;
+
+// 	height:28px;
+// 	line-height:28px;
+// 	text-align:center;
+// 	display:inline-block;
+// }
+// .xquery div.queryright {
+// 	position:absolute;
+// 	z-index:5;
+// 	top:40px;
+// 	right:0;
+// 	background:red;
+// 	height:28px;
+// 	line-height:28px;
+// 	padding:8px 15px;
+// 	display:none
+// }
+// .xquery .wrapper-btn {
+	/* background-color:transparent!important */
+// }
+
+// .xquery-adv{
+// 	padding:5px;
+
+// }
+
+// 自定义样式 用于解决高级查询隐藏时出现滚动条及表单控件边框问题
+.querymorebtn{
+	display:none;
+} 
+.query-itmes-table .cfield .app-wrapper {
+	height: 25px;
+	border: 1px solid $border-color;
+}
+.query-itmes-table .cfield .app-wrapper:hover,.query-itmes-table .cfield .app-wrapper:focus {
+	border-color: $skin-modulebordercolor;
+}
+.query-itmes-table .cfield .app-wrapper>input:hover,.query-itmes-table .cfield .app-wrapper>input:focus {
+	border: none;
+	height: 23px;
+	line-height: 23px;
+}
+// 自定义样式 用于解决查询条件表单控件边框问题
+.app-toolbar .toolbar-item .app-wrapper {
+	height: 25px;
+    border: 1px solid $border-color;	
+}
+.app-toolbar .toolbar-item .app-wrapper>input:hover,.app-toolbar .toolbar-item .app-wrapper>input:focus {
+    border: none;
+    height: 23px;
+    line-height: 23px;	
+}
+
+// 框架报表部分--快照选择样式覆盖调整
+.snapshot-list .app-wrapper{
+	top:-4px;
+}
+// 框架报表部分--查询条件样式覆盖调整
+.queryleft .app-wrapper{
+    width: 160px;
+    display: inline-block;
+    border: 1px solid #a9a9a9;
+}
+
+// 自定义样式 用于解决报表页面高级查询表单样式调整
+// 注意：由于无法单纯根据样式 区分报表和普通页面高级查询表单，故根据当前报表页面ID修改样式
+#morequery{
+    margin: 10px 0px;
+
+    .app-wrapper{
+    	margin: 2px 0px;
+		border: 1px solid $border-color;
+	    // border-bottom: 1px solid #d1cdc8;
+	}
+	
+	.app-wrapper input:focus, .app-wrapper input:hover{
+		border-width: 0px;
+	}
+
+	.app-wrapper-active, .app-wrapper-hover{
+		border-color: $border-color;
+	}
+}
+
+// 自定义样式
+.xquery-absolute .query-itmes-table .clabel {
+  width:auto
+}
+
+.xquery-absolute .clabel {
+  padding-left: 0px;
+}
+
+.queryControl {
+	display: inline-block;
+}
+.queryControl .app-wrapper, .snapshot-list .app-wrapper{
+	border-width: 1px;
+}

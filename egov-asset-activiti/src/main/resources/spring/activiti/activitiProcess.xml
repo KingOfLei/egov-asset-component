@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-2.5.xsd
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop-2.5.xsd"
+	default-lazy-init="true">
+
+	<!-- <context:component-scan base-package="com.bosssoft.egov.asset.activiti.modeler.rest.diagram.services"/> 
+		<context:component-scan base-package="com.bosssoft.egov.asset.activiti.modeler.rest.editor"/> -->
+
+
+<!-- 
+	<bean id="activitiprocessservice"
+		class="com.bosssoft.egov.asset.activiti.service.impl.ActivitiProcessServiceImpl">
+	</bean>
+	<bean id="activitiamcervice"
+		class="com.bosssoft.egov.asset.activiti.service.impl.ActivitiAmcServiceImpl">
+	</bean> -->
+	<!-- 请假人员 -->
+<!-- 	<bean id="aimsleavepeopleservice"
+		class="com.bosssoft.egov.asset.activiti.service.impl.AimsLeavePeopleServiceImpl">
+	</bean> -->
+	<!-- group -->
+<!-- 	<bean id="aimsgroupserserice"
+		class="com.bosssoft.egov.asset.activiti.service.impl.AimsGroupUserServiceImpl">
+	</bean> -->
+
+<!-- 	<bean id="tbusleaveapplicationservice"
+		class="com.bosssoft.egov.asset.activiti.service.impl.TbusLeaveApplicationServiceImpl">
+	</bean> -->
+
+
+	<!-- <bean id="contentNegotiationManager"
+		class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+		<property name="mediaTypes">
+			<map>
+				<entry key="xml" value="application/xml" />
+				<entry key="json" value="application/json" />
+			</map>
+		</property>
+		<property name="ignoreAcceptHeader" value="true" />
+		<property name="favorPathExtension" value="true" />
+	</bean> -->
+
+	<bean id="contentTypeResolver"
+		class="org.activiti.rest.common.application.DefaultContentTypeResolver" />
+
+</beans>

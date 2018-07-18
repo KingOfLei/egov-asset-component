@@ -1,0 +1,4 @@
+DummyHandler=com.bosssoft.asset.etl.comp.handler.DummyHandler
+TxtHandler=com.bosssoft.asset.etl.comp.handler.TxtHandler
+XlsHandler=com.bosssoft.asset.etl.comp.handler.XlsHandler
+DbHandler=com.bosssoft.asset.etl.comp.handler.DbHandler

@@ -1,0 +1,181 @@
+@charset "UTF-8";
+
+.jcl {
+    text-align: center;
+}
+    .jcl .container {
+        display: inline-block;
+        width: auto;
+    }
+
+    /*.jcl .carousel*/
+    .jcl .carousel {
+        border: 1px solid $border-color;
+        border-radius: 10px;
+        background-color: #fff;
+        float: left;
+        padding-left: 10px;
+
+        /* Needed for rendering without flicker */
+        position: relative;
+        visibility: hidden;
+        left: -5000px;
+        box-sizing: content-box;
+    }
+
+    /* Styling for image based carousel content. Only width and height are mandatory */
+    .jcl .carousel>ul>li>img {
+        // width: 150px;
+        // height: 118px;
+        vertical-align:middle;
+
+        /* optional */
+        margin: 10px 10px 10px 0;
+        border-radius: 5px;
+    }
+    /* Styling for text based carousel content. Only width and height are mandatory */
+    .jcl .carousel>ul>li>p {
+        width: 130px;
+        height: 98px;
+
+        margin: 10px 10px 10px 0;
+        border: 1px solid #808080;
+        border-radius: 5px;
+        line-height: normal;
+        background-color: #fff;
+        padding: 10px;
+    }
+
+/* Styles for PREV and NEXT anchor buttons */
+.jcl a.prev, .jcl a.next, .jcl a.go {
+    display: block;
+    width: 26px;
+    height: 30px;
+    line-height: 1;
+
+    background: $border-color;
+    color: #fff;
+    text-decoration: none;
+    font-family: Arial, sans-serif;
+    font-size: 25px;
+
+    border-radius: 8px;
+    float: left;
+    cursor: pointer;
+}
+    .jcl a.prev.disabled, .jcl a.next.disabled,
+    .jcl a.prev.disabled:hover, .jcl a.next.disabled:hover {
+        background: $btn-disable-color;
+        cursor: default;
+    }
+    .jcl a.go.highlight {
+        background-color: #dedede;
+        color: #000;
+    }
+    .jcl a.prev {
+        margin: 50px -5px 0 0;
+        /*text-indent: 7px;*/
+    }
+    .jcl a.next {
+        margin: 50px 0 0 -5px;
+        /*text-indent: 10px;*/
+    }
+        .jcl a.prev:hover, .jcl a.next:hover, .jcl a.go:hover {
+            background-color: $btn-color;
+        }
+
+/* Additional carousel styles for external controls, slider, widget, mid etc. */
+
+.jcl .externalControl button,
+.jcl .imageSliderExt button {
+    margin: 5px 5px 0 0;
+}
+.jcl .externalControl a.next, .jcl .externalControl a.prev, .jcl .externalControl a.go,
+.jcl .imageSliderExt a.next, .jcl .imageSliderExt a.prev, .jcl .imageSliderExt a.go
+{
+    margin: 0 5px 0 0;
+    padding: 7px 5px 0 5px;
+    font-size: 15px;
+    text-align: center;
+    border-radius: 3px;
+}
+
+.jcl .widget img {
+    cursor: pointer;
+}
+.jcl .mid {
+    margin-left: 50px;
+    width: 400px;
+    height: 300px;
+}
+.jcl .vertical {
+    margin-left: 170px;
+}
+
+.jcl .imageSlider .carousel>ul>li>img,
+.jcl .imageSliderExt .carousel>ul>li>img {
+    width: 400px;
+    height: 300px;
+}
+.jcl .imageSlider .carousel>ul>li>p,
+.jcl .imageSliderExt .carousel>ul>li>p {
+    width: 380px;
+    height: 280px;
+}
+
+/* Other common styles */
+.clear {
+    clear: both;
+}
+
+/*扩展插件--点击图片预览样式*/
+.jcl-mask {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    z-index: 99999;
+    display: table;
+    background: rgba(0, 0, 0, 0.8);
+    _background: 0 0;
+    _border: 0;
+    filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#CC000000', EndColorStr='#CC000000');
+}
+
+.jcl-mask .jcl-mask-cell {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.jcl-mask .jcl-mask-cell>.switch-btn {
+    width: 48px;
+    height: 48px;
+    position: fixed;
+    top: 45%;
+}
+.jcl-mask .jcl-mask-cell .jcl-mask-left {
+    background: url($cover-image-path+'btn/left.png') center center no-repeat;
+    left: 10px;
+}
+.jcl-mask .jcl-mask-cell .jcl-mask-right {
+    background: url($cover-image-path+'btn/right.png') center center no-repeat;
+    right: 10px;
+}
+.jcl-mask .jcl-mask-cell .jcl-mask-close {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    background: url($cover-image-path+'btn/close.png') center center no-repeat;
+}
+
+.jcl-mask .jcl-mask-cell .jcl-mask-center {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    overflow: auto;
+}

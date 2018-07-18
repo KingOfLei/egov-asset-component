@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.card.mapper.basic.CardUiConfigBaseMapper" >
+  <resultMap id="cardUiConfigBaseMap" type="com.bosssoft.egov.asset.card.entity.basic.CardUiConfigBaseEntity" >
+         <result property="assetTypeId" column="ASSET_TYPE_ID" />
+	     <result property="assetTypeCode" column="ASSET_TYPE_CODE" />
+	     <result property="assetTypeName" column="ASSET_TYPE_NAME" />
+	     <result property="assetClassifyId" column="ASSET_CLASSIFY_ID" />
+	     <result property="assetClassifyCode" column="ASSET_CLASSIFY_CODE" />
+	     <result property="assetClassifyName" column="ASSET_CLASSIFY_NAME" />
+	     <result property="uiAddress" column="UI_ADDRESS" />
+	     <result property="bizType" column="BIZ_TYPE" />
+	     <result property="uiFlag" column="UI_FLAG" />
+	     <result property="tableName" column="TABLE_NAME" />
+	     <result property="condition" column="CONDITION" />
+	 </resultMap>
+ 
+ <sql id="Base_Column_List">
+    ASSET_TYPE_ID,ASSET_TYPE_CODE,ASSET_TYPE_NAME,ASSET_CLASSIFY_ID,ASSET_CLASSIFY_CODE,ASSET_CLASSIFY_NAME,
+    UI_ADDRESS,BIZ_TYPE,UI_FLAG,TABLE_NAME,CONDITION  </sql>
+ 
+    <select id="queryCardUiConfigPage" resultMap="cardUiConfigBaseMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM ASSET_CARD_UI_CONFIG
+      	 <trim prefix="where"  prefixOverrides="and |or">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            ${searcher.__QUERYCON}
+	        </if>  
+	    </trim>
+    </select>
+    
+    <!-- 根据分类编码获取对应ui表单 -->
+    <select id="getUiByClassifyCode" resultMap="cardUiConfigBaseMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM 
+        <if test="uiConfigTable != null and uiConfigTable !=''">
+            ${uiConfigTableName}
+        </if>
+         <if test="uiConfigTable == null or uiConfigTable ==''">
+            ASSET_CARD_UI_CONFIG
+        </if>
+        WHERE #{assetClassifyCode} LIKE ASSET_CLASSIFY_CODE || '%'
+      	and ASSET_TYPE_CODE = #{assetTypeCode}
+      	AND UI_ADDRESS IS NOT NULL
+      	ORDER BY ASSET_CLASSIFY_CODE DESC
+    </select>
+</mapper>

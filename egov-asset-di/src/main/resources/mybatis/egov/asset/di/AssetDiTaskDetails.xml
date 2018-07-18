@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.di.mapper.AssetDiTaskDetailsMapper" >
+  <resultMap id="assetDiTaskDetailsMap" type="com.bosssoft.egov.asset.di.entity.AssetDiTaskDetails" >
+         <result property="taskId" column="F_TASK_ID" />
+	     <result property="taskMxId" column="F_TASK_MX_ID" />
+	     <result property="taskMxName" column="F_TASK_MX_NAME" />
+	     <result property="taskNo" column="F_TASK_NO" />
+	     <result property="srcData" column="F_SRC_DATA" />
+	     <result property="srcFilterType" column="F_SRC_FILTER_TYPE" />
+	     <result property="srcFilter" column="F_SRC_FILTER" />
+	     <result property="destData" column="F_DEST_DATA" />
+	     <result property="destFilterType" column="F_DEST_FILTER_TYPE" />
+	     <result property="destFilter" column="F_DEST_FILTER" />
+	     <result property="srcAuxiliary" column="F_SRC_AUXILIARY" />
+	     <result property="destAuxiliary" column="F_DEST_AUXILIARY" />
+	     <result property="ismust" column="F_ISMUST" />
+	     <result property="taskType" column="F_TASK_TYPE" />
+	     <result property="taskTypeName" column="F_TASK_TYPE_NAME" />
+	     <result property="verifyType" column="F_VERIFY_TYPE" />
+	     <result property="state" column="F_STATE" />
+	     <result property="dealType" column="F_DEAL_TYPE" />
+	     <result property="keyField" column="F_KEY_FIELD" />
+	     <result property="repairSql" column="F_REPAIR_SQL"/>
+	 </resultMap>
+ 
+ <sql id="Base_Column_List">
+    F_TASK_ID,F_TASK_MX_ID,F_TASK_MX_NAME,F_TASK_NO,F_SRC_DATA,F_SRC_FILTER_TYPE,F_SRC_FILTER,F_DEST_DATA,F_DEST_FILTER_TYPE,F_DEST_FILTER,F_SRC_AUXILIARY,F_DEST_AUXILIARY,F_ISMUST,F_TASK_TYPE,F_TASK_TYPE_NAME,F_VERIFY_TYPE,F_STATE,F_DEAL_TYPE,F_KEY_FIELD,F_REPAIR_SQL  </sql>
+ 
+    <select id="queryAssetDiTaskDetailsPage" resultMap="assetDiTaskDetailsMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM ASSET_DI_TASK_DETAILS
+      	 <trim prefix="where"  prefixOverrides="and |or">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            ${searcher.__QUERYCON}
+	        </if>  
+	    </trim>
+    </select>
+    
+    <select id="getAssetDiTaskDetailsList" resultMap="assetDiTaskDetailsMap">
+    	select <include refid="Base_Column_List"/>
+    	from asset_di_task_details
+    	<where>
+    		f_task_id = #{taskId}
+    	</where>
+    	order by f_task_no
+    </select>
+</mapper>

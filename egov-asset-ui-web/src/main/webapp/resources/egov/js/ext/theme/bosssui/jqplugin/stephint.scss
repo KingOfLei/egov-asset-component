@@ -1,0 +1,100 @@
+/* 步骤提示插件
+ * author: zhangxiaoyun
+ * date: 2017-11-23
+*/
+// html,body,div,ul,li,ol,p,h1,h2,h3,h4,h5{ margin: 0; padding: 0; }
+
+.stephint{
+    font-size: 12px;
+    position: relative;
+    border: 1px solid #ccc;
+    background-color: #ffffff;
+}
+.stephint div,.stephint ul,.stephint li,.stephint h5,.stephint p,.stephint a,.stephint span{
+	box-sizing: border-box;
+}
+
+.stephint-list{
+	list-style: none;
+	overflow: hidden;
+	height: 100%;
+	padding: 5px 0px 5px 5px;
+}
+.stephint-list>ul{
+	overflow: auto;
+	height: 100%;
+}
+/*默认未完成的样式*/
+.stephint-list>ul>li{
+	min-height: 50px;
+}
+.stephint-list>ul>li>h5{
+	font-size: 14px;
+	font-weight: bold;
+    line-height: 32px;
+	padding-left: 45px;
+	color: #a1a1a1;
+	background: url($cover-theme-path+"jq-plugin/stephint/waitting.png") 5px center no-repeat;
+}
+.stephint-list>ul>li>h5>a{
+	font-size: 14px;
+	font-weight: bold;
+    line-height: 40px;
+	color: #a1a1a1;
+	cursor: pointer;
+}
+.stephint-list>ul>li>div{
+	min-height: 20px;
+	line-height: 20px;
+	background: url($cover-theme-path+"jq-plugin/stephint/line-wait.png") 19px 35px repeat-y;
+	padding-left: 35px;
+}
+.stephint-list>ul>li>div>span{
+	display: block;
+	cursor: default;
+}
+
+/*完成步骤的样式*/
+.stephint-list>ul>li.stephint-finish>h5{
+	background-image: url($cover-theme-path+"jq-plugin/stephint/finish.png");
+}
+.stephint-list>ul>li.stephint-finish>h5, .stephint-list>ul>li.stephint-finish>h5>a{
+	color: $theme-color;
+}
+.stephint-list>ul>li.stephint-finish>div{
+	background-image: url($cover-theme-path+"jq-plugin/stephint/line.png");
+}
+
+/*正在进行的样式*/
+.stephint-list>ul>li.stephint-doing>h5{
+	background: url($cover-theme-path+"jq-plugin/stephint/doing.png") left center no-repeat;
+	line-height: 45px;
+}
+.stephint-list>ul>li.stephint-doing>h5, .stephint-list>ul>li.stephint-doing>h5>a{
+	color: #ff7e00;
+}
+
+/* 步骤提示附带信息样式 */
+.stephint-attach{
+	width: 100%;
+	border-top: 2px solid #ccc;
+	padding: 5px 5px 0px 5px;
+	overflow: hidden;
+	position: absolute;
+    bottom: 0;
+    left: 0;
+}
+.stephint-attach>p{
+	height: auto;
+	overflow: hidden;
+    margin: 3px 0px;
+}
+.stephint-attach>p>span{
+	display: inline-block;
+	float: left;
+	font-size: 12px;
+}
+.stephint-attach>p>span.stephint-attach-title{
+	font-weight: bold;
+	color: #000;
+}

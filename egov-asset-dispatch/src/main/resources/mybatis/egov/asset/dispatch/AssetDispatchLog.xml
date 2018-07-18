@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.dispatch.mapper.AssetDispatchLogMapper" >
+  <resultMap id="assetDispatchLogMap" type="com.bosssoft.egov.asset.dispatch.entity.AssetDispatchLog" >
+         <result property="id" column="ID" />
+	     <result property="taskId" column="TASK_ID" />
+	     <result property="startTime" column="START_TIME" />
+	     <result property="endTime" column="END_TIME" />
+	     <result property="executeStatus" column="EXECUTE_STATUS" />
+	     <result property="reamrk" column="REAMRK" />
+	 </resultMap>
+ 
+ <sql id="Base_Column_List">
+    ID,TASK_ID,START_TIME,END_TIME,EXECUTE_STATUS,REAMRK  </sql>
+ 
+    <select id="queryAssetDispatchLogPage" resultMap="assetDispatchLogMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM ASSET_DISPATCH_LOG
+      	 <trim prefix="where"  prefixOverrides="and |or">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            #{searcher.__QUERYCON}
+	        </if>  
+	    </trim>
+    </select>
+</mapper>

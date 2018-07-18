@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cache="http://www.springframework.org/schema/cache"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       		http://www.springframework.org/schema/beans/spring-beans.xsd
+       		http://www.springframework.org/schema/cache
+       		http://www.springframework.org/schema/cache/spring-cache.xsd">
+
+	 <!--定时器配置-->
+<!-- 	<bean id ="schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean" destroy-method="destroy">  		 
+	     <property name="" ref="bosssoftJobFactory"></property>
+	</bean> -->
+
+<!--     <bean id="bosssoftJobFactory" class="com.bosssoft.bossbi.quartz.BosssoftJobFactory"/>
+ --></beans>

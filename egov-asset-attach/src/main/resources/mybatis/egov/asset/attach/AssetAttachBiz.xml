@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.attach.mapper.AssetAttachBizMapper" >
+  <resultMap id="assetAttachBizMap" type="com.bosssoft.egov.asset.attach.entity.AssetAttachBiz" >
+         <result property="appId" column="APP_ID" />
+	     <result property="id" column="ID" />
+	     <result property="bizType" column="BIZ_TYPE" />
+	     <result property="bizName" column="BIZ_NAME" />
+	     <result property="attachTbl" column="ATTACH_TBL" />
+	     <result property="status" column="STATUS" />
+	     <result property="remark" column="REMARK" />
+	 </resultMap>
+ 
+ <sql id="Base_Column_List">
+    APP_ID,ID,BIZ_TYPE,BIZ_NAME,ATTACH_TBL,STATUS,REMARK  </sql>
+ 
+    <select id="queryAssetAttachBizPage" resultMap="assetAttachBizMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM asset_attach_biz
+      	 <trim prefix="where"  prefixOverrides="and |or">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            ${searcher.__QUERYCON}
+	        </if>  
+	    </trim>
+    </select>
+</mapper>

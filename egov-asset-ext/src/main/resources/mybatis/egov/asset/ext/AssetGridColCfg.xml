@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.ext.mapper.AssetGridColCfgMapper">
+	<resultMap id="BaseResultMap" type="com.bosssoft.egov.asset.ext.entity.AssetGridColCfg">
+		<result property="cfgId" column="CFG_ID"/>
+		<result property="gridCfgId" column="GRID_CFG_ID"/>
+		<result property="sxh" column="SXH"/>
+		<result property="title" column="TITLE"/>
+		<result property="field" column="FIELD"/>
+		<result property="pfield" column="PFIELD"/>
+		<result property="attr" column="ATTR"/>
+		<result property="colLevel" column="COL_LEVEL"/>
+		<result property="hidden" column="HIDDEN"/>
+		<result property="rowspan" column="ROWSPAN"/>
+		<result property="colspan" column="COLSPAN"/>
+		<result property="sortType" column="SORT_TYPE"/>
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+		CFG_ID, GRID_CFG_ID, SXH, TITLE, FIELD, PFIELD, ATTR, COL_LEVEL, HIDDEN, ROWSPAN, COLSPAN, SORT_TYPE
+	</sql>
+	
+	<select id="getGridColCfgByGridCfgId" resultMap="BaseResultMap">
+		SELECT <include refid="Base_Column_List"/>
+		FROM asset_grid_col_cfg
+		<where>
+			GRID_CFG_ID = #{gridCfgId}
+		</where>
+		ORDER BY col_level ASC, sxh ASC
+	</select>
+	
+	<insert id="insertColumnsCfg">
+		insert into asset_grid_col_cfg 
+		(<include refid="Base_Column_List"/>)
+		<foreach collection="columns" item="col" open="(" separator=" UNION ALL " close=")">
+			(
+				select #{col.cfgId}, 
+					#{col.gridCfgId}, 
+					#{col.sxh}, 
+					#{col.title}, 
+					#{col.field},
+					#{col.pfield}, 
+					#{col.attr}, 
+					#{col.colLevel}, 
+					#{col.hidden},
+					<if test="col.rowspan == null">0</if>
+					<if test="col.rowspan != null">#{col.rowspan}</if>, 
+					<if test="col.colspan == null">0</if>
+					<if test="col.colspan != null">#{col.colspan}</if>,
+					#{col.sortType}
+				from dual
+			) 
+		</foreach>
+	</insert>
+	
+	<delete id="deleteGridColCfgByGridCfgId">
+		delete asset_grid_col_cfg
+		<where>
+			grid_cfg_id = #{gridCfgId}
+		</where>
+	</delete>
+</mapper>

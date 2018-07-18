@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<task>	
+  <businessTasks>
+    <orgunitTask name="orgunitTask" title="组织机构任务">
+      <tables>
+        <table name="AIMS_BASIC_ORG" tableType="0" tailSql="" />
+    	<table name="AIMS_REPORT_ORG" title="报表单位表" tableType="0" tailSql="" />  
+    	<table name="AIMS_REPORT_ORG_EX" title="报表单位是否上报" tableType="0" tailSql="" />       
+      </tables>
+    </orgunitTask>  	
+      <baseDataTask name="baseDataTask" title="基础数据任务">
+      <tables>
+        <table name="AIMS_BASIC_SITE" title="存放地点" tableType="0" tailSql="" />
+        <table name="AIMS_BASIC_DEPT" title="部门" tableType="0" tailSql="" />
+        <table name="AIMS_BASIC_STAFF" title="人员" tableType="0" tailSql="" />
+        <table name="AIMS_BASIC_UNIT" title="人员" tableType="0" tailSql="" />    
+      </tables>
+    </baseDataTask>
+    <billTask name="billTask" title="卡片单据任务">
+      <tables>
+        <table name="AIMS_CARD6" title="卡片表" tableType="0" tailSql="" />
+       <table name="AIMS_CARD_ATTR_LBS" title="卡片位置、地址属性表" tableType="0" tailSql="" />        
+        <table name="AIMS_CARD_OTHER" title="卡片附属表" tableType="0" tailSql="" />
+        <table name="AIMS_CARD6_LIFE" title="生命周期表" tableType="0" tailSql="" />
+        <table name="AIMS_CHANGE" title="卡片变动主表" tableType="0" tailSql="" />
+        <table name="AIMS_CHANGE_DETAILS" title="卡片变动明细表" tableType="0" tailSql="" />
+        <table name="AIMS_SPLIT" title="卡片拆分主表" tableType="0" tailSql="" />
+        <table name="AIMS_SPLIT_DETAILS" title="卡片拆分明细表" tableType="0" tailSql="" />
+        <table name="AIMS_CARD6_VOID" title="卡片作废主表" tableType="0" tailSql="" />
+        <table name="AIMS_CARD6_VOID_DETAILS" title="卡片作废明细表" tableType="0" tailSql="" />
+      </tables>
+    </billTask>    
+    <deprTask name="deprTask" title="折旧任务">
+      <tables>
+        <table name="AIMS_DEPR_CONFIG" title="单位折旧配置信息" tableType="0" tailSql="" />
+        <table name="AIMS_DEPR_INFO" title="单位折旧表" tableType="0" tailSql="" />
+        <table name="AIMS_DEPR_CARD" title="折旧卡片业务表" tableType="0" tailSql="" />     
+        <table name="AIMS_DEPR_CARD_CONFIG" title="卡片状态表" tableType="0" tailSql="" /> 
+        <table name="AIMS_DEPRECIATION" title="单位折旧明细表" tableType="0" tailSql="" />       
+      </tables>
+    </deprTask>    
+    <disposeTask name="disposeTask" title="处置信息任务">
+    	<tables>
+        <table name="AIMS_DISPOSE" title="处置(主表)" tableType="0" tailSql="" />
+        <table name="AIMS_DISPOSE_DETAILS" title="处置(明细表表)" tableType="0" tailSql="" />
+        <table name="AIMS_DISPOSE_BILL" title="处置-清单主表)" tableType="0" tailSql="" />
+        <table name="AIMS_DISPOSE_BILL_DETAILS" title="处置-清单(明细表)" tableType="0" tailSql="" />
+        <table name="AIMS_DISPOSE_WAIT_RECEIVE" title="处置-接收表" tableType="0" tailSql="" />
+        <table name="AIMS_DISPOSE_WAIT_RECEIVE_BILL" title="处置-接收附表" tableType="0" tailSql="" />
+        <table name="AIMS_DISPOSE_RECYCLE" title="处置-回收单" tableType="0" tailSql="" />
+    	</tables>	
+    </disposeTask>	
+    <useTask name="useTask" title="使用信息任务">
+    	<tables>
+        <table name="AIMS_USE" title="使用-变动申请单(主表)" tableType="0" tailSql="" />
+        <table name="AIMS_USE_DETAILS" title="使用-变动申请单(明细表)" tableType="0" tailSql="" />    		
+        <table name="AIMS_USE_VIEW" title="使用" tableType="0" tailSql="" />
+        <table name="AIMS_USER_MAIN" title="使用" tableType="0" tailSql="" />    		
+    	</tables>	
+    </useTask>	
+    <checkTask name="checkTask" title="盘点任务">
+    	<tables>
+        <table name="AIMS_INVENTORY" title="盘点-盘点清单(主表)" tableType="0" tailSql="" />
+        <table name="AIMS_INVENTORY_DETAILS" title="盘点-盘点清单(明细表)" tableType="0" tailSql="" />
+        <table name="AIMS_INVENTORY_DEPT" title="盘点-盘点清单(明细表)" tableType="0" tailSql="" />
+        <table name="AIMS_INVENTORY_CLASSIFY" title="盘点-盘点清单(明细表)" tableType="0" tailSql="" />
+        <table name="AIMS_INVENTORY_FINAL" title="盘点-盘点清单(明细表)" tableType="0" tailSql="" />
+        <table name="AIMS_INVENTORY_FINAL_DETAILS" title="盘点-盘点清单(明细表)" tableType="0" tailSql="" />
+        <table name="AIMS_INVENTORY_ORG" title="盘点-盘点清单(明细表)" tableType="0" tailSql="" />
+        <table name="AIMS_INVENTORY_PLAN" title="盘点-盘点清单(明细表)" tableType="0" tailSql="" />
+        <table name="AIMS_INVENTORY_PLAN_DETAILS" title="盘点-盘点清单(明细表)" tableType="0" tailSql="" />
+        <table name="AIMS_INVENTORY_RESULT" title="盘点-盘点清单(明细表)" tableType="0" tailSql="" />
+        <table name="AIMS_INVENTORY_SITE" title="盘点-盘点清单(明细表)" tableType="0" tailSql="" />
+        <table name="AIMS_INVENTORY_STAFF" title="盘点-盘点清单(明细表)" tableType="0" tailSql="" />
+        <table name="AIMS_INVENTORY_SWITCH" title="盘点-盘点清单(明细表)" tableType="0" tailSql="" />
+        <table name="AIMS_INVENTORY_TASK" title="盘点-盘点清单(明细表)" tableType="0" tailSql="" />
+    	</tables>	
+    </checkTask>	
+    <registerTask name="registerTask" title="产权登记">
+    	<tables>
+        <table name="AIMS_REGISTER_INFO" title="" tableType="0" tailSql="" />
+        <table name="AIMS_REGISTER_MAIN" title="" tableType="0" tailSql="" />    		
+        <table name="AIMS_REGISTER_SPONSOR" title="" tableType="0" tailSql="" />
+        <table name="AIMS_REGISTER_ASSETS" title="" tableType="0" tailSql="" />
+        <table name="AIMS_REGISTER_FINAL" title="" tableType="0" tailSql="" />
+        <table name="AIMS_REGISTER_FINAL_ASSETS" title="" tableType="0" tailSql="" />   
+        <table name="AIMS_REGISTER_FINAL_INFO" title="" tableType="0" tailSql="" />   
+        <table name="AIMS_REGISTER_FINAL_SPONSOR" title="配置-购置计划(明细表)" tableType="0" tailSql="" />   
+        <table name="AIMS_REGISTER_CHANGE" title="产权登记-变动" tableType="0" tailSql="" />   
+        <table name="AIMS_REGISTER_CHANGE_ASSETS" title="产权登记-变动" tableType="0" tailSql="" />   
+        <table name="AIMS_REGISTER_CHANGE_CQ" title="产权登记" tableType="0" tailSql="" /> 
+        <table name="AIMS_REGISTER_CHANGE_INFO" title="产权登记" tableType="0" tailSql="" /> 
+        <table name="AIMS_REGISTER_CHANGE_SPONSOR" title="产权登记" tableType="0" tailSql="" /> 
+        <table name="AIMS_REGISTER_CHECK" title="产权登记" tableType="0" tailSql="" />     		
+    	</tables>	
+    </registerTask>
+   <bcpmTask name="bcpmTask" title="投融资任务">
+    	<tables>
+        <table name="BCPM_PROJECT" title="投融资-项目表" tableType="0" tailSql="" />
+        <table name="BCPM_RECEIVE" title="投融资-项目移交表" tableType="0" tailSql="" />    		
+        <table name="BCPM_RECEIVE_DETAILS" title="投融资-项目移交明细表" tableType="0" tailSql="" />
+        <table name="BCPM_TMPUSE" title="投融资-临时使用" tableType="0" tailSql="" />
+        <table name="BCPM_TMPUSE_DETAILS" title="投融资-临时使用(明细表)" tableType="0" tailSql="" />   
+        <table name="BCPM_TRANSFER" title="投融资-移交表" tableType="0" tailSql="" />   
+        <table name="BCPM_TRANSFER_DETAILS" title="投融资-移交(明细表)" tableType="0" tailSql="" />   
+        <table name="BCPM_DISPOSE" title="投融资-项目取消表" tableType="0" tailSql="" />   
+        <table name="BCPM_DISPOSE_DETAILS" title="投融资-目取消表(明细表)" tableType="0" tailSql="" />		
+    	</tables>	
+    </bcpmTask>	
+    <report2016Task name="report2016Task" title="2016报表任务">
+    	<tables>
+		<table name="TGRATHER_CZ01_2016" title="01表-行政事业单位资产负债简表" tableType="0" tailSql="" />
+		<table name="TGRATHER_CZ02_2016" title="02表-行政事业单位机构人员情况表" tableType="0" tailSql="" />
+		<table name="TGRATHER_CZ03_2016" title="03表-固定资产情况汇总表" tableType="0" tailSql="" />
+		<table name="TGRATHER_CZ04_2016" title="04表-无形资产情况汇总表" tableType="0" tailSql="" />
+		<table name="TGRATHER_CZ05_2016" title="05表-行政事业单位土地情况表" tableType="0" tailSql="" />
+		<table name="TGRATHER_CZ06_2016" title="06表-行政事业单位房屋情况表" tableType="0" tailSql="" />
+		<table name="TGRATHER_CZ07_2016" title="07表-行政事业单位车辆情况表" tableType="0" tailSql="" />
+		<table name="TGRATHER_CZ08_2016" title="08表-行政事业单位大型设备情况表" tableType="0" tailSql="" />
+		<table name="TGRATHER_CZ09_2016" title="09表-行政事业单位在建工程情况表" tableType="0" tailSql="" />
+		<table name="TGRATHER_CZ10_2016" title="10表-行政事业单位资产出租出借情况表" tableType="0" tailSql="" />
+		<table name="TGRATHER_CZ11_2016" title="11表-行政事业单位资产处置情况表" tableType="0" tailSql="" />
+		<table name="TGRATHER_CZ12_2016" title="12表-事业（行政）单位对外投资情况表" tableType="0" tailSql="" />
+		<table name="TGRATHER_CZFM_2016" title="报表封面" tableType="0" tailSql="" />
+		<table name="TGRATHER_CZZ05_2016" title="05表-行政事业单位土地情况汇总表" tableType="0" tailSql="" />
+		<table name="TGRATHER_CZZ06_2016" title="06表-行政事业单位房屋情况汇总表" tableType="0" tailSql="" />
+		<table name="TGRATHER_CZZ07_2016" title="07表-行政事业单位车辆情况汇总表" tableType="0" tailSql="" />
+		<table name="TGRATHER_CZZ08_2016" title="08表-行政事业单位大型设备情况汇总表" tableType="0" tailSql="" />
+		<table name="TGRATHER_CZZ09_2016" title="09表-行政事业单位在建工程情况汇总表" tableType="0" tailSql="" />
+		<table name="TGRATHER_CZZ10_2016" title="10表-行政事业单位资产出租出借情况汇总表" tableType="0" tailSql="" />
+		<table name="TGRATHER_CZZ11_2016" title="11表-行政事业单位资产处置情况汇总表" tableType="0" tailSql="" />
+		<table name="TGRATHER_CZZ12_2016" title="12表-事业（行政）单位对外投资情况汇总表" tableType="0" tailSql="" />
+		<table name="TGRATHER_CZZFM_2016" title="报表封面" tableType="0" tailSql="" />
+    	</tables>	
+    </report2016Task>
+  <report2017Task name="report2017Task" title="2017报表任务">
+    	<tables>
+		<table name="TGRATHER_CZ01_2017" title="01表-行政事业单位资产负债简表" tableType="0" tailSql="" />
+		<table name="TGRATHER_CZ02_2017" title="02表-行政事业单位机构人员情况表" tableType="0" tailSql="" />
+		<table name="TGRATHER_CZ03_2017" title="03表-固定资产情况汇总表" tableType="0" tailSql="" />
+		<table name="TGRATHER_CZ04_2017" title="04表-无形资产情况汇总表" tableType="0" tailSql="" />
+		<table name="TGRATHER_CZ05_2017" title="05表-行政事业单位土地情况表" tableType="0" tailSql="" />
+		<table name="TGRATHER_CZ06_2017" title="06表-行政事业单位房屋情况表" tableType="0" tailSql="" />
+		<table name="TGRATHER_CZ07_2017" title="07表-行政事业单位车辆情况表" tableType="0" tailSql="" />
+		<table name="TGRATHER_CZ08_2017" title="08表-行政事业单位大型设备情况表" tableType="0" tailSql="" />
+		<table name="TGRATHER_CZ09_2017" title="09表-行政事业单位在建工程情况表" tableType="0" tailSql="" />
+		<table name="TGRATHER_CZ10_2017" title="10表-行政事业单位资产出租出借情况表" tableType="0" tailSql="" />
+		<table name="TGRATHER_CZ11_2017" title="11表-行政事业单位资产处置情况表" tableType="0" tailSql="" />
+		<table name="TGRATHER_CZ12_2017" title="12表-事业（行政）单位对外投资情况表" tableType="0" tailSql="" />
+		<table name="TGRATHER_CZ13_2017" title="13表-事业（行政）单位对外投资情况汇总表" tableType="0" tailSql="" />	
+		<table name="TGRATHER_CZFM_2017" title="报表封面" tableType="0" tailSql="" />
+		<table name="TGRATHER_CZ21_2017" title="省直资附01表企业化管理事业单位资产负债表" tableType="0" tailSql="" />
+		<table name="TGRATHER_CZ22_2017" title="省直资附02表省直行政事业单位国有资产进场交易执行情况表（房地产出租）" tableType="0" tailSql="" />
+		<table name="TGRATHER_CZ23_2017" title="省直资附03表省直行政事业单位国有资产进场交易执行情况表（其他资产出租）" tableType="0" tailSql="" />
+		<table name="TGRATHER_CZ24_2017" title="省直资附04表省直行政事业单位国有资产进场交易执行情况表（资产出售）" tableType="0" tailSql="" />
+		<table name="TGRATHER_CZ25_2017" title="省直资附05表资产管理基本信息明细表" tableType="0" tailSql="" />
+		<table name="TGRATHER_CZZ05_2017" title="05表-行政事业单位土地情况汇总表" tableType="0" tailSql="" />
+		<table name="TGRATHER_CZZ06_2017" title="06表-行政事业单位房屋情况汇总表" tableType="0" tailSql="" />
+		<table name="TGRATHER_CZZ07_2017" title="07表-行政事业单位车辆情况汇总表" tableType="0" tailSql="" />
+		<table name="TGRATHER_CZZ08_2017" title="08表-行政事业单位大型设备情况汇总表" tableType="0" tailSql="" />
+		<table name="TGRATHER_CZZ09_2017" title="09表-行政事业单位在建工程情况汇总表" tableType="0" tailSql="" />
+		<table name="TGRATHER_CZZ10_2017" title="10表-行政事业单位资产出租出借情况汇总表" tableType="0" tailSql="" />
+		<table name="TGRATHER_CZZ11_2017" title="11表-行政事业单位资产处置情况汇总表" tableType="0" tailSql="" />
+		<table name="TGRATHER_CZZ12_2017" title="12表-事业（行政）单位对外投资情况汇总表" tableType="0" tailSql="" />
+		<table name="TGRATHER_CZZ13_2017" title="13表-事业（行政）单位对外投资情况汇总表" tableType="0" tailSql="" />
+		<table name="TGRATHER_CZZ21_2017" title="企业化管理事业单位资产负债表" tableType="0" tailSql="" />
+		<table name="TGRATHER_CZZ22_2017" title="省直行政事业单位国有资产进场交易执行情况汇总表（房地产出租）" tableType="0" tailSql="" />
+		<table name="TGRATHER_CZZ23_2017" title="省直行政事业单位国有资产进场交易执行情况汇总表（其他资产出租）" tableType="0" tailSql="" />
+		<table name="TGRATHER_CZZ24_2017" title="省直行政事业单位国有资产进场交易执行情况汇总表（资产出售）" tableType="0" tailSql="" />
+		<table name="TGRATHER_CZZ25_2017" title="省直行政事业单位资产管理基本信息明细表" tableType="0" tailSql="" />
+		<table name="TGRATHER_CZZFM_2017" title="报表封面" tableType="0" tailSql="" />
+    	</tables>	
+    </report2017Task>    
+   <zczc2016Task name="zczc2016Task" title="市场自查表">
+    	<tables>
+        <table name="TGRATHER_ZCCZCS01_2016" title="行政事业单位土地、房屋及构筑物资产出租情况自查表" tableType="0" tailSql="" />
+        <table name="TGRATHER_ZCCZCS02_2016" title="行政事业单位土地、房屋及构筑物资产出售情况自查表" tableType="0" tailSql="" />		
+    	</tables>	
+    </zczc2016Task>    
+  </businessTasks>
+</task>

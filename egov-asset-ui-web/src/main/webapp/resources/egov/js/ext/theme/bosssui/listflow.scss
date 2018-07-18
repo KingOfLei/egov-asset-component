@@ -1,0 +1,60 @@
+.list_flow_box{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    li {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        border-bottom: solid 1px #f5f5f5;
+        width: 90%;
+        overflow: hidden;
+    }
+    .flow_new .timeline_title,
+    .flow_label .timeline_title{
+        padding: 10px;
+        margin-left: 15px;
+        border-left: solid 2px #ececec;
+        .timeline_circle{
+            position: relative;
+            left: -18px;
+            margin-top: -10px;
+            padding-top: 19px;
+            float: left;
+        }
+    }
+    .flow_new .timeline_circle {
+        left: -18px;
+        margin-top: -10px;
+        padding-top: 19px;
+        background: #fff;
+    }
+
+    .circle_new {
+        background-position: 0 0;
+    }
+
+    .circle_old{
+        background-position: -14px 0;
+    }
+
+    .circle_new, .circle_old {
+        background-image: url(images/dout.png);
+        display: inline-block;
+        width: 14px;
+        height: 14px;
+        vertical-align: text-bottom;
+        font-style: normal;
+        overflow: hidden;
+    }
+
+    .info{
+        padding: 10px;
+        .time{
+
+        }
+        .text{
+            margin-left: 20px;
+        }
+    }
+}

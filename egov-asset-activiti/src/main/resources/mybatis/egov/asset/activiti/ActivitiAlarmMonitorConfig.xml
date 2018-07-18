@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.activiti.mapper.ActivitiAlarmMonitorConfigMapper" >
+  <resultMap id="activitiAlarmMonitorConfigMap" type="com.bosssoft.egov.asset.activiti.entity.ActivitiAlarmMonitorConfig" >
+         <result property="id" column="ID" />
+	     <result property="name" column="NAME" />
+	     <result property="busType" column="BUS_TYPE" />
+	     <result property="alarmZone" column="ALARM_ZONE" />
+	     <result property="alarmDay" column="ALARM_DAY" />
+	     <result property="expiredDay" column="EXPIRED_DAY" />
+	     <result property="sql" column="vSQL" />
+	     <result property="bizCode" column="BIZ_CODE" />
+	 </resultMap>
+ 
+ <sql id="Base_Column_List">
+    ID,NAME,BUS_TYPE,ALARM_ZONE,ALARM_DAY,EXPIRED_DAY,vSQL  </sql>
+ 
+    <select id="queryActivitiAlarmMonitorConfigPage" resultMap="activitiAlarmMonitorConfigMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM ACTIVITI_ALARM_MONITOR_CONFIG
+      	 <trim prefix="where"  prefixOverrides="and |or">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            #{searcher.__QUERYCON}
+	        </if>  
+	    </trim>
+    </select>
+    
+    	
+	<select id="queryNotWorkDay" resultType="Integer">
+		SELECT count(1) FROM ACTIVITI_ALARM_MONITOR_DAYS
+		WHERE DESIGNTIME >= #{beginTime}  and DESIGNTIME &lt;= #{endTime}
+	</select>
+    
+</mapper>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper
+	namespace="com.bosssoft.egov.asset.monitor.mapper.FabMonitorRecordUrlortypeMapper">
+	<resultMap id="fabMonitorRecordUrlortypeMap"
+		type="com.bosssoft.egov.asset.monitor.entity.FabMonitorRecordUrlortype">
+		<result property="id" column="ID" />
+		<result property="typeCode" column="TYPE_CODE" />
+		<result property="typeName" column="TYPE_NAME" />
+		<result property="url" column="URL" />
+		<result property="recordDetailId" column="RECORD_DETAIL_ID" />
+		<result property="param1" column="PARAM1" />
+		<result property="param2" column="PARAM2" />
+		<result property="param3" column="PARAM3" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		ID,TYPE_CODE,TYPE_NAME,URL,RECORD_DETAIL_ID,PARAM1,PARAM2,PARAM3
+	</sql>
+
+	<select id="queryFabMonitorRecordUrlortypePage" resultMap="fabMonitorRecordUrlortypeMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM FAB_MONITOR_RECORD_URLORTYPE
+		<trim prefix="where" prefixOverrides="and |or">
+			<if test="searcher != null and searcher.__QUERYCON != null">
+				#{searcher.__QUERYCON}
+			</if>
+		</trim>
+	</select>
+
+
+	<select id="queryFabMonitorRecordUrlortypeByBusType" resultMap="fabMonitorRecordUrlortypeMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM FAB_MONITOR_RECORD_URLORTYPE
+		where TYPE_CODE = #{busType}
+	</select>
+	<select id="getFabMonitorRecordUrlortypeListAll" resultMap="fabMonitorRecordUrlortypeMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM FAB_MONITOR_RECORD_URLORTYPE
+	</select>
+</mapper>

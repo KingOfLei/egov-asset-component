@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>                       
+<Page id="download" layout="border" 
+	templatePath="egov/asset/template/download.jsp" 
+	js="resources/egov/js/asset/template/download.js"
+	jsId="download"  
+	xmlns="http://www.bosssoft.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.bosssoft.org ../../../schema/uis/uitemplate-2.0.xsd">
+	<items>
+	<Panel id="download_panel" region="center" layout="border">
+		<items>
+		
+		</items>
+	</Panel>	
+	</items>
+</Page>

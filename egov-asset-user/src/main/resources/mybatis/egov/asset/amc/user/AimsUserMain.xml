@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.amc.user.mapper.AimsUserMainMapper" >
+  <resultMap id="aimsUserMainMap" type="com.bosssoft.egov.asset.amc.user.model.AimsUserMain" >
+         <result property="id" column="ID" />
+	     <result property="userId" column="USER_ID" />
+	     <result property="userCode" column="USER_CODE" />
+	     <result property="createDate" column="CREATE_DATE" />
+	     <result property="modifyDate" column="MODIFY_DATE" />
+	     <result property="auditDate" column="AUDIT_DATE" />
+	     <result property="auditor" column="AUDITOR" />
+	     <result property="bizStatus" column="BIZ_STATUS" />
+	     <result property="bizStatusName" column="BIZ_STATUS_NAME" />
+	     <result property="busType" column="BUS_TYPE" />
+	     <result property="busTypeName" column="BUS_TYPE_NAME" />
+	     <result property="status" column="STATUS"/>
+	     <result property="creator" column="CREATOR"/>
+	     <result property="creatorId" column="CREATOR_ID"/>
+	     <result property="orgCode" column="ORG_CODE"/>
+	     <result property="orgId" column="ORG_ID"/>
+	     <result property="orgName" column="ORG_NAME"/>
+	     <result property="rgnId" column="RGN_ID"/>
+	     <result property="rgnCode" column="RGN_CODE"/>
+	     <result property="rgnName" column="RGN_NAME"/>
+	     <result property="auditComment" column="AUDIT_COMMENT"/>
+	     <result property="userName" column="USER_NAME"/>
+	 </resultMap>
+ 
+ <sql id="Base_Column_List">
+    ID,USER_ID,USER_CODE,CREATE_DATE,MODIFY_DATE,AUDIT_DATE,AUDITOR,BIZ_STATUS,BIZ_STATUS_NAME,BUS_TYPE,BUS_TYPE_NAME,STATUS
+    ,CREATOR,CREATOR_ID, ORG_CODE, ORG_ID,ORG_NAME,RGN_ID,RGN_CODE,RGN_NAME,AUDIT_COMMENT,USER_NAME
+    </sql>
+ 
+    <select id="queryAimsUserMainPage" resultMap="aimsUserMainMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM AIMS_USER_MAIN
+      	 <trim prefix="where"  prefixOverrides="and |or">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            ${searcher.__QUERYCON}
+	        </if>  
+	    </trim>
+    </select>
+    
+    <select id="queryShowTodoPage" resultMap="aimsUserMainMap">
+    	SELECT   
+    	<include refid="Base_Column_List" />
+        FROM AIMS_USER_MAIN
+      	 <trim prefix="where"  prefixOverrides="and |or">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            ${searcher.__QUERYCON}
+	        </if>  
+	    </trim>
+	    ORDER BY CREATE_DATE DESC
+    </select>
+    
+    
+    <update id="updateByUserCode" parameterType="com.bosssoft.egov.asset.amc.user.model.AimsUserMain">
+    	UPDATE AIMS_USER_MAIN
+    	<set>
+    		<if test="id!=null"> ID=#{id},</if>
+    		<if test="userId!=null"> USER_ID=#{userId},</if>
+    		<if test="userCode!=null"> USER_CODE=#{userCode},</if>
+    		<if test="createDate!=null"> CREATE_DATE=#{createDate},</if>
+    		<if test="modifyDate!=null"> MODIFY_DATE=#{modifyDate},</if>
+    		<if test="auditDate!=null"> AUDIT_DATE=#{auditDate},</if>
+    		<if test="auditor!=null"> AUDITOR=#{auditor},</if>
+    		<if test="bizStatus!=null"> BIZ_STATUS=#{bizStatus},</if>
+    		<if test="bizStatusName!=null"> BIZ_STATUS_NAME=#{bizStatusName},</if>
+    		<if test="busType!=null"> BUS_TYPE=#{busType},</if>
+    		<if test="busTypeName!=null"> BUS_TYPE_NAME=#{busTypeName},</if>
+    		<if test="status!=null"> STATUS=#{status},</if>
+    		<if test="creator!=null"> CREATOR=#{creator},</if>
+    		<if test="creatorId!=null"> CREATOR_ID=#{creatorId},</if>
+    		<if test="orgCode!=null"> ORG_CODE=#{orgCode},</if>
+    		<if test="orgId!=null"> ORG_ID=#{orgId}, </if>
+    		<if test="orgName!=null"> ORG_NAME=#{orgName}, </if>
+    		<if test="rgnId!=null"> RGN_ID=#{rgnId}, </if>
+    		<if test="rgnCode!=null"> RGN_CODE=#{rgnCode}, </if>
+    		<if test="rgnName!=null"> RGN_NAME=#{rgnName}, </if>
+    		<if test="auditComment!=null"> AUDIT_COMMENT=#{auditComment}, </if>
+    		<if test="userName!=null">USER_NAME=#{userName} </if>
+    	</set>
+    	WHERE USER_CODE=#{userCode} AND STATUS=1
+    </update>
+</mapper>

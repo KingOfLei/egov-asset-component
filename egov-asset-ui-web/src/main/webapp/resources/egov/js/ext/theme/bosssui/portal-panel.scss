@@ -1,0 +1,55 @@
+$portal-panel-color:#00811C !default;
+$portal-panel-box-height:250;
+$portal-panel-box-title-height:35;
+
+.portal-panel-content{
+  float: none;
+}
+
+.portal-panel-box{
+  min-height: $portal-panel-box-height;
+  min-width: 300px;
+  display: inline-block;
+  float: left;
+  margin-top:20px;
+  border: 1px solid $portal-panel-color;
+
+  .title{
+    border-bottom:1px solid $portal-panel-color ;
+    color: #000;
+    height:#{$portal-panel-box-title-height}px;
+    line-height:#{$portal-panel-box-title-height}px;
+    padding-left: 10px;
+    padding-right: 10px;
+
+    .text{
+
+    }
+
+    .more{
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .more:hover{
+      color: orange;
+    }
+
+  }
+
+
+
+  .box-body{
+    overflow: hidden;
+    overflow-y: auto;
+    height: #{$portal-panel-box-height - $portal-panel-box-title-height}px;
+    .item{
+      background: #fff;
+      color: #000;
+    }
+    .item:hover{
+      background:#fff;
+      color: orange;
+    }
+
+  }
+}

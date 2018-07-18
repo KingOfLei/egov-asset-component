@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page id="dataSourceCfgPage" layout="border"
+	templatePath="egov/asset/di/dataSourceCfg.jsp"
+	js="resources/egov/js/asset/di/dataSourceCfg.js"
+	jsId="dataSourceCfg"
+	xmlns="http://www.bosssoft.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.bosssoft.org ../../../../../schema/uis/uitemplate-2.0.xsd">
+	<items>
+		<Panel id="attachId" style="display:hidden;"></Panel>
+		<Panel id="dataSourceCfgPage_north" layout="border" region="north" height="200">
+		</Panel>
+		<Panel id="dataSourceCfgPage_center" layout="border" region="center" height="35">
+			<items>
+				<Form id="dataSourceCfgPage_form" layout="table">
+					<items>
+						<Row>
+							<items>
+								<FormItem id="dbId" name="数据源" editorType="COMBOBOX"
+									validations="{
+										required: true,
+										messages: {required: '请选择数据源'}
+									}"
+									editOptions="{
+										textfield: 'title',
+										valuefield: 'dbId',
+										action: 'egov/asset/di/getDataSourceList.do'
+									}"/>
+								<FormItem id="importOrg" name="源单位选择" editorType="COMBOZTREE"
+									editOptions="{readonly:true}"/>
+							</items>
+						</Row>
+					</items>
+				</Form>
+			</items>
+		</Panel>
+	</items>
+</Page>

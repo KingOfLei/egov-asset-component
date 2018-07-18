@@ -1,0 +1,200 @@
+// 人员管理--在线资格认证页面样式
+// author: zhangxiaoyun
+// date: 2017-10-20
+
+.online-test{
+	display:inline-block;
+	width:100%;
+	height:100%;
+	overflow: auto;
+	position: relative;
+
+	>h3{
+		position: absolute;
+		top: 0;
+		width: 100%;
+		line-height: 60px;
+		text-align: center;
+		border-bottom: 1px solid $theme-color;
+	}
+
+	>div{
+		overflow: hidden;
+		width: 100%;
+		height: 100%;
+		padding-top: 60px;
+
+		>.test-info{
+			border-bottom: 1px solid $theme-color;
+			min-height: 300px;
+			>li{
+
+				>h4{
+					width:100%;
+					height: auto;
+					line-height: 30px;
+					background-color: $theme-match-color;
+					border-bottom: 1px solid $theme-color;
+					padding: 0px 10px;
+					color: #ffffff;
+				}
+
+				>.test-options{
+					padding: 10px;
+
+					>label{
+						display: block;
+					    line-height: 28px;
+					    font-size: 16px;
+
+						input{
+							margin-right: 15px;
+						}
+					}
+				}
+
+				>.test-answer{
+					height: 60px;
+				    margin: 10px 0px 0px 10px;
+
+				    >label{
+						margin-right: 20px;
+						font-weight: bold;
+					}
+				}
+			}
+		}
+
+		>.test-shortcut{
+
+			>.test-operate{
+				width:100%;
+				background-color: $theme-match-color;
+				padding: 10px;
+
+				>li{
+					margin: 0px 5px;
+
+					>a{
+						padding: 5px;
+						font-size: 16px;
+						border: 1px solid $theme-color;
+						background-color: #fff;
+					}
+					>a:hover{
+						background-color: $theme-color;
+						color: #fff;
+					}
+				}
+			}
+
+			>ul{
+				overflow: hidden;
+
+				>li{
+					display: inline-block;
+					float:left;
+
+					>a{
+						cursor: pointer;
+						display: inline-block;
+					}
+					>a:hover{
+						text-decoration: none;
+					}
+				}
+			}
+
+			>.test-list{
+				display: inline-block;
+				margin: 15px;
+
+				.true-answer{
+					background-color: #57b957;
+					color: #fff;
+				}
+				.false-answer{
+					background-color: #f51c51;
+					color: #fff;
+				}
+
+				>li>a{
+			        width: 40px;
+				    line-height: 40px;
+				    text-align: center;
+				    border: 1px solid $theme-color;
+				    border-bottom: 1px solid $theme-color;
+				    margin: 0px -1px 5px 0px;
+				    font-size: 16px;
+				}
+			}
+		}
+	}
+}
+
+.online-test>div>.test-shortcut>.test-list>li>a:hover,.online-test>div>.test-shortcut>.test-list>li>a.onselect{
+	background-color: $theme-color;
+	color: #fff;
+}
+.test-resoult{
+	width: 100%;
+	height: 100%;
+	padding: 20px;
+
+	>.test-resoult-img{
+		width: 256px;
+		height: 256px;
+		float: left;
+	}
+	>.test-resoult-happy{
+		background: url("../images/btn/happy.png") center center no-repeat;
+	}
+	>.test-resoult-sad{
+		background: url("../images/btn/sad.png") center center no-repeat;
+	}
+
+	>.test-resoult-info{
+		width: 300px;
+		float: left;
+		margin-left: 20px;
+
+		>ul{
+		    height: 200px;
+			padding: 20px;
+
+			>li{
+				line-height: 40px;
+				font-size: 16px;
+			}
+
+			>li.test-resoult-text{
+				font-size: 24px;
+			    font-weight: bold;
+			}
+			>li.test-resoult-pass{
+				color: green;
+			}
+			>li.test-resoult-nopass{
+				color: red;
+			}
+			
+		}
+
+		>div{
+
+			>a{
+				padding: 5px;
+				font-size: 16px;
+				border: 1px solid $theme-color;
+				background-color: #fff;
+			    cursor: pointer;
+			    display: inline-block;
+			    margin:0px 10px;
+			}
+			>a:hover{
+				background-color: $theme-color;
+				color: #fff;
+			}
+		}
+	}
+}

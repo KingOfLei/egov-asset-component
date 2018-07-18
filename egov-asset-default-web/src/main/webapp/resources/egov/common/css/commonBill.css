@@ -1,0 +1,65 @@
+@charset "UTF-8";
+/*使用、处置模块样式表*/
+
+/* 注意：!important 尽量少用，只有当框架样式使用JS生成，无法用一般方式覆盖时使用*/
+/******************************使用、处置--公用样式开始*************************************/
+
+
+
+/******************************使用、处置--公用样式结束*************************************/
+
+
+
+
+
+/******************************使用模块样式开始*********************************************/
+/* 选择资产界面样式*/
+#billSelectPage,#assetSelectPage{
+    width: 98% !important;
+    margin: 0px auto !important;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+}
+
+(#billSelectPage,#assetSelectPage)>.layout-panel-center{
+	width: 100% !important;
+}
+
+(#billSelectPage,#assetSelectPage)>.layout-panel-center>.layout-body{
+	width: 100% !important;
+}
+
+/*单据底部信息项样式  */
+.bill-foot-info{
+height: 30px;
+font-size: 12px;
+display: inline-block;;
+float: right;
+text-align: right; 
+}
+
+.bill-foot-status{
+height:30px;
+font-size: 12px;
+display: inline-block;
+float:left;
+text-align:left
+}
+
+/*表单界面字段样式  */
+.form-field-view{
+	background-color: #ddd; width: 174px; height: 28px;
+}
+  
+/******************************使用模块样式结束*********************************************/
+
+
+
+
+
+/******************************处置模块样式开始*********************************************/
+
+
+
+
+/******************************处置模块样式结束*********************************************/

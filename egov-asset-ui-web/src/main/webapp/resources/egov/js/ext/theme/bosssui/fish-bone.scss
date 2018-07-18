@@ -1,0 +1,176 @@
+.fish-bone * {
+	margin: 0;
+	padding: 0;
+}
+
+.fish-bone {
+	color: #767676;
+	width: 100%;
+	height: 100%;
+	white-space: nowrap;
+	position: relative;
+	font-size: 12px;
+
+	ul {
+		overflow: visible !important;
+	}
+	ul, li {
+		list-style: none;
+		line-height: 2em
+	}
+
+	.wrapper {
+		padding: 0 10px;
+		margin: auto;
+		overflow: hidden;
+	}
+	.wrapper .bd {
+		overflow: hidden;
+	}
+	.item {
+		position: relative;
+		width: 230px;
+		height: 350px;
+		display: none;
+		margin-left: 20px;
+	}
+	.item .first {
+		line-height: 2em;
+	}
+	.item .title {
+		border-left: none;
+	}
+	.item .title .title-left,
+	.item .title .title-center,
+	.item .title .title-right {
+		display: inline-block;
+		line-height: 2em;
+		font-size: 15px;
+		font-weight: bold;
+		font-family: '微软雅黑';
+		color: white;
+		/*overflow:hidden;*/
+	}
+	.item .title .title-left {
+		width: 15px;
+		background: url("images/fish-bone/title.png") no-repeat 0 0;
+	}
+	.item .title .title-center {
+		background: url("images/fish-bone/title.png") repeat-x 0 -600px;
+		width: 200px;
+		display: inline-block;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+	.item .title .title-right {
+		width: 15px;
+		background: url("images/fish-bone/title.png") no-repeat 0 -1200px;
+	}
+	.item .title {
+		display: block;
+		position: relative;
+		left: -33px;
+		background: url(images/fish-bone/line-point.png) no-repeat 12px -212px;
+	}
+	.item.top .title {
+	}
+	.item.bottom .title {
+		bottom: 0;
+	}
+	.item .content {
+		padding-left: 13px;
+		position: absolute;
+	}
+	.item.top .content {
+		padding-top: 5px;
+		top: 10px;
+		padding-bottom: 13px;
+	}
+	.item.bottom .content {
+		bottom: 7px;
+		padding-top: 10px;
+		padding-bottom: 5px;
+	}
+	.item.bottom {
+	}
+
+	.item .content ul {
+	}
+	.item .content ul {
+		.line-common{
+			height: 24px;
+		}
+	}
+	.item .content ul li {
+		padding-left: 13px;
+		display: block;
+
+	}
+
+	.item .content ul li.line-first {
+		position: relative;
+		padding-left: 19px;
+		left: -4px;
+		border-left: 0 !important;
+		background: url(images/fish-bone/line-first.png) no-repeat 0px 0px;
+		font-size: 14px;
+		font-family: '微软雅黑';
+		font-weight: 550;
+		display: inline-block;
+	}
+	.item .content ul li.line-circle {
+		border-left: none;
+	}
+	.item.top .content ul li .name {
+	}
+	.item.top .content ul li .text {
+	}
+	/**prev next*/
+	.prev {
+		position: absolute;
+		top: 154px;
+		left: 0;
+		display: inline-block;
+		width: 20px;
+		height: 40px;
+		background: url(images/fish-bone/arrow.png) no-repeat -1px 13px;
+	}
+	.prev:hover {
+		cursor: pointer;
+		background-position-y: -28px;
+	}
+	.next:hover {
+		cursor: pointer;
+		background-position-y: -28px;
+	}
+	.next {
+		position: absolute;
+		top: 154px;
+		right: 0;
+		display: inline-block;
+		width: 20px;
+		height: 40px;
+		background: url(images/fish-bone/arrow.png) no-repeat -19px 13px;
+	}
+	/**line**/
+	.line {
+		position: absolute;
+		top: 175px;
+		height: 1px;
+		width: 100%;
+		border-bottom: 2px solid #7E899D;
+	}
+	.item .line-point {
+		position: absolute;
+		left: 4px;
+		bottom: -4px;
+		display: block;
+		height: 18px;
+		width: 18px;
+		background: url(images/fish-bone/line-point.png) no-repeat 0px 0px;
+	}
+	.item.bottom .line-point {
+		top: -6px
+	}
+
+}

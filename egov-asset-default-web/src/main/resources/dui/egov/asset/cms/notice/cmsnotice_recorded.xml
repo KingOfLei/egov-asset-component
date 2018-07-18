@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Page id="cmsNoticePage" layout="border"
+	templatePath="egov/asset/cms/notice/cmsnotice_recorded.jsp"
+	js="resources/egov/js/asset/cms/notice/notice.js" jsId="cmsnotice_index"
+	xmlns="http://www.bosssoft.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.bosssoft.org ../../../../../schema/uis/uitemplate-2.0.xsd">
+	<items>
+		<Panel id="cmsNoticePage_panel_top" region="north" height="40">
+			<items>
+				<ToolBar id="mybtnarea" displayType="MENU">
+					<items>
+					<Button id="cmsNoticePage_btnAdd" name="新增" icon="btn-add"
+						iconMode="LEFT" />
+					<Button id="cmsNoticePage_setDialog" name="首页弹窗设置" icon="btn-edit"></Button>
+					<!-- <Button id="cmsNoticePage_btnMoreQuery" name="更多查询" icon="btn-search"
+						iconMode="LEFT" /> -->
+					</items>
+				</ToolBar>
+				<Query id="cmsNoticePage_query" queryTarget="cmsNoticePage_grid"
+					isAdvance="true" style="display:none;" manual="false" advColCount="2">
+					<quicks>
+						<QueryItem id="title" name="标题" editorType="TEXTBOX" operator="like" editOptions="{clearbtn:true}"/>
+						<QueryItem id="realeaseUser" name="发布人" editorType="TEXTBOX" operator="like" editOptions="{clearbtn:true}"/>
+					    <QueryItem id="billStartDate" field="REALEASE_DATE" width="200px" editorType="DATETIME" editOptions="{onlySelect:true,clearbtn:true,dateend:'billEndDate'}" name="发布日期" operator="&gt;="></QueryItem>
+					    <QueryItem id="billEndDate" field="REALEASE_DATE" editorType="DATETIME" name="至" operator="&lt;=" editOptions="{onlySelect:true,clearbtn:true}"/>
+					</quicks>
+					<advances>
+					</advances>
+				</Query>
+			</items>
+		</Panel>
+		<Panel id="cmsNoticePage_panel_bottom" region="center">
+			<items>
+				<XGrid id="cmsNoticePage_grid" checkbox="true" url="egov/asset/cms/notice/queryCmsNoticePage.do"
+					rownumbers="normal" autoLoad="false" fitColumns="ES" fit="true" sort="true"
+					pager="up" pageList="20,50,100,500" pageSize="50" title="通知公告列表">
+					<columns>
+						<XGridColumn field="id" title="ID" align="left" hidden="true"/>
+						<XGridColumn field="rgnId" title="区划id" align="left" hidden="true"/>
+						<XGridColumn field="orgId" title="单位id" align="left" hidden="true"/>
+						<XGridColumn field="title" title="标题" align="left" width="300" showTitle="true"/>
+						<XGridColumn field="content" title="内容" align="left" hidden="true"/>
+						<XGridColumn field="realeaseUserId" title="发布者id" align="left" hidden="true"/>
+						<XGridColumn field="realeaseUser" title="发布人" align="center" showTitle="true"/>
+						<XGridColumn field="realeaseDate" title="发布日期" align="center" showTitle="true"/>
+						<XGridColumn field="receiveType" title="接收类型" align="center" showTitle="true"/>
+						<XGridColumn field="type" title="类型" align="center" formatter="cmsnotice_index.showFormatterType" showTitle="true"/>
+						<XGridColumn field="status" title="状态" align="center" formatter="cmsnotice_index.showFormatterStatus" showTitle="true"/>						
+						<XGridColumn field="isPortal" title="是否发送至门户" align="center" formatter="$funcs.transferGridColumn" showTitle="true"/>
+						<XGridColumn field="isTop" title="是否置顶" align="center" formatter="$funcs.transferGridColumn" showTitle="true"/>
+						<!-- 增加是否首页弹窗 -->
+						<XGridColumn field="isShow" title="是否首页弹窗" align="center" formatter="$funcs.transferGridColumn" showTitle="true"/>
+						<XGridColumn field="topExpir" title="置顶失效日期" align="center" showTitle="true"/>						
+						<XGridColumn field="remark" title="备注" align="left" showTitle="true"/>
+					</columns>
+					<frozenColumnsRight>
+					    <XGridColumn field="oper" title="操作">
+					      	<Button id="cmsNoticePage_grid_btnView" name="查看" icon="btn-detail"></Button>
+					      	<Button id="cmsNoticePage_grid_btnEdit" name="修改" icon="btn-edit"></Button>
+							<Button id="cmsNoticePage_grid_btnDel" name="删除" icon="btn-delete"></Button>
+					    </XGridColumn>
+					</frozenColumnsRight>
+				</XGrid>
+			</items>
+		</Panel>
+	</items>
+</Page>

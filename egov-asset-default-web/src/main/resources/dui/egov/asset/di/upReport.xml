@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page id="upReportPage" layout="border"
+	templatePath="egov/asset/di/upReport.jsp"
+	js="resources/egov/js/asset/di/upReport.js"
+	jsId="upReport"
+	xmlns="http://www.bosssoft.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.bosssoft.org ../../../../../schema/uis/uitemplate-2.0.xsd">
+	<items>
+		<Panel id="upReport_north" region="north" layout="border" height="40">
+			<items>
+				<ToolBar id="upReport_btnarea" displayType="MENU">
+					<items>
+						<Button id="upReport_btn" name="一键上报" icon="btn-commit" iconMode="LEFT"/>
+						<Button id="downReport_btn" name="撤销上报" icon="btn-cancel" iconMode="LEFT"/>
+					</items>
+				</ToolBar>
+			</items>
+		</Panel>
+	</items>
+</Page>

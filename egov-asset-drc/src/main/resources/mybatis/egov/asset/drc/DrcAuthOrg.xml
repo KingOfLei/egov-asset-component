@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.drc.mapper.DrcAuthOrgMapper" >
+  <resultMap id="drcAuthOrgMap" type="com.bosssoft.egov.asset.drc.entity.DrcAuthOrg" >
+         <result property="id" column="ID" />
+	     <result property="userId" column="USER_ID" />
+	     <result property="userCode" column="USER_CODE" />
+	     <result property="userName" column="USER_NAME" />
+	     <result property="condition" column="CONDITION" />
+	     <result property="str1" column="STR1" />
+	     <result property="str2" column="STR2" />
+	     <result property="str3" column="STR3" />
+	     <result property="str4" column="STR4" />
+	     <result property="str5" column="STR5" />
+	     <result property="status" column="STATUS" />
+	     <result property="rgnId" column="RGN_ID" />
+		 <result property="rgnCode" column="RGN_CODE" />
+		 <result property="rgnName" column="RGN_NAME" />
+		 <result property="orgId" column="ORG_ID" />
+		 <result property="orgCode" column="ORG_CODE" />
+		 <result property="orgName" column="ORG_NAME" />
+	 </resultMap>
+ 
+ <sql id="Base_Column_List">
+    RGN_ID,RGN_CODE,RGN_NAME,ORG_ID,ORG_CODE,ORG_NAME,ID,USER_ID,USER_CODE,USER_NAME,CONDITION,STR1,STR2,STR3,STR4,STR5,STATUS  </sql>
+ 
+    <select id="queryDrcAuthOrgPage" resultMap="drcAuthOrgMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM DRC_AUTH_ORG
+      	 <trim prefix="where"  prefixOverrides="and |or">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            ${searcher.__QUERYCON}
+	        </if>  
+	    </trim>
+    </select>
+</mapper>

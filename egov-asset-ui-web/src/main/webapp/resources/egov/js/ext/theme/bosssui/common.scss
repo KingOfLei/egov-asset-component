@@ -1,0 +1,36 @@
+/**
+常用css样式
+ */
+$prefix: unquote('.cm');
+
+.inline-block {
+  display: inline-block !important;
+}
+
+//百分比宽度
+@for $i from 1 through 100 {
+  #{$prefix}-width-#{$i} {
+    width: #{$i}unquote('%');
+  }
+}
+
+//百分比高度
+@for $i from 1 through 100 {
+  #{$prefix}-height-#{$i} {
+    height: #{$i}unquote('%');
+  }
+}
+
+//m-l
+@for $i from 1 through 100 {
+  #{$prefix}-mg-l-#{$i} {
+    margin-left: #{$i}unquote('%');
+  }
+}
+
+//mr
+@for $i from 1 through 100 {
+  #{$prefix}-mg-r-#{$i} {
+    margin-right: #{$i}unquote('%');
+  }
+}

@@ -1,0 +1,103 @@
+// 主题包样式变量 -- red
+// author: zhangxiaoyun
+// date: 2018-01-31 
+
+// **********主题颜色修改****************
+// 主色调(主色)
+	$theme-color: #b11010;
+	$theme-match-color: #ffbdbd;
+	
+	// 皮肤背景颜色 (包括面板标题文字颜色、面板边框颜色)
+	$skin-bgcolor: #b11010;
+	// 首页自定义模块tab的hover背景颜色
+	$skin-modulehover-bgcolor: #b11010;
+	// 弹框标题背景色
+	$dialog-title-bgcolor: #b11010;
+	// 首页自定义模块标题背景颜色
+	$skin-moduletitle-bgcolor: #ffbdbd;
+
+// 主色调(补色)
+	// 首页自定义模块标题颜色
+	// $skin-moduletitlecolor: #b11010;
+	$skin-moduletitlecolor: #3c1601;
+	// 首页自定义模块边框颜色
+	$skin-modulebordercolor: #b11010;
+	// 首页自定义模块文字悬停颜色
+	$skin-modulehovercolor: #b11010;
+	//边框颜色
+	$border-color:#b11010 !default;
+	// $border-color:#d1d1d1 !default;
+	//自定义表单弹框标题背景色
+	$dialog-headbg-color: #b11010;
+	// 按钮字体色
+	$btn-color: #b11010;
+	$btn-disable-color: #a5cef7;
+	// 按钮悬停边框色
+	$btn-hover-border-color: #b11010;
+
+
+// 配色(过渡色)
+
+	//表格表头背景色
+	$grid-header-bgcolor:#ffbdbd !default;
+	// 按钮悬停背景色
+	$btn-hover-bgcolor:#ffbdbd;
+	// 面板标题背景色
+	$panel-title-bgcolor:#ffbdbd;
+ 
+
+// 配色(偏主色)
+	// tab页签背景色
+	$tab-bgcolor: #b11010;
+	$tab-active-color: #b11010;
+	$btn-hover-deepbgcolor: #b11010;
+
+// 配色(偏补色)
+	// 文字颜色
+	$font-hover-color: #b11010;
+
+// 附件模块
+	// 附件模块边框色
+	$upload-bordercolor: #ffbdbd;
+	// 附件模块标题序号字体颜色
+	$upload-titfont-color: #b11010;
+	// 附件模块标题边框颜色
+	$upload-titbd-color: #b11010;
+	// 附件模块标题背景色
+	$upload-bgcolor: #ffbdbd;
+
+// 提示弹框样式配置
+	$alert-dialog-lightcolor: #c74148;
+	$alert-dialog-deepcolor: #b11010;
+	$alert-dialog-filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#c74148', endColorstr='#b11010');
+	$alert-dialog-filter-reverse:progid:DXImageTransform.Microsoft.gradient(startColorstr='#b11010', endColorstr='#c74148');
+
+// 其他颜色配置
+	
+	$form-drop-panel-hover: rgba(148, 15, 22, 0.8);
+	// 表单hover及focus时的阴影
+	$box-shadow: inset 0 1px 1px rgba(0,0,0,0.075), 0 0 8px $form-drop-panel-hover;
+	// 左侧菜单栏选中后背景色
+	$menu-hover-bgcolor: #ffbdbd;
+	// 左侧菜单栏选中后字体颜色
+	$menu-hover-color: #b11010;
+	//标题文字色
+	$title-color:#2d1000;
+	//按钮背景色
+	$btn-bgcolor:#FFFFFF;
+	$btn-bgcolor-focus: #b11010;
+	// 弹框标题文字颜色
+	$dialog-title-fontcolor: #FFFFFF;
+
+	// 各模块边界线
+	$skin-bordercolor: #aaaaaa;
+	// 皮肤字体颜色
+	$skin-fontcolor: #FFFFFF;
+	// 皮肤横向导航选中背景色
+	$skin-hoverbgcolor: #FFFFFF;
+
+// **********覆盖样式图片路径变量****************
+// 主题对应图片路径
+$cover-theme-path:"images/";
+// 系统通用图片路径
+$cover-image-path:"../images/";

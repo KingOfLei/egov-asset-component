@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.monitor.mapper.FabMonitorEvtMapper" >
+  <resultMap id="fabMonitorEvtMap" type="com.bosssoft.egov.asset.monitor.entity.FabMonitorEvt" >
+         <result property="fid" column="FID" />
+	     <result property="frgnid" column="FRGNID" />
+	     <result property="fevtcode" column="FEVTCODE" />
+	     <result property="fevtname" column="FEVTNAME" />
+	     <result property="fmodelid" column="FMODELID" />
+	     <result property="flevel" column="FLEVEL" />
+	     <result property="faddsql" column="FADDSQL" />
+	     <result property="fmcmid" column="FMCMID" />
+	     <result property="fmcmcode" column="FMCMCODE" />
+	     <result property="fmcmname" column="FMCMNAME" />
+	     <result property="ftrigcond" column="FTRIGCOND" />
+	     <result property="fasitcont" column="FASITCONT" />
+	     <result property="fissmsnoti" column="FISSMSNOTI" />
+	     <result property="fnotitel" column="FNOTITEL" />
+	     <result property="fhndlorgid" column="FHNDLORGID" />
+	     <result property="fhndlorgcode" column="FHNDLORGCODE" />
+	     <result property="fhndlorgname" column="FHNDLORGNAME" />
+	     <result property="fisautoclose" column="FISAUTOCLOSE" />
+	     <result property="fhndlway" column="FHNDLWAY" />
+	     <result property="fisenable" column="FISENABLE" />
+	     <result property="foperid" column="FOPERID" />
+	     <result property="foperator" column="FOPERATOR" />
+	     <result property="fopedate" column="FOPEDATE" />
+	     <result property="fmemo" column="FMEMO" />
+	     <result property="fcreatetime" column="FCREATETIME" />
+	     <result property="fupdatetime" column="FUPDATETIME" />
+	     <result property="faltercode" column="FALTERCODE" />
+	     <result property="fversion" column="FVERSION" />
+	     <result property="fcustom1" column="FCUSTOM1" />
+	     <result property="fcustom2" column="FCUSTOM2" />
+	     <result property="fcustom3" column="FCUSTOM3" />
+	     <result property="fcustom4" column="FCUSTOM4" />
+	     <result property="fcustom5" column="FCUSTOM5" />
+	     <result property="fcustom6" column="FCUSTOM6" />
+	     <result property="fcustom7" column="FCUSTOM7" />
+	     <result property="fcustom8" column="FCUSTOM8" />
+	     <result property="fcustom9" column="FCUSTOM9" />
+	     <result property="fcustom10" column="FCUSTOM10" />
+	     <result property="fisnoticehndlorg" column="FISNOTICEHNDLORG" />
+	     <result property="isResult" column="ISRESULT" />
+	     <result property="isNew" column="ISNEW" />
+	 </resultMap>
+ 
+ <sql id="Base_Column_List">
+    FID,FRGNID,FEVTCODE,FEVTNAME,FMODELID,FLEVEL,FADDSQL,FMCMID,FMCMCODE,
+    FMCMNAME,FTRIGCOND,FASITCONT,FISSMSNOTI,FNOTITEL,FHNDLORGID,
+    FHNDLORGCODE,FHNDLORGNAME,FISAUTOCLOSE,FHNDLWAY,FISENABLE,FOPERID,
+    FOPERATOR,FOPEDATE,FMEMO,FCREATETIME,FUPDATETIME,FALTERCODE,FVERSION,
+    FCUSTOM1,FCUSTOM2,FCUSTOM3,FCUSTOM4,FCUSTOM5,FCUSTOM6,FCUSTOM7,FCUSTOM8,
+    FCUSTOM9,FCUSTOM10,FISNOTICEHNDLORG,isResult,ISNEW
+    
+ </sql>
+ 
+    <select id="queryFabMonitorEvtPage" resultMap="fabMonitorEvtMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM FAB_MONITOR_EVT
+      	 <trim prefix="where"  prefixOverrides="and |or">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            ${searcher.__QUERYCON}
+	        </if>  
+	    </trim>
+    </select>
+    
+        <!-- 根据复合条件查询 -->
+    <select id="queryList" resultMap="fabMonitorEvtMap">
+        SELECT * FROM FAB_MONITOR_EVT
+	    <trim prefix="where" prefixOverrides="and |or">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            ${searcher.__QUERYCON}
+	        </if>  
+	    </trim>
+	    <if test="sortProperty != null">
+			ORDER BY ${sortProperty}
+			<if test="sortDirection != null">
+				${sortDirection}
+			</if>
+        </if>
+    </select>
+
+	<select id="queryCount" resultType="Integer">
+		SELECT count(1) FROM FAB_MONITOR_EVT
+		<trim prefix="where" prefixOverrides="and |or">
+			<if test="searcher != null and searcher.__QUERYCON != null">
+				${searcher.__QUERYCON}
+			</if>
+		</trim>
+	</select>
+</mapper>

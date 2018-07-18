@@ -1,0 +1,81 @@
+// multistage-linkage 下拉框多级联动样式
+// author: zxy
+// date: 2017-06-02
+// 说明: 若需自定义样式，更改样式主名称 multistage-linkage 及内部对应的具体样式，但样式对应结构不可改变
+//       传参的外层样式名称即此处的 multistage-linkage
+
+.multistage-linkage{
+    margin: 10px auto;
+    width: 95%;
+    max-width: 700px;
+
+    .mult-linkage-widget{
+        .app-wrapper{
+            border-width: 1px;
+        }
+
+        .mult-linkage-item{
+            display: inline-block;
+            width: 33%;
+            margin: 5px 1px;
+
+            >.app-wrapper>input:focus, .app-wrapper>input:hover{
+                border: none;
+            }
+
+        }
+
+        label{
+            width: auto;
+            // float: right;
+            // line-height: 38px;
+            margin-right: 20px;
+            min-width: 100px;
+        }
+
+        .mult-linkage-input{
+            width: 85%;
+            margin: 5px 0px 10px 0px;
+            float: right;
+            border: 1px solid $border-color;
+        }
+
+        .mult-linkage-span{
+            width: 85%;
+            margin: 5px 1px;
+            float: right;
+            border: 1px solid $border-color;
+        }
+
+        .mult-linkage-detail{
+            width: 100%;
+        }
+
+        .mult-linkage-map{
+            width: 100%;
+            height: 300px;
+            clear: both;
+            border: 1px solid $border-color;
+
+            // 去除百度自带版权信息
+            .anchorBL{display:none;}
+            
+            // 调整框架影响的样式(地图坐标点样式变小问题)
+            // 由于框架设置max-width: 100%; 无法通过覆盖去除，坐标点投影仍无法显示
+            .BMap_Marker img{
+                max-width: none;
+            }
+        }
+    }
+
+    .mult-linkage-btns{
+        margin: 10px auto;
+        text-align: center;
+
+        a{
+            width: 100px;
+            display: inline-block;
+            margin: 0px 5px;
+        }
+    }
+}

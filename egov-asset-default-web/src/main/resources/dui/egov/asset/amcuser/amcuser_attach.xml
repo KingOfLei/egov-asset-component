@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Page id="amcUserAttachPage" layout="border"
+	templatePath="egov/asset/amcuser/amcuser_attach.jsp"
+	js="resources/egov/js/asset/amcuser/amcuser_attach.js" jsId="amcuser_attach"
+		xmlns="http://www.bosssoft.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.bosssoft.org ../../../../../schema/uis/uitemplate-2.0.xsd">
+	<items>
+		<Panel id="amcUserAttach" region="north"  height="300px">
+		</Panel>
+	</items>
+</Page>

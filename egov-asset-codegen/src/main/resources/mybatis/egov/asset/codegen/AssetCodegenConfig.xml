@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.codegen.mapper.AssetCodegenConfigMapper" >
+  <resultMap id="assetCodegenConfigMap" type="com.bosssoft.egov.asset.codegen.entity.AssetCodegenConfig" >
+         <result property="cfgId" column="CFG_ID" />
+	     <result property="orgId" column="ORG_ID" />
+	     <result property="bizType" column="BIZ_TYPE" />
+	     <result property="bizName" column="BIZ_NAME" />
+	     <result property="seqReset" column="SEQ_RESET" />
+	     <result property="curNo" column="CUR_NO" />
+	     <result property="curCode" column="CUR_CODE" />
+	     <result property="curReset" column="CUR_RESET" />
+	     <result property="genRule" column="GEN_RULE" />
+	     <result property="separator" column="SEP_STR" />
+	     <result property="step" column="STEP" />
+	     <result property="status" column="STATUS" />
+	     <result property="creatorId" column="CREATOR_ID" />
+	     <result property="creator" column="CREATOR" />
+	     <result property="createTime" column="CREATE_TIME" />
+	     <result property="remark" column="REMARK" />
+	 </resultMap>
+ 
+ <sql id="Base_Column_List">
+    CFG_ID,ORG_ID,BIZ_TYPE,BIZ_NAME,SEQ_RESET,CUR_NO,CUR_CODE,CUR_RESET,STEP,STATUS,GEN_RULE,SEP_STR,CREATOR_ID,CREATOR,CREATE_TIME,REMARK  </sql>
+ 
+    <select id="queryAssetCodegenConfigPage" resultMap="assetCodegenConfigMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM asset_codegen_config
+      	 <trim prefix="where"  prefixOverrides="and |or">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            #{searcher.__QUERYCON}
+	        </if>  
+	    </trim>
+    </select>
+</mapper>

@@ -1,0 +1,1 @@
+sass --sourcemap --watch default.uiext.scss:default/uiext.min.css --style compressed

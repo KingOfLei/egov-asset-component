@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.aims.api.org.mapper.AimsRegionMapper" >
+  <resultMap id="aimsRegionMap" type="com.bosssoft.egov.asset.aims.api.org.entity.AimsRegion" >
+         <result property="rngId" column="RNG_ID" />
+	     <result property="rngCode" column="RNG_CODE" />
+	     <result property="rngName" column="RNG_NAME" />
+	     <result property="rngPid" column="RNG_PID" />
+	     <result property="rngPcode" column="RNG_PCODE" />
+	     <result property="rngPname" column="RNG_PNAME" />
+	     <result property="rgnTitle" column="RGN_TITLE" />
+	     <result property="rngRank" column="RNG_RANK" />
+	     <result property="rgnIsleaf" column="RGN_ISLEAF" />
+	     <result property="status" column="STATUS" />
+	     <result property="remark" column="REMARK" />
+	     <result property="str01" column="STR01" />
+	     <result property="str02" column="STR02" />
+	     <result property="str03" column="STR03" />
+	 </resultMap>
+ 
+ <sql id="Base_Column_List">
+    RNG_ID,RNG_CODE,RNG_NAME,RNG_PID,RNG_PCODE,RNG_PNAME,RGN_TITLE,RNG_RANK,RGN_ISLEAF,STATUS,REMARK,STR01,STR02,STR03  </sql>
+  <sql id="Format_Column_List">
+ 	RNG_ID,RNG_CODE,RNG_NAME,RNG_PID,RNG_PCODE,RNG_PNAME,RGN_TITLE,RNG_RANK,RGN_ISLEAF,STATUS,REMARK,
+ 		(RNG_CODE||' '||RNG_NAME) AS STR01,STR02,STR03
+  </sql>
+    <select id="queryAimsRegionPage" resultMap="aimsRegionMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM AIMS_REGION
+      	 <trim prefix="where"  prefixOverrides="and |or">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            ${searcher.__QUERYCON} AND RNG_PID=#{rngId}
+	        </if>
+	        <if test="searcher == null or searcher.__QUERYCON == null">  
+	            RNG_PID=#{rngId}
+	        </if>   
+	    </trim>
+    </select>
+    
+   
+ <select id="queryRegionList" resultMap="aimsRegionMap">
+ 	SELECT
+ 	<include refid="Format_Column_List"/>
+ 	FROM AIMS_REGION
+ 	WHERE STATUS=#{status}
+ </select>
+</mapper>

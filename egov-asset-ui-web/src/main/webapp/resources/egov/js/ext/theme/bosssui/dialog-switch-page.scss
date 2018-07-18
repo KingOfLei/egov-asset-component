@@ -1,0 +1,100 @@
+// 弹框页面上下翻页按钮样式
+// author: zxy
+// date: 2017-03-14
+
+// 右侧按钮样式
+.switch-page-content{
+	position: relative;
+}
+.switch-page-content>div{
+	margin:0px auto;
+	width:90%!important;
+} 
+.switch-right-btn{
+	width:50px;
+	height:50px;
+	position:absolute;
+	cursor: pointer;
+}
+.switch-right-first-btn{
+	right:5px;
+	top:10px;
+	background: url($cover-theme-path+'btn/first.png') center center no-repeat;
+}
+
+.switch-right-prev-btn{
+	right:5px;
+	top:70px;
+	background: url($cover-theme-path+'btn/prev.png') center center no-repeat;
+}
+
+.switch-right-next-btn{
+	right:5px;
+	top:130px;
+	background: url($cover-theme-path+'btn/next.png') center center no-repeat;
+}
+
+.switch-right-last-btn{
+	right:5px;
+	top:190px; 
+	background: url($cover-theme-path+'btn/last.png') center center no-repeat;
+}
+
+// 顶部按钮样式
+.switch-top-btn-group{
+	width: 250px;
+	margin: 0 auto;
+	overflow: hidden;
+}
+.switch-top-btn{
+	width: 50px;
+	height: 50px;
+	float: left; 
+	cursor: pointer;
+	margin: 0 3px;
+}
+.switch-top-first-btn{
+	background: url($cover-theme-path+'btn/first_row.png') center center no-repeat;
+}
+.switch-top-prev-btn{
+	background: url($cover-theme-path+'btn/prev_row.png') center center no-repeat;
+}
+.switch-top-next-btn{
+	background: url($cover-theme-path+'btn/next_row.png') center center no-repeat;
+}
+.switch-top-last-btn{
+	background: url($cover-theme-path+'btn/last_row.png') center center no-repeat;
+}
+
+// 底部按钮样式
+.switch-bottom-btn-group{
+    width: 100%;
+    // margin: 0 auto;
+    overflow: hidden;
+    float: left;
+    position: absolute;
+    // left: 43%;
+    bottom: -50px;
+    z-index: 999;
+    height: 50px;
+    background-color: #fff;
+}
+.switch-bottom-btn{
+	width: 36px;
+	height: 36px;
+	float: left; 
+	cursor: pointer;
+	margin: 0 3px; 
+}
+.switch-bottom-first-btn{
+	background: url($cover-theme-path+'btn/first_row.png') center center no-repeat;
+}
+.switch-bottom-prev-btn{
+	background: url($cover-theme-path+'btn/prev_row.png') center center no-repeat;
+}
+.switch-bottom-next-btn{
+	background: url($cover-theme-path+'btn/next_row.png') center center no-repeat;
+}
+.switch-bottom-last-btn{
+	background: url($cover-theme-path+'btn/last_row.png') center center no-repeat;
+}

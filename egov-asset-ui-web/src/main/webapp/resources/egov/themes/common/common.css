@@ -1,0 +1,8 @@
+.grid_tips{color:red;font-size:12px;}
+
+/*审核文本域样式*/
+.auditOption textarea{
+    border: none;
+    height: 210px;
+    width: 100% !important;
+}

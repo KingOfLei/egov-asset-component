@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.activiti.mapper.ActivitiPermissionExtMapper" >
+  <resultMap id="activitiPermissionExtMap" type="com.bosssoft.egov.asset.activiti.entity.ActivitiPermissionExt" >
+         <result property="id" column="ID" />
+	     <result property="activityKey" column="ACTIVITY_KEY" />
+	     <result property="processDefinition" column="PROCESS_DEFINITION" />
+	     <result property="grantedGroups" column="GRANTED_GROUPS" />
+	     <result property="assignedUsers" column="ASSIGNED_USERS" />
+	     <result property="designByOrg" column="DESIGN_BY_ORG" />
+	     <result property="designByBus" column="DESIGN_BY_BUS" />
+	     <result property="designBySubmit" column="DESIGN_BY_SUBMIT" />
+	     <result property="manageOrgs" column="MANAGE_ORGS" />
+	     <result property="sumits" column="SUMITS" />
+	     <result property="busName" column="BUS_NAME" />
+	     <result property="roleName" column="ROLE_NAME" />
+	     <result property="enable" column="ENABLE" />
+	 </resultMap>
+ 
+ <sql id="Base_Column_List">
+    ID,ACTIVITY_KEY,PROCESS_DEFINITION,GRANTED_GROUPS,ASSIGNED_USERS,DESIGN_BY_ORG,DESIGN_BY_SUBMIT,MANAGE_ORGS,SUMITS,OP_TIME,BUS_NAME,ROLE_NAME,ENABLE  </sql>
+ 
+    <select id="queryActivitiPermissionExtPage" resultMap="activitiPermissionExtMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM ACTIVITI_PERMISSION_EXT
+      	 <trim prefix="where"  prefixOverrides="and |or">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            ${searcher.__QUERYCON}
+	        </if>  
+	    </trim>
+    </select>
+    
+    <delete id="delActivitiPermissionExtOrg">
+		DELETE
+		ACTIVITI_PERMISSION_EXT
+		WHERE ACTIVITY_KEY= #{activitiKey} and PROCESS_DEFINITION = #{busType} and ASSIGNED_USERS=#{assignUsers} and DESIGN_BY_ORG='1'
+	</delete>
+	
+    <delete id="delActivitiPermissionExtBus">
+		DELETE
+		ACTIVITI_PERMISSION_EXT
+		WHERE ACTIVITY_KEY= #{activitiKey} and PROCESS_DEFINITION = #{busType} and ASSIGNED_USERS=#{assignUsers} and DESIGN_BY_BUS='1'
+	</delete>
+    <delete id="delActivitiPermissionExtById">
+		DELETE
+		ACTIVITI_PERMISSION_EXT
+		WHERE id= #{id}
+	</delete>
+    
+</mapper>

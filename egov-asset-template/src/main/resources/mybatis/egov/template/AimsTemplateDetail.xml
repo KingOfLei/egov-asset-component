@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.template.mapper.AimsTemplateDetailMapper" >
+  <resultMap id="aimsTemplateDetailMap" type="com.bosssoft.egov.asset.template.entity.AimsTemplateDetail" >
+         <result property="moduleItemId" column="MODULE_ITEM_ID" />
+	     <result property="moduleItemCode" column="MODULE_ITEM_CODE" />
+	     <result property="moduleItemName" column="MODULE_ITEM_NAME" />
+	     <result property="moduleId" column="MODULE_ID" />
+	     <result property="moduleCode" column="MODULE_CODE" />
+	     <result property="moduleName" column="MODULE_NAME" />
+	     <result property="isGloabl" column="IS_GLOABL" />
+	     <result property="createDate" column="CREATE_DATE" />
+	     <result property="creator" column="CREATOR" />
+	     <result property="modifyDate" column="MODIFY_DATE" />
+	     <result property="version" column="VERSION" />
+	     <result property="isDefault" column="IS_DEFAULT" />
+	     <result property="isPublic" column="IS_PUBLIC" />
+	     <result property="status" column="STATUS" />
+	     <result property="orgId" column="ORG_ID" />
+	     <result property="orgCode" column="ORG_CODE" />
+	     <result property="orgName" column="ORG_NAME" />
+	     <result property="rgnId" column="RGN_ID" />
+	     <result property="rgnCode" column="RGN_CODE" />
+	     <result property="rgnName" column="RGN_NAME" />
+	     <result property="str01" column="STR01" />
+	     <result property="str02" column="STR02" />
+	     <result property="str03" column="STR03" />
+	     <result property="str04" column="STR04" />
+	     <result property="str05" column="STR05" />
+	     <result property="moduleFile" column="MODULE_FILE"/>
+	     <result property="fileName" column="FILE_NAME"/>
+	     <result property="moduleSql" column="MODULE_SQL"/>
+	     <result property="moduleProcessBean" column="MODULE_PROCESS_BEAN"/>
+	     
+	 </resultMap>
+ 
+ <sql id="Base_Column_List">
+    MODULE_ITEM_ID,MODULE_ITEM_CODE,MODULE_ITEM_NAME,MODULE_ID,MODULE_CODE,MODULE_NAME,IS_GLOABL,CREATE_DATE,CREATOR,MODIFY_DATE,VERSION,IS_DEFAULT,IS_PUBLIC,STATUS,ORG_ID,ORG_CODE,ORG_NAME,RGN_ID,RGN_CODE,RGN_NAME,STR01,STR02,STR03,STR04,STR05
+    	,MODULE_FILE,FILE_NAME,MODULE_SQL,MODULE_PROCESS_BEAN
+    </sql>
+ 	
+    <select id="queryAimsTemplateDetailPage" resultMap="aimsTemplateDetailMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM AIMS_TEMPLATE_DETAIL
+      	 <trim prefix="where"  prefixOverrides="and |or">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            ${searcher.__QUERYCON}
+	        </if>  
+	    </trim>
+    </select>
+    
+    <select id="queryTemplateDetailPage" resultMap="aimsTemplateDetailMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM AIMS_TEMPLATE_DETAIL
+      	 <trim prefix="where"  prefixOverrides="and |or">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            ${searcher.__QUERYCON}
+	            <if test="moduleId!=null">AND MODULE_ID=#{moduleId}</if>
+	            AND STATUS=1
+	        </if>
+	        <if test="searcher== null or searcher.__QUERYCON == null">
+	            <if test="moduleId!=null">AND MODULE_ID=#{moduleId}</if>
+	            AND STATUS=1
+	        </if>   
+	    </trim>
+	    ORDER BY MODULE_ITEM_CODE,ORG_CODE
+	    <!-- SELECT <include refid="Base_Column_List" />
+    	FROM AIMS_TEMPLATE_DETAIL T
+    	WHERE T.ORG_ID='-1' AND T.STATUS='1'
+    	AND T.MODULE_ID=#{moduleId}
+    	UNION ALL
+    	SELECT <include refid="Base_Column_List" />
+    	FROM AIMS_TEMPLATE_DETAIL T
+    	WHERE T.ORG_ID=#{orgId} AND T.STATUS='1'
+    	AND T.MODULE_ID=#{moduleId}
+    	ORDER BY MODULE_ITEM_CODE -->
+    </select>
+    
+    <select id="queryOne" resultMap="aimsTemplateDetailMap">
+    	SELECT
+    	<include refid="Base_Column_List" />
+        FROM AIMS_TEMPLATE_DETAIL
+        WHERE MODULE_ITEM_ID=#{moduleItemId}
+    </select>
+    
+    <update id="updateById" parameterType="com.bosssoft.egov.asset.template.entity.AimsTemplateDetail">
+    	UPDATE AIMS_TEMPLATE_DETAIL
+    	<set>
+    		<if test="moduleItemId!=null">MODULE_ITEM_ID=#{moduleItemId},</if>
+    		<if test="moduleItemCode!=null">MODULE_ITEM_CODE=#{moduleItemCode},</if>
+    		<if test="moduleItemName!=null">MODULE_ITEM_NAME=#{moduleItemName},</if>
+    		<if test="moduleId!=null">MODULE_ID=#{moduleId},</if>
+    		<if test="moduleCode!=null">MODULE_CODE=#{moduleCode},</if>
+    		<if test="moduleName!=null">MODULE_NAME=#{moduleName},</if>
+    		<if test="isGloabl!=null">IS_GLOABL=#{isGloabl},</if>
+    		<if test="createDate!=null">CREATE_DATE=#{createDate},</if>
+    		<if test="creator!=null">CREATOR=#{creator},</if>
+    		<if test="modifyDate!=null">MODIFY_DATE=#{modifyDate},</if>
+    		<if test="version!=null">VERSION=#{version},</if>
+    		<if test="isDefault!=null">IS_DEFAULT=#{isDefault},</if>
+    		<if test="isPublic!=null">IS_PUBLIC=#{isPublic},</if>
+    		<if test="status!=null">STATUS=#{status},</if>
+    		<if test="orgId!=null">ORG_ID=#{orgId},</if>
+    		<if test="orgCode!=null">ORG_CODE=#{orgCode},</if>
+    		<if test="orgName!=null">ORG_NAME=#{orgName},</if>
+    		<if test="rgnId!=null">RGN_ID=#{rgnId},</if>
+    		<if test="rgnCode!=null">RGN_CODE=#{rgnCode},</if>
+    		<if test="rgnName!=null">RGN_NAME=#{rgnName},</if>
+    		<if test="str01!=null">STR01=#{str01},</if>
+    		<if test="str02!=null">STR02=#{str02},</if>
+    		<if test="str03!=null">STR03=#{str03},</if>
+    		<if test="str04!=null">STR04=#{str04},</if>
+    		<if test="str05!=null">STR05=#{str05},</if>
+    		<if test="moduleFile!=null">MODULE_FILE=#{moduleFile:BLOB},</if>
+    		<if test="fileName!=null">FILE_NAME=#{fileName},</if>
+    		<if test="moduleSql!=null">MODULE_SQL=#{moduleSql},</if>
+    		<if test="moduleProcessBean">MODULE_PROCESS_BEAN=#{moduleProcessBean},</if>
+    	</set>
+    	WHERE MODULE_ITEM_ID=#{moduleItemId}
+    </update>
+    
+    <select id="queryTemplateDetailPageByOrgId" resultMap="aimsTemplateDetailMap">
+    	SELECT <include refid="Base_Column_List" />
+    	FROM (
+			SELECT *
+      		FROM AIMS_TEMPLATE_DETAIL T
+      		WHERE 
+      		   (T.ORG_ID='-1' AND T.STATUS='1'
+      				AND T.MODULE_ID=#{moduleId}
+      				AND T.MODULE_ITEM_CODE NOT IN (
+         				SELECT T1.MODULE_ITEM_CODE 
+         				FROM AIMS_TEMPLATE_DETAIL T1
+         				WHERE T1.ORG_ID=#{orgId} AND T1.STATUS='1'
+         				AND T1.MODULE_ID=#{moduleId}
+      				)) 
+      			OR (T.ORG_ID=#{orgId} AND T.STATUS='1'
+      				AND T.MODULE_ID=#{moduleId})) T
+      	ORDER BY T.MODULE_ITEM_CODE
+    	<!-- SELECT <include refid="Base_Column_List" /> 
+    	FROM (
+    	SELECT MODULE_ITEM_ID,MODULE_ITEM_CODE,MODULE_ITEM_NAME,MODULE_ID,MODULE_CODE,MODULE_NAME,IS_GLOABL,CREATE_DATE,CREATOR,MODIFY_DATE,VERSION,IS_DEFAULT,IS_PUBLIC,STATUS,ORG_ID,ORG_CODE,ORG_NAME,RGN_ID,RGN_CODE,RGN_NAME,STR01,STR02,STR03,STR04,STR05
+    	,MODULE_FILE,FILE_NAME,MODULE_SQL,MODULE_PROCESS_BEAN
+    	FROM AIMS_TEMPLATE_DETAIL T
+    	WHERE T.ORG_ID='-1' AND T.STATUS='1'
+    	AND T.MODULE_ID=#{moduleId}
+    	AND T.MODULE_ITEM_CODE NOT IN (
+    	   SELECT MODULE_ITEM_CODE 
+    	   FROM AIMS_TEMPLATE_DETAIL T1
+    	   WHERE T1.ORG_ID=#{orgId} AND T1.STATUS='1'
+    	   AND T1.MODULE_ID=#{moduleId}
+    	)
+    	UNION ALL
+    	SELECT MODULE_ITEM_ID,MODULE_ITEM_CODE,MODULE_ITEM_NAME,MODULE_ID,MODULE_CODE,MODULE_NAME,IS_GLOABL,CREATE_DATE,CREATOR,MODIFY_DATE,VERSION,IS_DEFAULT,IS_PUBLIC,STATUS,ORG_ID,ORG_CODE,ORG_NAME,RGN_ID,RGN_CODE,RGN_NAME,STR01,STR02,STR03,STR04,STR05
+    	,MODULE_FILE,FILE_NAME,MODULE_SQL,MODULE_PROCESS_BEAN
+    	FROM AIMS_TEMPLATE_DETAIL T2
+    	WHERE T2.ORG_ID=#{orgId} AND T2.STATUS='1'
+    	AND T2.MODULE_ID=#{moduleId} ) T
+    	ORDER BY T.MODULE_ITEM_CODE -->
+    </select>
+    
+    <delete id="deleteById" parameterType="com.bosssoft.egov.asset.template.entity.AimsTemplateDetail">
+    	DELETE FROM AIMS_TEMPLATE_DETAIL T WHERE T.MODULE_ITEM_ID=#{moduleItemId}
+    </delete>
+</mapper>

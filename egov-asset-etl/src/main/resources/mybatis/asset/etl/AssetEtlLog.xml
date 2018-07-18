@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.asset.etl.mapper.AssetEtlLogMapper" >
+  <resultMap id="assetEtlLogMap" type="com.bosssoft.asset.etl.entity.AssetEtlLog" >
+         <result property="appId" column="APP_ID" />
+	     <result property="id" column="ID" />
+	     <result property="configCode" column="CONFIG_CODE" />
+	     <result property="configName" column="CONFIG_NAME" />
+	     <result property="userCode" column="USER_CODE" />
+	     <result property="userName" column="USER_NAME" />
+	     <result property="ip" column="IP" />
+	     <result property="startTime" column="START_TIME" />
+	     <result property="endTime" column="END_TIME" />
+	     <result property="reqParams" column="REQ_PARAMS" />
+	     <result property="status" column="STATUS" />
+	     <result property="exception" column="EXCEPTION" />
+	 </resultMap>
+ 
+ <sql id="Base_Column_List">
+    APP_ID,ID,CONFIG_CODE,CONFIG_NAME,USER_CODE,USER_NAME,IP,START_TIME,END_TIME,REQ_PARAMS,STATUS,EXCEPTION  </sql>
+ 
+    <select id="queryAssetEtlLogPage" resultMap="assetEtlLogMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM ASSET_ETL_LOG
+      	 <trim prefix="where"  prefixOverrides="and |or">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            ${searcher.__QUERYCON}
+	        </if>  
+	    </trim>
+    </select>
+</mapper>

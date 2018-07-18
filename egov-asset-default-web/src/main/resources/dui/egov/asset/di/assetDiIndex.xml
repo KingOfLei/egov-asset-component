@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page id="assetDiPage" layout="border"
+	templatePath="egov/asset/di/assetDiIndex.jsp"
+	js="resources/egov/js/asset/di/assetDiIndex.js"
+	jsId="assetDi_index"
+	xmlns="http://www.bosssoft.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.bosssoft.org ../../../../../schema/uis/uitemplate-2.0.xsd">
+	<items>
+		<Panel id="assetDiPage_north" layout="border" region="north" height="40"
+			style="border-bottom:1px solid #aaa;">
+			<items>
+				<ToolBar id="assetDiPage_toolbar" displayType="MENU">
+					<items>
+						<Button id="impBtn" name="导入" icon="import"/>
+						<Button id="expBtn" name="导出" icon="outporting"/>
+					</items>
+				</ToolBar>
+			</items>
+		</Panel>
+		<Panel id="assetDiPage_west" layout="border" region="west" style="overflow:auto;" 
+			width="300" title="导出内容" split="true">
+			<items>
+				<Tree id="diTaskDetails_tree" hasRoot="false" hasQry="false" isAsync="false" rootId="-1"
+					idField="taskMxId" parentField="pTaskMxId" nameField="taskMxName" checkable="true"/>
+			</items>
+		</Panel>
+		<Panel id="assetDiPage_center" layout="border" region="center" title="导出选项">
+			<items>
+				<Form id="assetDiPage_form" layout="table">
+					<items>
+						<Row>
+							<items>
+								<FormItem id="assetDiTask" name="接口类型" editorType="COMBOBOX"
+									validations="{
+										required: true,
+										messages: {required: '请选择接口类型'}
+									}" 
+									editOptions="{
+										action: 'egov/asset/di/getDiTaskList.do',
+										textfield: 'taskName',
+										valuefield: 'taskId',
+										usesuggest: true,
+										clearbtn: true
+									}"/>
+								<FormItem id="orgSelect" name="单位选择" editorType="COMBOZTREE"
+									validations="{
+										required: true,
+										messages: {required: '请选择单位'}
+									}"
+									editOptions="{
+										action: 'egov/asset/aims/basic/aimsbasicorg/loadOrgTree.do',
+										async: false,
+										idfield: 'orgId',
+										pidfield: 'orgPid',
+										textfield: 'treeNode',
+										valuefield: 'orgCode',
+										multiple: true,
+										usesuggest: true,
+										clearbtn: true
+									}"/>
+								<FormItem id="endDate" name="截止日期" editorType="DATETIME"
+									validations="{
+										required: true,
+										messages: {required: '截止日期必填'}
+									}"
+									editOptions="{
+										clearbtn: true
+									}"/>
+								<FormItem id="reportInterval" name="报表区间" editorType="COMBOBOX"
+									editOptions="{
+										textfield: 'reportIntervalName',
+										valuefield: 'reportIntervalCode',
+										clearbtn: true
+									}" visible="false"/>
+								<FormItem id="dataProcessMode" name="数据处理方式" editorType="COMBOBOX"
+									editOptions="{
+										textfield: 'handleModeName',
+										valuefield: 'handleModeCode',
+										value: '1',
+										data: [
+											{handleModeCode: 1, handleModeName: '全量导入'},
+											{handleModeCode: 2, handleModeName: '覆盖导入'},
+											{handleModeCode: 3, handleModeName: '增量导入'}
+										]
+									}" visible="false"/>
+								<FormItem id="validationData" name="校验数据" editorType="COMBOBOX"
+									editOptions="{
+										textfield: 'validationDataName',
+										valuefield: 'validationDataCode',
+										value: '1',
+										data: [
+											{validationDataCode: 0, validationDataName: '否'},
+											{validationDataCode: 1, validationDataName: '是'}
+										]
+									}"/>
+								<FormItem id="orgCompare" name="对照单位" editorType="COMBOBOX"
+									editOptions="{
+										textfield: 'orgCompareName',
+										valuefield: 'orgCompareCode',
+										value: '1',
+										data: [
+											{orgCompareCode: 0, orgCompareName: '否'},
+											{orgCompareCode: 1, orgCompareName: '是'}
+										]
+									}"/>
+								<FormItem id="autoValidation" name="自动校验" editorType="COMBOBOX"
+									editOptions="{
+										textfield: 'autoValidationName',
+										valuefield: 'autoValidationCode',
+										value: '1',
+										data: [
+											{autoValidationCode: 0, autoValidationName: '否'},
+											{autoValidationCode: 1, autoValidationName: '是'}
+										]
+									}"/>
+							</items>
+						</Row>
+					</items>
+				</Form>
+			</items>
+		</Panel>
+	</items>
+</Page>

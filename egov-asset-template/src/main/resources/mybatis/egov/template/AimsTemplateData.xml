@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.template.mapper.AimsTemplateDataMapper" >
+  <resultMap id="aimsTemplateDataMap" type="com.bosssoft.egov.asset.template.entity.AimsTemplateData" >
+         <result property="id" column="ID" />
+	     <result property="moduleItemId" column="MODULE_ITEM_ID" />
+	     <result property="moduleType" column="MODULE_TYPE" />
+	     <result property="moduleSql" column="MODULE_SQL" />
+	     <result property="status" column="STATUS" />
+	     <result property="remark" column="REMARK" />
+	     <result property="bizId" column="BIZ_ID" />
+	 </resultMap>
+ 
+ <sql id="Base_Column_List">
+    ID,MODULE_ITEM_ID,MODULE_TYPE,MODULE_SQL,STATUS,REMARK,BIZ_ID  </sql>
+ 
+    <select id="queryAimsTemplateDataPage" resultMap="aimsTemplateDataMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM AIMS_TEMPLATE_DATA
+      	 <trim prefix="where"  prefixOverrides="and |or">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            #{searcher.__QUERYCON}
+	            <if test = "id != null"> AND ID = #{id}</if>
+	        </if>  
+	    </trim>
+    </select>
+    <select id="queryOne" resultMap="aimsTemplateDataMap">
+    	SELECT
+		<include refid="Base_Column_List" />
+  		FROM AIMS_TEMPLATE_DATA
+        WHERE ID = #{id}
+    </select>
+    <select id="queryByModuleItemId" resultMap="aimsTemplateDataMap">
+  		SELECT
+		<include refid="Base_Column_List" />
+  		FROM AIMS_TEMPLATE_DATA
+  		WHERE MODULE_ITEM_ID=#{moduleItemId}
+  		AND STATUS = 1
+	</select>
+	
+	<select id = "geTemplateDatasByBizId" resultMap="aimsTemplateDataMap">
+		SELECT
+		<include refid = "Base_Column_List"/>
+  		FROM AIMS_TEMPLATE_DATA
+  		WHERE MODULE_ITEM_ID=#{moduleItemId} 
+        AND STATUS = 1
+        <if test ="bizId != null and bizId != '' ">
+        	AND BIZ_ID = #{bizId}
+        </if>
+        <if test = "bizId == null">
+        	AND BIZ_ID IS NULL
+        </if>
+	</select>
+	
+	<update id="updateById" parameterType="com.bosssoft.egov.asset.template.entity.AimsTemplateData">
+		UPDATE AIMS_TEMPLATE_DATA
+		<set>
+			<if test="id != null">ID = #{id},</if>
+			<if test="moduleItemId">MODULE_ITEM_ID = #{moduleItemId}</if>
+			<if test="moduleType">MODULE_TYPE = #{moduleType}</if>
+			<if test="moduleSql">MODULE_SQL = #{moduleSql}</if>
+			<if test="status">STATUS = #{status}</if>
+			<if test="remark">REMARK = #{remark}</if>
+			<if test="bizId">BIZ_ID = #{bizId}</if>
+		</set>
+		WHERE ID = #{id}
+	</update>
+	
+	<delete id = "deleteById" parameterType="com.bosssoft.egov.asset.template.entity.AimsTemplateData">
+	    DELETE AIMS_TEMPLATE_DATA
+	    WHERE ID = #{id}
+	</delete>
+</mapper>

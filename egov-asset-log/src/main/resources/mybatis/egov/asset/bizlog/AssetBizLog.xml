@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.bizlog.mapper.AssetBizLogMapper" >
+  <resultMap id="assetBizLogMap" type="com.bosssoft.egov.asset.bizlog.entity.AssetBizLog" >
+         <result property="id" column="ID" />
+	     <result property="appId" column="APP_ID" />
+	     <result property="userId" column="USER_ID" />
+	     <result property="userCode" column="USER_CODE" />
+	     <result property="userName" column="USER_NAME" />
+	     <result property="rgnId" column="RGN_ID" />
+	     <result property="rgnCode" column="RGN_CODE" />
+	     <result property="rgnName" column="RGN_NAME" />
+	     <result property="orgId" column="ORG_ID" />
+	     <result property="orgCode" column="ORG_CODE" />
+	     <result property="orgName" column="ORG_NAME" />
+	     <result property="bizType" column="BIZ_TYPE" />
+	     <result property="bizTypeName" column="BIZ_TYPE_NAME" />
+	     <result property="bizOperType" column="BIZ_OPER_TYPE" />
+	     <result property="operDesc" column="OPER_DESC" />
+	     <result property="operDate" column="OPER_DATE" />
+	     <result property="createTime" column="CREATE_TIME" />
+	     <result property="str01" column="STR01" />
+	     <result property="str02" column="STR02" />
+	     <result property="str03" column="STR03" />
+	     <result property="str04" column="STR04" />
+	     <result property="str05" column="STR05" />
+	 </resultMap>
+ 
+ <sql id="Base_Column_List">
+    ID,APP_ID,USER_ID,USER_CODE,USER_NAME,RGN_ID,RGN_CODE,RGN_NAME,ORG_ID,ORG_CODE,ORG_NAME,BIZ_TYPE,BIZ_TYPE_NAME,BIZ_OPER_TYPE,OPER_DESC,OPER_DATE,CREATE_TIME,STR01,STR02,STR03,STR04,STR05  </sql>
+ 
+    <select id="queryAssetBizLogPage" resultMap="assetBizLogMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM ASSET_BIZ_LOG
+      	 <trim prefix="where"  prefixOverrides=" and | or ">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            ${searcher.__QUERYCON}
+	        </if>  
+	    </trim>
+	    ORDER BY ID DESC
+    </select>
+    
+    <select id="queryPortalBizLogList" resultType="HashMap">
+	select * from 
+	   (
+	    select * from (
+	    select BIZ_TYPE,BIZ_TYPE_NAME,OPER_DATE,BIZ_OPER_TYPE,COUNT(1) AS COUNT from (
+	select * from asset_biz_log t where user_id = #{bizLog.userId}
+	) group by biz_type,biz_type_name,oper_date,BIZ_OPER_TYPE
+	    ) order by OPER_DATE desc
+	) where rowNum &lt;= #{limit} 
+    </select>
+</mapper>

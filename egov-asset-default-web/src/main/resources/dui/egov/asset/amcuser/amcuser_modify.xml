@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Page id="amcUserPageModify" layout="border"
+	templatePath="egov/asset/amcuser/amcuser_modify.jsp"
+	js="resources/egov/js/asset/amcUser/amcuser_modify.js"
+	jsId="amcuser_modify" xmlns="http://www.bosssoft.User"
+	xmlns:xsi="http://www.w3.User/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.bosssoft.User ../../../schema/uis/uitemplate-2.0.xsd">
+	<items>
+		<Panel id="amcUserPanel_UserInfo" region="north" height="180">
+			<items>
+				<Form id="amcUserPageForm" colCount="3" layout="table" modelKey="afaUser">
+					<FormItem id="auditComment"  name="auditComment" editorType="TEXTBOX" visible="false"/>
+					<FormItem id="userId"  name="用户ID"   editorType="TEXTBOX" visible="false"/>
+					<FormItem id="userName" name="用户名"   editorType="TEXTBOX" required="true" />
+					<FormItem id="userCode" name="用户账号"  editorType="TEXTBOX" required="true" />
+					<FormItem id="userType" name="用户类型"  editorType="COMBOBOX" showField="dictName" editOptions="{action: 'platform/appframe/dicthelper/getUserType.do',valuefield: 'dictId',textfield: 'dictName'}"/>
+					<FormItem id="identityCode" name="身份证号码"  editorType="TEXTBOX" />
+					<FormItem id="status" name="状态" editorType="COMBOBOX"  showField="dictName" 
+						editOptions="{
+							action: 'platform/appframe/dicthelper/getUserStatus.do',
+							valuefield: 'dictId',
+							textfield: 'dictName'
+						}"/>
+					<FormItem id="startDate" name="用户有效日期"    editorType="DATETIME"/>
+					<FormItem id="endDate" name="用户失效日期"    editorType="DATETIME"/>
+					<FormItem id="invlidate" name="密码失效日期" editorType="DATETIME" />
+					<FormItem id="macAddress" name=" MAC 地址" editorType="TEXTBOX"/>
+					<FormItem id="ipAddress" name="IP 地址"  editorType="TEXTBOX" />
+					<FormItem id="mobileNo" name=" 手机号码"    editorType="TEXTBOX"
+						validations="{phone:true,messages:{phone:'联系电话格式错误'}}" 
+ 						editOptions="{tips:'请输入11位手机号或固定电话'}"/>
+					<FormItem id="email" name="Email地址"    editorType="TEXTBOX" />
+					<FormItem id="mainOrgid" name="默认机构" editorType="COMBOBOX"
+						editOptions="{
+							valuefield: 'orgId',
+							textfield: 'orgName'
+						}" readOnly="true"/>
+					<FormItem id="mainPositionid" name="默认岗位" editorType="TEXTBOX" visible="false"/>
+					<FormItem id="majorUserCode" name="直接主管" editorType="COMBOZTREE"
+						showField="majorUserName"
+						suggest="true"
+						editOptions="{
+							action:'egov/asset/aims/basic/aimsbasicorg/loadAllOrgList.do',
+							idfield : 'orgId',
+							pidfield : 'orgPid',
+							textfield : 'treeNode',
+							valuefield : 'orgCode',
+							rootpidvalue : '0',
+							panelHeight : '150',
+							clearbtn:true
+							}"/>
+					<FormItem id="majorUserName" name=" 直接主管" editorType="TEXTBOX" visible="fasle"/>
+				</Form>
+				<Form id="amcUserRoleForm" colCount="2" modelKey="roleStr">
+					<FormItem id="roleStr" name="所属岗位" editorType="TEXTBOX" readOnly="true"/>
+				</Form>
+			</items>
+		</Panel>
+		<Panel id="amcUserPanel_OrgRoleInfo" region="center">
+			<items>
+				<XGrid id="amcSubPosPanel_subPosByUser" 
+					url="egov/asset/amcuser/querySubOrgByUserCode.do" rownumbers="normal" autoLoad="false" 
+					fitColumns="E" fit="true" 
+				    editable="true"
+					title="机构岗位信息">
+					<columns>
+						<XGridColumn field="id" title="id" hidden="true"/>
+						<XGridColumn field="orgId" title="机构ID" editorType="TEXTBOX" hidden="true"/>
+						<XGridColumn field="financeBudgetCode" title="预算代码" editorType="TEXTBOX" hidden="true"/>
+						<XGridColumn field="partyCode" title="用户编码" hidden="true"/>
+						<XGridColumn field="ruleValueId" title="机构ID" editorType="TEXTBOX" hidden="true"/>
+						<XGridColumn field="ruleValueName" title="机构名称" editorType="TEXTBOX" align="left" hidden="true"/>
+						<XGridColumn field="ruleValueCode" title="机构名称" editorType="COMBOZTREE" align="left" editable="true" editorOptions="{
+							idfield : 'orgId',
+							pidfield : 'orgPid',
+							textfield : 'treeNode',
+							valuefield : 'orgCode',
+							rootpidvalue : '0',
+							panelwidth:'360',
+							usesuggest:true
+							}"
+							formatter="amcuser_modify.formatterOrg"/>
+						<XGridColumn field="roleId" title="岗位ID" editorType="TEXTBOX" hidden="true"/>
+						<XGridColumn field="roleType" title="岗位类型" editorType="TEXTBOX" hidden="true"/>
+						<XGridColumn field="roleName" title="岗位名称" align="left" editorType="TEXTBOX" hidden="true"/>
+						<XGridColumn field="roleCode" title="岗位名称" align="left" editorType="COMBOBOX" editorOptions="{
+							async : 'false',
+							textfield : 'roleCodeName',
+							valuefield : 'roleCode',
+							editable : true,
+							panelwidth:'360',
+						}"
+						formatter="function(val,row){
+							if(val != null){
+								val = row.roleCode + ' ' + row.roleName;
+							}else{
+								val = '';
+							}
+							return val;
+						}"/>
+						<XGridColumn field="rgnId" title="区划ID" editorType="TEXTBOX" hidden="true"/>
+						<XGridColumn field="rgnCode" title="区划编码" editorType="TEXTBOX" hidden="true"/>
+						<XGridColumn field="rgnName" title="区划名称" editorType="TEXTBOX" hidden="true"/>
+						
+					</columns>
+					<frozenColumnsRight>
+						<XGridColumn field="op" title="0">
+							<Button id="amcuser_subOrg_addBtn" icon="btn-add" name="新增机构"/>
+							<Button id="setDefaultOrg_btn" icon="btn-add" name="设置默认机构"/>
+							<Button id="delSubOrg_btn" icon="btn-delete" name="删除机构"/>
+						</XGridColumn>
+					</frozenColumnsRight>
+				</XGrid>
+			</items>
+		</Panel>
+	</items>
+</Page>

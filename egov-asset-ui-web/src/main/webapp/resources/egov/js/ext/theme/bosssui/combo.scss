@@ -1,0 +1,34 @@
+// combo 下拉框扩展样式
+// author: zxy
+// date: 2017-04-27
+
+
+// 下拉框工具栏样式
+.combo-toolbar{
+    height: 30px;
+    border: 1px solid #ccc;
+    position: absolute;
+    bottom: -30px;
+    left: -1px;
+    background-color: #fff;
+    width: 101%; 
+
+    p{
+        width: 180px;
+        margin: 2px auto;
+
+        span{
+            display: inline-block;
+            height: 24px;
+            line-height: 22px;
+            border: 1px solid $border-color;
+            padding: 0 28px;
+            cursor: pointer;
+
+        }
+        span:hover{
+            border-color: $btn-hover-border-color;
+            background-color: $btn-hover-bgcolor;
+        }
+    }
+}

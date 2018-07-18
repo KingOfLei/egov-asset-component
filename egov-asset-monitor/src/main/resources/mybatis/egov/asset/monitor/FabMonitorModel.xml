@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.monitor.mapper.FabMonitorModelMapper" >
+  <resultMap id="fabMonitorModelMap" type="com.bosssoft.egov.asset.monitor.entity.FabMonitorModel" >
+         <result property="fid" column="FID" />
+	     <result property="frgnid" column="FRGNID" />
+	     <result property="fmodelcode" column="FMODELCODE" />
+	     <result property="fmodelname" column="FMODELNAME" />
+	     <result property="fsql" column="FSQL" />
+	     <result property="ftype" column="FTYPE" />
+	     <result property="furl" column="FURL" />
+	     <result property="ftitle" column="FTITLE" />
+	     <result property="foperid" column="FOPERID" />
+	     <result property="foperator" column="FOPERATOR" />
+	     <result property="fopedate" column="FOPEDATE" />
+	     <result property="fmemo" column="FMEMO" />
+	     <result property="fcreatetime" column="FCREATETIME" />
+	     <result property="fupdatetime" column="FUPDATETIME" />
+	     <result property="faltercode" column="FALTERCODE" />
+	     <result property="fversion" column="FVERSION" />
+	     <result property="fcustom1" column="FCUSTOM1" />
+	     <result property="fcustom2" column="FCUSTOM2" />
+	     <result property="fcustom3" column="FCUSTOM3" />
+	     <result property="fcustom4" column="FCUSTOM4" />
+	     <result property="fcustom5" column="FCUSTOM5" />
+	     <result property="fcustom6" column="FCUSTOM6" />
+	     <result property="fcustom7" column="FCUSTOM7" />
+	     <result property="fcustom8" column="FCUSTOM8" />
+	     <result property="fcustom9" column="FCUSTOM9" />
+	     <result property="fcustom10" column="FCUSTOM10" />
+	     <result property="ftablename" column="FTABLENAME" />
+	 </resultMap>
+ 
+ <sql id="Base_Column_List">
+    FID,FRGNID,FMODELCODE,FMODELNAME,FSQL,FTYPE,FURL,FTITLE,FOPERID,FOPERATOR,FOPEDATE,FMEMO,FCREATETIME,FUPDATETIME,FALTERCODE,FVERSION,FCUSTOM1,FCUSTOM2,FCUSTOM3,FCUSTOM4,FCUSTOM5,FCUSTOM6,FCUSTOM7,FCUSTOM8,FCUSTOM9,FCUSTOM10,FTABLENAME  </sql>
+ 
+    <select id="queryFabMonitorModelPage" resultMap="fabMonitorModelMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM FAB_MONITOR_MODEL
+      	 <trim prefix="where"  prefixOverrides="and |or">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            ${searcher.__QUERYCON}
+	        </if>  
+	    </trim>
+    </select>
+</mapper>

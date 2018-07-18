@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.activiti.mapper.AssetBusHistoryMapper">
+	<resultMap id="assetBusHistoryMap"
+		type="com.bosssoft.egov.asset.activiti.entity.AssetBusHistory">
+		<result property="id" column="ID" />
+		<result property="busId" column="BUS_ID" />
+		<result property="operatorId" column="OPERATOR_ID" />
+		<result property="checkResult" column="CHECK_RESULT" />
+		<result property="procInstId" column="PROC_INST_ID" />
+		<result property="operateDate" column="OPERATE_DATE" />
+		<result property="bizType" column="BIZ_TYPE" />
+		<result property="beforeTask" column="BEFORE_TASK" />
+		<result property="beforeCheck" column="BEFORE_CHECK" />
+		<result property="currentTask" column="CURRENT_TASK" />
+		<result property="taskStatus" column="TASK_STATUS" />
+		<result property="beforeStatus" column="BEFORE_STATUS" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		ID,BUS_ID,OPERATOR_ID,CHECK_RESULT,PROC_INST_ID,OPERATE_DATE,BIZ_TYPE,BEFORE_TASK,BEFORE_CHECK,CURRENT_TASK,TASK_STATUS,BEFORE_STATUS
+	</sql>
+
+	<select id="queryAssetBusHistoryPage" resultMap="assetBusHistoryMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM ASSET_BUS_HISTORY
+		<trim prefix="where" prefixOverrides="and |or">
+			<if test="searcher != null and searcher.__QUERYCON != null">
+				${searcher.__QUERYCON}
+			</if>
+		</trim>
+	</select>
+
+	<delete id="deleteByBusIdAndPId">
+		DELETE FROM
+		ASSET_BUS_HISTORY
+		WHERE BUS_ID= #{busId}
+		AND PROC_INST_ID = #{pId}
+	</delete>
+	<delete id="deleteByBusIdUserCode">
+		DELETE FROM
+		ASSET_BUS_HISTORY
+		WHERE BUS_ID= #{busId}
+		AND OPERATOR_ID = #{userCode}
+	</delete>
+	<delete id="deleteByBusIdUserCodeCurrentTask">
+		DELETE FROM
+		ASSET_BUS_HISTORY
+		WHERE BUS_ID= #{busId}
+		AND OPERATOR_ID = #{userCode}
+		AND CURRENT_TASK = #{currentTask}
+	</delete>
+
+	<update id="updatePIdByBusId">
+		UPDATE
+		ASSET_BUS_HISTORY
+		<set>
+			PROC_INST_ID = #{pId},
+			BIZ_TYPE = #{busType}
+		</set>
+		WHERE BUS_ID= #{busId}
+	</update>
+	<update id="updatePIdByBusIdAndBusType">
+		UPDATE
+		ASSET_BUS_HISTORY
+		<set>
+			PROC_INST_ID = #{pId}
+		</set>
+		WHERE BUS_ID= #{busId} and	BIZ_TYPE = #{busType}
+	</update>
+	<update id="updateBusTypeByBusIdAndPid">
+		UPDATE
+		ASSET_BUS_HISTORY
+		<set>
+		 BIZ_TYPE = #{busType}
+		</set>
+		WHERE BUS_ID= #{busId} and	PROC_INST_ID = #{pId}
+	</update>
+
+
+	<select id="queryOne" resultMap="assetBusHistoryMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM ASSET_BUS_HISTORY where BUS_ID= #{busId} AND OPERATOR_ID =	#{userCode}
+	</select>
+
+	<select id="queryOneHistory" resultMap="assetBusHistoryMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM ASSET_BUS_HISTORY where BUS_ID= #{busId} AND OPERATOR_ID =
+		#{userCode} AND CURRENT_TASK = #{currentTask}
+	</select>
+	<select id="queryCheckList" resultMap="assetBusHistoryMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM ASSET_BUS_HISTORY
+		where BUS_ID= #{busId} AND OPERATOR_ID =
+		#{userCode} AND CHECK_RESULT = #{handle} order by OPERATE_DATE DESC
+	</select>
+
+	<select id="queryCheckListByBusinessId" resultMap="assetBusHistoryMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM ASSET_BUS_HISTORY
+		where BUS_ID= #{busId} ORDER BY OPERATE_DATE
+		DESC
+	</select>
+	
+	<select id="queryCheckListByBusinessIdUserCode" resultMap="assetBusHistoryMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM ASSET_BUS_HISTORY
+		where BUS_ID= #{busId} and OPERATOR_ID =#{userCode} ORDER BY OPERATE_DATE
+		DESC
+	</select>
+</mapper>

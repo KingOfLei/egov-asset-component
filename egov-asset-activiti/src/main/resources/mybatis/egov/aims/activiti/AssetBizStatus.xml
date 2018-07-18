@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.activiti.mapper.AssetBizStatusMapper" >
+  <resultMap id="assetBizStatusMap" type="com.bosssoft.egov.asset.activiti.entity.AssetBizStatus" >
+         <result property="bizId" column="BIZ_ID" />
+	     <result property="isenable" column="ISENABLE" />
+	     <result property="bizType" column="BIZ_TYPE" />
+	     <result property="bizStatus" column="BIZ_STATUS" />
+	     <result property="bizStatusName" column="BIZ_STATUS_NAME" />
+	 </resultMap>
+ 
+ <sql id="Base_Column_List">
+    BIZ_ID,ISENABLE,BIZ_TYPE,BIZ_STATUS,BIZ_STATUS_NAME  </sql>
+ 
+    <select id="queryAssetBizStatusPage" resultMap="assetBizStatusMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM ASSET_BIZ_STATUS
+      	 <trim prefix="where"  prefixOverrides="and |or">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            #{searcher.__QUERYCON}
+	        </if>  
+	    </trim>
+    </select>
+    <select id="queryAssetBizStatusByStatus" resultMap="assetBizStatusMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM ASSET_BIZ_STATUS where BIZ_STATUS = #{status}
+    </select>
+</mapper>

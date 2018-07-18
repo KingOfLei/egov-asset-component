@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.drc.mapper.DrcAuthMenuUserMapper" >
+  <resultMap id="drcAuthMenuUserMap" type="com.bosssoft.egov.asset.drc.entity.DrcAuthMenuUser" >
+         <result property="id" column="ID" />
+	     <result property="userId" column="USER_ID" />
+	     <result property="userCode" column="USER_CODE" />
+	     <result property="userName" column="USER_NAME" />
+	     <result property="roleId" column="ROLE_ID" />
+	     <result property="roleCode" column="ROLE_CODE" />
+	     <result property="roleName" column="ROLE_NAME" />
+	     <result property="appId" column="APP_ID" />
+	     <result property="menuId" column="MENU_ID" />
+	     <result property="menuCode" column="MENU_CODE" />
+	     <result property="menuName" column="MENU_NAME" />
+	     <result property="status" column="STATUS" />
+	     <result property="remark" column="REMARK" />
+	 </resultMap>
+ 
+ <sql id="Base_Column_List">
+    ID,USER_ID,USER_CODE,USER_NAME,ROLE_ID,ROLE_CODE,ROLE_NAME,APP_ID,MENU_ID,MENU_CODE,MENU_NAME,STATUS,REMARK  </sql>
+ 
+    <select id="queryDrcAuthMenuUserPage" resultMap="drcAuthMenuUserMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM DRC_AUTH_MENU_USER
+      	 <trim prefix="where"  prefixOverrides="and |or">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            #{searcher.__QUERYCON}
+	        </if>  
+	    </trim>
+    </select>
+</mapper>

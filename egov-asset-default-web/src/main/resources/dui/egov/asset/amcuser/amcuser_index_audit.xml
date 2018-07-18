@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Page id="amcUserPage" layout="border"
+	templatePath="egov/asset/amcuser/amcuser_index_audit.jsp"
+	js="resources/egov/js/asset/amcUser/amcuser_index_audit.js"
+	jsId="amcuser_index" xmlns="http://www.bosssoft.User"
+	xmlns:xsi="http://www.w3.User/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.bosssoft.User ../../../schema/uis/uitemplate-2.0.xsd">
+	<items>
+		<Panel id="amcUserPanel_User" region="north" height="80" layout="border">
+			<items>
+				<ButtonArea id="amcUserPanel_operate" displayType="MENU" height="50" >
+					<Button id="amcUserPanel_add" name="新增" icon="btn-add" iconMode="ONLYICON" />
+					<Button id="amcUserPanel_del" name="批量删除" icon="btn-delete" iconMode="ONLYICON" />
+					<Button id="amcUserPanel_reset" name="重置密码" icon="btn-edit" iconMode="ONLYICON" />
+				</ButtonArea>
+				<Query id="amcUserPage_query" queryTarget="amcUserPanelUserdetails" isAdvance="true" style="display: block" manual="false" advColCount="2">
+					<quicks>
+						<QueryItem id="Name" field="u.USER_NAME" name="用户名"  operator="like"   editorType="TEXTBOX" editOptions="{clearbtn:true}"/>
+						<QueryItem id="Code" field="u.USER_CODE" name="用户账号"  operator="like"   editorType="TEXTBOX" editOptions="{clearbtn:true}" />
+						<QueryItem id="mobileNo" field="mobile_no" name="手机号码"  operator="like"   editorType="TEXTBOX" editOptions="{clearbtn:true}" />
+						<!-- <QueryItem id="org" field="ou.ORG_ID" name="所属机构" operator="=" /> -->
+						<QueryItem id="org" field="u.main_orgid" name="所属机构" operator="=" editorType="COMBOZTREE"
+							suggest="true"
+							editOptions="{
+								action:'egov/asset/aims/basic/aimsbasicorg/loadAllOrgList.do',
+								idfield : 'orgId',
+								pidfield : 'orgPid',
+								textfield : 'treeNode',
+								valuefield : 'orgId',
+								rootpidvalue : '0',
+								panelwidth:300,
+								clearbtn:true
+							}"/>
+						<QueryItem id="status" field="u.STATUS" name="状态"  operator="="   editorType="COMBOBOX"
+							comboFieldText="dictName" comboFieldValue="dictId"
+							editOptions="{clearbtn:true}" />
+					</quicks>
+				</Query>		
+			</items>
+		</Panel>
+		<Panel id="amcUserPanel" region="center"  layout="border">
+			<items>
+				<XGrid id="amcUserPanelUserdetails" 
+					url="egov/asset/amcuser/queryAmcUserPage.do" 
+					rownumbers="normal" autoLoad="true" 
+					fitColumns="ES" fit="true" checkbox="true"
+					title="用户列表">
+					<columns>
+					    <XGridColumn field="userName" title="用户名称" align="left"/>
+						<XGridColumn field="userCode" title="用户账号" align="left"/>
+						<XGridColumn field="identityCode" title="身份证号" align="left"/>
+						<XGridColumn field="mobileNo" title="手机号码" align="left"/>
+						<XGridColumn field="mainOrgName" title="所属机构" align="left"/>
+						<XGridColumn field="mainPosName" title="所属岗位" align="left"/>
+					</columns>
+					<frozenColumnsRight>
+						<XGridColumn field="operation" title="操作">
+							<Button id="amcUserPanel_grid_btnOrg"  icon="btn-detail" name="信息编辑"/>	 	 
+							<Button id="amcUserPanel_grid_btnReset"  icon="btn-edit" name="密码重置"/>	 
+							<Button id="amcUserPanel_grid_btnDel"  icon="btn-delete" name="删除用户"/>
+						</XGridColumn>
+					</frozenColumnsRight>
+				</XGrid>
+			</items>
+		</Panel>
+	</items>
+</Page>

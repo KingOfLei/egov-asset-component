@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>                       
+<Page id="assetCommentPage" layout="border" 
+	templatePath="egov/asset/comment/assetcomment/assetcomment_add.jsp" 
+	js="resources/egov/js/asset/comment/assetcomment/assetcomment_add.js"
+	jsId="assetcomment_add" 
+	xmlns="http://www.bosssoft.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.bosssoft.org ../../../../schema/uis/uitemplate-2.0.xsd">
+	<items>
+	   <Panel id="assetCommentPage_panel_north" region="north" height="160">
+	     <items>
+	       <Panel id="assetCommentPage_panel_north_north" region="center">
+	          <items>
+	             <Form  id="assetCommentPage_form"  colCount="3"  layout="table" >
+		         
+		          </Form>
+	          </items>
+	       </Panel>
+	       <Panel id="btn_panel_north_buttom" region="south" height="40" style="padding-top:5px;">
+	              <items>
+	                <ButtonArea id="mybtnarea_btn" displayType="BUTTON" style="text-align:center" >
+	                 <Button id="assetCommentPage_saveBtn" name="确定" iconMode="LEFT"></Button>
+	                 <Button id="assetCommentPage_closeBtn" name="取消" iconMode="LEFT"></Button>
+	              </ButtonArea>
+	              </items>
+	           </Panel>
+	     </items>
+	   </Panel>
+	   <Panel id="assetCommentPage_panel" region="center" layout="border">
+	      <items>	           
+              <Panel id="commentlist_panel_center_tabs" region="north"  layout="border"  height="30" >
+		                 <items>
+		                    <Tabs id="commentListTabs">
+		                    <items>
+		                      <TabPanel id="commentListTab" name="意见列表">
+		                         <items>
+		                           
+		                         </items>
+		                      </TabPanel>
+		                    </items>
+		                 </Tabs>
+		                 </items>
+	           </Panel>
+	                  <Panel id="commentlist_panel_center_tab" region="center">
+	                  </Panel>
+	      </items>
+	   </Panel>
+	</items>
+</Page>

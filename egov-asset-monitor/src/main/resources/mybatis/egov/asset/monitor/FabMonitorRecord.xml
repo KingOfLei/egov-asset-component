@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.monitor.mapper.FabMonitorRecordMapper" >
+  <resultMap id="fabMonitorRecordMap" type="com.bosssoft.egov.asset.monitor.entity.FabMonitorRecord" >
+         <result property="fid" column="FID" />
+	     <result property="frgnid" column="FRGNID" />
+	     <result property="fevtid" column="FEVTID" />
+	     <result property="fevtcode" column="FEVTCODE" />
+	     <result property="fevtname" column="FEVTNAME" />
+	     <result property="fmcmid" column="FMCMID" />
+	     <result property="fmcmcode" column="FMCMCODE" />
+	     <result property="fmcmname" column="FMCMNAME" />
+	     <result property="fbusiid" column="FBUSIID" />
+	     <result property="fomonitorid" column="FOMONITORID" />
+	     <result property="fomonitorcode" column="FOMONITORCODE" />
+	     <result property="fomonitorname" column="FOMONITORNAME" />
+	     <result property="fhndlorgid" column="FHNDLORGID" />
+	     <result property="fhndlorgcode" column="FHNDLORGCODE" />
+	     <result property="fhndlorgname" column="FHNDLORGNAME" />
+	     <result property="fmntcont" column="FMNTCONT" />
+	     <result property="fmntdate" column="FMNTDATE" />
+	     <result property="fmnttime" column="FMNTTIME" />
+	     <result property="fishndl" column="FISHNDL" />
+	     <result property="fhndlid" column="FHNDLID" />
+	     <result property="fhndlname" column="FHNDLNAME" />
+	     <result property="fhndltime" column="FHNDLTIME" />
+	     <result property="fhndldate" column="FHNDLDATE" />
+	     <result property="fhndldesc" column="FHNDLDESC" />
+	     <result property="fisclose" column="FISCLOSE" />
+	     <result property="fclsmanid" column="FCLSMANID" />
+	     <result property="fclsman" column="FCLSMAN" />
+	     <result property="fclsdate" column="FCLSDATE" />
+	     <result property="fclstime" column="FCLSTIME" />
+	     <result property="fupdatetime" column="FUPDATETIME" />
+	     <result property="faltercode" column="FALTERCODE" />
+	     <result property="fversion" column="FVERSION" />
+	     <result property="fclick" column="FCLICK" />
+	     <result property="ptype" column="PTYPE" />
+	     <result property="isResult" column="ISRESULT" />
+	     <result property="favoriteOption" column="FAVORITEOPTION" />
+	     <result property="detailId" column="DETAIL_ID" />
+	     <result property="optionId" column="OPTION_ID" />
+	     <result property="type" column="TYPE" />
+	     <result property="typeName" column="TYPE_NAME" />
+	     <result property="ptypeName" column="PTYPE_NAME" />
+	     <result property="url" column="URL" />
+	     <result property="param1" column="PARAM1" />
+	     <result property="param2" column="PARAM2" />
+	     <result property="param3" column="PARAM3" />
+	 </resultMap>
+ 
+ <sql id="Base_Column_List">
+ 
+    FID,FRGNID,FEVTID,FEVTCODE,FEVTNAME,FMCMID,FMCMCODE,FMCMNAME,FBUSIID,FOMONITORID,FOMONITORCODE,FOMONITORNAME,FHNDLORGID,FHNDLORGCODE,FHNDLORGNAME,FMNTCONT,FMNTDATE,FMNTTIME,FISHNDL,FHNDLID,FHNDLNAME,FHNDLTIME,FHNDLDATE,FHNDLDESC,FISCLOSE,FCLSMANID,FCLSMAN,FCLSDATE,FCLSTIME,FUPDATETIME,FALTERCODE,FVERSION,FCLICK,PTYPE,ISRESULT,FAVORITEOPTION,OPTION_ID,DETAIL_ID,TYPE,TYPE_NAME,PTYPE_NAME,URL,PARAM1,PARAM2,PARAM3
+ 
+ </sql>
+ 
+    <select id="queryFabMonitorRecordPage" resultMap="fabMonitorRecordMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM FAB_MONITOR_RECORD
+      	 <trim prefix="where"  prefixOverrides="and |or">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            ${searcher.__QUERYCON}
+	        </if>  
+	    </trim>
+	    order by fmntdate desc
+<!-- 	    order by fclick asc ,fmntdate desc -->
+    </select>
+
+	<select id="queryCount" resultType="Integer">
+		SELECT count(1) FROM FAB_MONITOR_RECORD
+		<trim prefix="where" prefixOverrides="and |or">
+			<if test="searcher != null and searcher.__QUERYCON != null">
+				${searcher.__QUERYCON}
+			</if>
+		</trim>
+	</select>
+
+	<!-- 根据复合条件查询 -->
+	<select id="queryList" resultMap="fabMonitorRecordMap">
+		SELECT * FROM FAB_MONITOR_RECORD
+		<trim prefix="where" prefixOverrides="and |or">
+			<if test="searcher != null and searcher.__QUERYCON != null">
+				${searcher.__QUERYCON}
+			</if>
+		</trim>
+		<if test="sortProperty != null">
+			ORDER BY ${sortProperty}
+			<if test="sortDirection != null">
+				${sortDirection}
+			</if>
+		</if>
+	</select>
+    
+    <!-- 查询统计记录 -->
+	<select id="queryRecordCountData" resultType="map">
+		select FMNTDATE,FEVTNAME,
+		sum(case when FISHNDL=1 then 1 else 0 end) fhandleYes,
+		sum(case when FISHNDL=0 then 1 else 0 end) fhandleNo,
+		sum(case when FISCLOSE=1 then 1 else 0 end) fcloseYes,
+		sum(case when FISCLOSE=0 then 1 else 0 end) fcloseNo 
+		from fab_monitor_record
+		<trim prefix="where" prefixOverrides="and |or">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            ${searcher.__QUERYCON}
+	        </if>  
+	    </trim>
+<!-- 	    <if test="page != null and page.sort != null">
+			ORDER BY <foreach collection="page.sort" item="order" separator=","> ${order.property} ${order.direction}</foreach>
+        </if> -->
+		group by FMNTDATE,FEVTNAME
+	</select>
+
+	<select id="queryRecordByType" resultMap="fabMonitorRecordMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM fab_monitor_record
+		<trim prefix="where" prefixOverrides="and |or">
+			<if test="searcher != null and searcher.__QUERYCON != null">
+				${searcher.__QUERYCON}
+			</if>
+		</trim>
+
+		<if test="types != null and types !='' ">
+			<trim prefix="and" prefixOverrides="and | or">
+				${types}
+			</trim>
+		</if>
+	</select>
+	
+	
+	<select id="getFabMonitorRecordEvtName" resultMap="fabMonitorRecordMap">
+		select distinct fevtname from FAB_MONITOR_RECORD t
+		<trim prefix="where" prefixOverrides="and | or">
+			<if test="searcher != null and searcher.__QUERYCON != null">
+				${searcher.__QUERYCON}
+			</if>
+		</trim>
+		order by t.fevtname 
+	</select>
+
+</mapper>

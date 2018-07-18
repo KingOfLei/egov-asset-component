@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.connect.mapper.RecycleOrgMapper" >
+  <resultMap id="recycleOrgMap" type="com.bosssoft.egov.connect.entity.RecycleOrg" >
+         <result property="id" column="ID" />
+	     <result property="orgType" column="ORG_TYPE" />
+	     <result property="orgName" column="ORG_NAME" />
+	     <result property="contacts" column="CONTACTS" />
+	     <result property="phone" column="PHONE" />
+	     <result property="tel" column="TEL" />
+	     <result property="createDate" column="CREATE_DATE" />
+	     <result property="endDate" column="END_DATE" />
+	     <result property="beginDate" column="BEGIN_DATE" />
+	     <result property="disposeType" column="DISPOSE_TYPE" />
+	     <result property="address" column="ADDRESS" />
+	     <result property="fax" column="FAX" />
+	     <result property="contractNo" column="CONTRACT_NO" />
+	     <result property="orgCode" column="ORG_CODE"/>
+	     <result property="operator" column="OPERATOR"/>
+	 </resultMap>
+ 
+ <sql id="Base_Column_List">
+    ID,ORG_TYPE,ORG_NAME,CONTACTS,PHONE,TEL,CREATE_DATE,END_DATE,BEGIN_DATE,DISPOSE_TYPE,
+    ADDRESS,FAX, CONTRACT_NO, ORG_CODE, OPERATOR  </sql>
+ 
+    <select id="queryRecycleOrgPage" resultMap="recycleOrgMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM RECYCLE_ORG
+      	 <trim prefix="where"  prefixOverrides="and">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            ${searcher.__QUERYCON}
+	        </if>  
+	    </trim>
+	    ORDER BY ORG_CODE
+    </select>
+    
+    <update id="updateById" parameterType="com.bosssoft.egov.connect.entity.RecycleOrg">
+    	UPDATE RECYCLE_ORG 
+    	<set>
+    		<if test="id!=null"> ID=#{id}, </if>
+    		<if test="orgType!=null"> ORG_TYPE=#{orgType}, </if>
+    		<if test="orgName!=null"> ORG_NAME=#{orgName}, </if>
+    		<if test="contacts!=null"> CONTACTS=#{contacts}, </if>
+    		<if test="phone!=null"> PHONE=#{phone}, </if>
+    		<if test="tel!=null"> TEL=#{tel}, </if>
+    		<if test="createDate!=null"> CREATE_DATE=#{createDate}, </if>
+    		<if test="endDate!=null"> END_DATE=#{endDate}, </if>
+    		<if test="beginDate!=null"> BEGIN_DATE=#{beginDate}, </if>
+    		<if test="disposeType!=null"> DISPOSE_TYPE=#{disposeType}, </if>
+    		<if test="address!=null"> ADDRESS=#{address}, </if>
+    		<if test="fax!=null"> FAX=#{fax}, </if>
+    		<if test="contractNo!=null"> CONTRACT_NO=#{contractNo}, </if>
+    		<if test="orgCode!=null"> ORG_CODE=#{orgCode}, </if>
+    		<if test="operator!=null"> OPERATOR=#{operator} </if>
+    	</set>
+    	WHERE ID=#{id}
+    </update>
+    
+    <delete id="deletebyId" parameterType="com.bosssoft.egov.connect.entity.RecycleOrg">
+    	DELETE FROM RECYCLE_ORG
+    	WHERE ID=#{id}
+    </delete>
+</mapper>

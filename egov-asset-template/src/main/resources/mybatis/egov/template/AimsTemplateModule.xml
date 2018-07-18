@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.template.mapper.AimsTemplateModuleMapper" >
+  <resultMap id="aimsTemplateModuleMap" type="com.bosssoft.egov.asset.template.entity.AimsTemplateModule" >
+         <result property="moduleId" column="MODULE_ID" />
+	     <result property="moduleCode" column="MODULE_CODE" />
+	     <result property="moduleName" column="MODULE_NAME" />
+	     <result property="modulePid" column="MODULE_PID" />
+	     <result property="modulePcode" column="MODULE_PCODE" />
+	     <result property="modulePname" column="MODULE_PNAME" />
+	     <result property="moduleRank" column="MODULE_RANK" />
+	     <result property="moduleIsleaf" column="MODULE_ISLEAF" />
+	     <result property="moduleStatus" column="MODULE_STATUS" />
+	     <result property="orgId" column="ORG_ID" />
+	     <result property="orgCode" column="ORG_CODE" />
+	     <result property="orgName" column="ORG_NAME" />
+	     <result property="rgnId" column="RGN_ID" />
+	     <result property="rgnCode" column="RGN_CODE" />
+	     <result property="rgnName" column="RGN_NAME" />
+	     <result property="createDate" column="CREATE_DATE" />
+	     <result property="creator" column="CREATOR" />
+	     <result property="modifyDate" column="MODIFY_DATE" />
+	     <result property="moduleVersion" column="MODULE_VERSION" />
+	     <result property="str01" column="STR01" />
+	     <result property="str02" column="STR02" />
+	     <result property="str03" column="STR03" />
+	     <result property="str04" column="STR04" />
+	     <result property="str05" column="STR05" />
+	 </resultMap>
+ 
+ <sql id="Base_Column_List">
+    MODULE_ID,MODULE_CODE,MODULE_NAME,MODULE_PID,MODULE_PCODE,MODULE_PNAME,MODULE_RANK,MODULE_ISLEAF,MODULE_STATUS,ORG_ID,ORG_CODE,ORG_NAME,RGN_ID,RGN_CODE,RGN_NAME,CREATE_DATE,CREATOR,MODIFY_DATE,MODULE_VERSION,STR01,STR02,STR03,STR04,STR05  </sql>
+ 
+    <select id="queryAimsTemplateModulePage" resultMap="aimsTemplateModuleMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM AIMS_TEMPLATE_MODULE
+      	 <trim prefix="where"  prefixOverrides="and |or">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            #{searcher.__QUERYCON}
+	        </if>  
+	    </trim>
+    </select>
+    
+    <select id="queryByModulePid" resultMap="aimsTemplateModuleMap">
+    	SELECT
+    	<include refid="Base_Column_List" />
+    	FROM AIMS_TEMPLATE_MODULE
+    	<!-- WHERE ORG_ID=#{orgId} AND MODULE_PID=#{modulePid} -->
+    	WHERE MODULE_PID=#{modulePid}
+    	AND MODULE_STATUS = 1
+    	ORDER BY MODULE_CODE
+    </select>
+    
+    <select id="searchListByKey" resultMap="aimsTemplateModuleMap">
+    	SELECT <include refid="Base_Column_List" />
+    	FROM AIMS_TEMPLATE_MODULE
+    	WHERE (MODULE_CODE LIKE #{_key} 
+    	OR MODULE_NAME LIKE #{_key})
+    	AND MODULE_STATUS = 1
+    	ORDER BY MODULE_CODE
+    	
+    </select>
+</mapper>

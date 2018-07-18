@@ -1,0 +1,16 @@
+.app-wrapper-hover.wrapper-disabled {
+  border:1px solid #008000;
+}
+
+
+.app-grid .grid-table-header td[opts=true] .rowBtn, .app-grid .grid-table-body td[opts=true] .rowBtn {
+  margin-right: 7px;
+}
+
+.app-grid .grid-table-body td.grid-td-editable>div{
+  background: rgb(244, 232, 218);
+}
+
+.dialog-header {
+  cursor: default;
+}

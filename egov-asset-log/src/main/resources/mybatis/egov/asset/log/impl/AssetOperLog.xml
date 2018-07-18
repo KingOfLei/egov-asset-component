@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.log.impl.mapper.AssetOperLogMapper" >
+  <resultMap id="assetOperLogMap" type="com.bosssoft.egov.asset.log.impl.entity.AssetOperLog" >
+         <result property="appId" column="APP_ID" />
+	     <result property="logId" column="LOG_ID" />
+	     <result property="userCode" column="USER_CODE" />
+	     <result property="userName" column="USER_NAME" />
+	     <result property="operTime" column="OPER_TIME" />
+	     <result property="operDate" column="OPER_DATE" />
+	     <result property="operIp" column="OPER_IP" />
+	     <result property="url" column="URL" />
+	     <result property="menuId" column="MENU_ID" />
+	     <result property="menuName" column="MENU_NAME" />
+	     <result property="beanName" column="BEAN_NAME" />
+	     <result property="beanMethodName" column="BEAN_METHOD_NAME" />
+	     <result property="beanParams" column="BEAN_PARAMS" />
+	     <result property="returnParams" column="RETURN_PARAMS" />
+	     <result property="startTime" column="START_TIME" />
+	     <result property="endTime" column="END_TIME" />
+	     <result property="totalTimemillis" column="TOTAL_TIMEMILLIS" />
+	     <result property="extParams" column="EXT_PARAMS" />
+	     <result property="exception" column="EXCEPTION" />
+	     <result property="usedMemory" column="USED_MEMORY" />
+	     <result property="freeMemory" column="FREE_MEMORY" />
+	     <result property="str01" column="STR01" />
+	     <result property="str02" column="STR02" />
+	     <result property="str03" column="STR03" />
+	     <result property="str04" column="STR04" />
+	     <result property="str05" column="STR05" />
+	 </resultMap>
+ 
+ <sql id="Base_Column_List">
+    APP_ID,LOG_ID,USER_CODE,USER_NAME,OPER_TIME,OPER_DATE,OPER_IP,URL,MENU_ID,MENU_NAME,BEAN_NAME,BEAN_METHOD_NAME,BEAN_PARAMS,RETURN_PARAMS,START_TIME,END_TIME,TOTAL_TIMEMILLIS,EXT_PARAMS,EXCEPTION,USED_MEMORY,FREE_MEMORY,STR01,STR02,STR03,STR04,STR05  </sql>
+ 
+    <select id="queryAssetOperLogPage" resultMap="assetOperLogMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM ASSET_OPER_LOG
+      	 <trim prefix="where"  prefixOverrides="and |or">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            ${searcher.__QUERYCON} 
+	        </if>  
+	    </trim>
+        ORDER BY OPER_TIME DESC
+    </select>
+</mapper>

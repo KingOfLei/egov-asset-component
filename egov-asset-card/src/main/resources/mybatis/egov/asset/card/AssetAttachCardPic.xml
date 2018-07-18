@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.card.mapper.basic.AssetAttachCardPicMapper" >
+  <resultMap id="assetAttachCardPicMap" type="com.bosssoft.egov.asset.card.entity.basic.AssetAttachCardPic" >
+         <result property="appId" column="APP_ID" />
+	     <result property="attachId" column="ATTACH_ID" />
+	     <result property="attachName" column="ATTACH_NAME" />
+	     <result property="contentType" column="CONTENT_TYPE" />
+	     <result property="fileSize" column="FILE_SIZE" />
+	     <result property="filePath" column="FILE_PATH" />
+	     <result property="bizId" column="BIZ_ID" />
+	     <result property="bizType" column="BIZ_TYPE" />
+	     <result property="bizStatus" column="BIZ_STATUS" />
+	     <result property="bizStatusName" column="BIZ_STATUS_NAME" />
+	     <result property="defaultStatus" column="DEFAULT_STATUS" />
+	     <result property="createDate" column="CREATE_DATE" />
+	     <result property="creator" column="CREATOR" />
+	     <result property="remark" column="REMARK" />
+	     <result property="status" column="STATUS" />
+	     <result property="creatorIp" column="CREATOR_IP" />
+	     <result property="uploadType" column="UPLOAD_TYPE" />
+	     <result property="thumbPath" column="THUMB_PATH" />
+	     <result property="thumbPath" column="THUMB_PATH" />
+	     <result property="updateDate" column="UPDATE_DATE" />
+	 </resultMap>
+ 
+ <sql id="Base_Column_List">
+    APP_ID,ATTACH_ID,ATTACH_NAME,CONTENT_TYPE,FILE_SIZE,FILE_PATH,BIZ_ID,BIZ_TYPE,
+    BIZ_STATUS,BIZ_STATUS_NAME,DEFAULT_STATUS,CREATE_DATE,CREATOR,REMARK,
+    STATUS,CREATOR_IP,UPLOAD_TYPE,THUMB_PATH,UPDATE_DATE
+ </sql>
+ <!-- 图片上传 根据卡片或单据业务走 status上传状态 1 删除状态 0  bizStatus 中间状态 1 最终状态 999999  -->
+ <!-- 图片上传 bizStatus为1 只有卡片/单据保存了，状态为999999 才是真正保存图片的业务操作(如上传/删除)-->
+    <select id="queryAssetAttachCardPicPage" resultMap="assetAttachCardPicMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM ASSET_ATTACH_CARD_PIC
+        WHERE 1=1 
+      	 <trim prefix="AND"  prefixOverrides="and | or ">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            ${searcher.__QUERYCON}
+	        </if>  
+	    </trim>
+	    <trim prefix="AND"  prefixOverrides="and | or ">  
+	        <if test="condition != null and condition != '' ">  
+	            ${condition}
+	        </if>  
+	    </trim>
+	    
+    </select>
+    <!-- 已确认保存或未确认删除的图片列表 -->
+    <!-- 如卡片视图页面 -->
+    <select id="getAssetAttachCardPicList" resultMap="assetAttachCardPicMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM ASSET_ATTACH_CARD_PIC
+		WHERE ((STATUS = 1 AND BIZ_STATUS = 999999) OR (STATUS = 0 AND BIZ_STATUS = 1))
+		AND BIZ_ID = #{bizId} 
+		ORDER BY CREATE_DATE DESC      	 
+    </select>
+    <!-- 获取预览图片列表 -->
+    <!-- 如卡片表单页面，要允许加载刚上传的图片 -->
+    <select id="getPreAssetCardPicList" resultMap="assetAttachCardPicMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM ASSET_ATTACH_CARD_PIC
+		WHERE STATUS = 1  
+		AND BIZ_ID = #{bizId} 
+		ORDER BY CREATE_DATE DESC      	 
+    </select>
+     <!-- 获取单张图片 -->
+    <select id="queryOneCardPicFile" resultMap="assetAttachCardPicMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM ASSET_ATTACH_CARD_PIC
+		WHERE (STATUS = 1 OR (STATUS = 0 AND BIZ_STATUS = 1))
+		AND BIZ_ID = #{bizId}
+		AND ATTACH_ID = #{attachId}       	 
+    </select>
+    
+    <delete id="doBatchDel" parameterType="java.util.List">
+         UPDATE ASSET_ATTACH_CARD_PIC
+         SET STATUS = 0,
+             BIZ_STATUS=1,
+             BIZ_STATUS_NAME='暂存'
+         WHERE 1=1
+         AND ATTACH_ID IN
+         <if test="list != null">
+	         <foreach item="cardpic" collection="list" open="(" close=")" separator=",">
+	               #{cardpic.attachId} 
+	         </foreach>
+	         AND BIZ_ID IN
+	         <foreach item="cardpic" collection="list" open="(" close=")" separator=",">
+	               #{cardpic.bizId} 
+	         </foreach>
+         </if>
+    </delete>
+    
+    <delete id="updatePicStatus" parameterType="java.util.List">
+         UPDATE ASSET_ATTACH_CARD_PIC T 
+         SET  T.STATUS = #{status}, 
+         	  T.BIZ_STATUS=#{bizStatus}
+         	  T.BIZ_STATUS_NAME=#{bizStatusName}
+         	  T.UPDATE_DATE = #{updateDate}
+         WHERE T.BIZ_ID = #{bizId}
+    </delete>
+    <!-- 卡片(单据)保存时才能保存图片业务操作(如上传和删除)  -->
+    <update id="updateBizStatus">
+	    UPDATE ASSET_ATTACH_CARD_PIC CC
+	    <set>
+	    	cc.biz_status = #{bizStatus},
+	    	cc.biz_status_name = #{bizStatusName}
+	    </set>
+	 	WHERE CC.BIZ_ID = #{bizId}
+    </update>
+</mapper>

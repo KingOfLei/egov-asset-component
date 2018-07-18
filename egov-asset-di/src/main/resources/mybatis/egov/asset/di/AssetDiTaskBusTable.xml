@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.di.mapper.AssetDiTaskBusTableMapper" >
+  <resultMap id="assetDiTaskBusTableMap" type="com.bosssoft.egov.asset.di.entity.AssetDiTaskBusTable" >
+         <result property="tableName" column="TABLE_NAME" />
+	     <result property="extstsField" column="EXTSTS_FIELD" />
+	     <result property="delSql" column="DEL_SQL" />
+	     <result property="sxh" column="SXH" />
+	 </resultMap>
+ 
+ <sql id="Base_Column_List">
+    TABLE_NAME,EXTSTS_FIELD,DEL_SQL,SXH  </sql>
+ 
+    <select id="queryAssetDiTaskBusTablePage" resultMap="assetDiTaskBusTableMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM ASSET_DI_TASK_BUS_TABLE
+      	 <trim prefix="where"  prefixOverrides="and |or">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            ${searcher.__QUERYCON}
+	        </if>  
+	    </trim>
+    </select>
+</mapper>

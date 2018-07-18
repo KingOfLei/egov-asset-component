@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>                       
+<Page id="cmsNoticePage" layout="border" 
+	templatePath="egov/asset/cms/notice/cmsnotice_add.jsp" 
+	js="resources/egov/js/asset/cms/notice/cmsnotice_add.js"
+	jsId="cmsnotice_add" 
+	xmlns="http://www.bosssoft.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.bosssoft.org ../../../../../schema/uis/uitemplate-2.0.xsd">
+	<items>
+	   <Form  id="cmsNoticePage_form"  colCount="2"  layout="table" modelKey="notice">
+		 <items>			
+			<Row>
+			   <items>
+			    <FormItem id="id" visible="false"></FormItem>
+			    <FormItem id="rgnId" name="" editorType="TEXTBOX" visible="false"/>
+			    <FormItem id="orgId" name=""  editorType="TEXTBOX" visible="false"/>
+			    <FormItem id="title" name="标题" tips="标题内容长度不得大于64" colSpan="2" width="100%"  editorType="TEXTBOX" required="true" editOptions="{maxLength:64}"/>
+			    <FormItem id="isPortal" name="" exp1="true" colSpan="2" width="100%" editorType="CHECKBOX" data="[{'value':'1','text':'发布到门户网站'}]" />			   
+			    <FormItem id="isTop" name="" exp1="true" editorType="CHECKBOX" data="[{'value':'1','text':'置顶'}]"/>
+			    <FormItem id="topExpir" name="置顶过期时间" contentAlign="LEFT" editorType="DATETIME"/>	
+			    <FormItem id="startDate" name="开始时间" contentAlign="LEFT" editorType="DATETIME" 
+			        editOptions="{panelwidth:135,clearbtn:true,dateend:'endDate'}"
+			    	required="true"/>	
+			    <FormItem id="endDate" name="结束时间" contentAlign="LEFT" editorType="DATETIME" 
+			    	editOptions="{panelwidth:110, clearbtn:true}"
+			    	required="true"/>
+			    <FormItem id="type" name="类型" colSpan="2" editorType="COMBOBOX" editOptions="{panelheight:100,data:[{'id':'0','name':'通知'},{'id':'1','name':'公告'},
+			    {'id':'5','name':'制度'},
+			    {'id':'9','name':'其他'}]}"/>			    			    
+			    <FormItem id="receiveType" name="接收类型"  editorType="COMBOBOX" visible="false" />			    
+			    <FormItem id="content1" name="发布内容" colSpan="2" required="true" style="height:200px; border:1px solid #ccc; margin-top:10px; width:1272px;" editorType="TEXTAREA" />
+			    <FormItem id="content" name="发布内容" colSpan="2"  visible="false" editorType="TEXTBOX" />
+			    <FormItem id="realeaseUserId" name="发布者id"  visible="false" editorType="TEXTBOX" />
+			    <FormItem id="realeaseUser" name="发布者"  editorType="TEXTBOX" readOnly="true"/>
+			    <FormItem id="realeaseDate" name="发布日期"  editorType="DATETIME" />
+			    <FormItem id="wenHao" name="文号" editorType="TEXTBOX" />
+			    <FormItem id="status" name="状态" editorType="COMBOBOX" editOptions="{panelheight:100,data:[{'id':'2','name':'发布'}]}"/>			    		    
+			    <FormItem id="remark" name="备注" editorType="TEXTBOX" colSpan="2" width="100%" 
+			    	tips="备注内容长度不得大于100" editOptions="{maxLength:100}"/>
+			   </items>
+			</Row>
+			</items>
+		</Form>
+	</items>
+</Page>

@@ -1,0 +1,71 @@
+/**
+ *滑块
+ */
+
+$z-index:8888;
+.panel-slider{
+  width: 100%;
+  height: 140px;
+  z-index:$z-index;
+  background: rgba(223, 235, 255, 0.23);
+  position: fixed;
+  border-top: 2px solid #257DD6;
+  @at-root & *{
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
+  }
+  @at-root &.show{
+    z-index:$z-index;
+  }
+
+  //panel 标签拖拽
+  .panel-tab-drag{
+
+  }
+
+  //标签样式
+  .panel-tab{
+    z-index:$z-index;
+    width: auto;
+    background: #257DD6;
+    height: 31px;
+    line-height: 29px;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: #fff;
+    font-size: 1.1em;
+    position: relative;
+    display: inline-block;
+    top:-30px;
+    text-align: center;
+    margin-left: 17px;
+    cursor: pointer;
+    @at-root &.popup{
+      height: 31px;
+    }
+    @at-root &.first{
+      margin-left: 195px;
+    }
+  }
+
+  //内容样式
+  .panel-content{
+    z-index:$z-index;
+    position: relative;
+    overflow: auto;
+    top:-31px;
+    width: 100%;
+    height: 100%;
+    background: #E7F1FF;
+  }
+
+}
+
+.dialog-panel-slider{
+  height: auto !important;
+  position: static;
+  margin-top: 35px;
+  background: #E7F1FF;
+  text-align: left;
+}

@@ -1,0 +1,228 @@
+@charset "utf-8";
+/* 酷站代码整理 http://www.5icool.org */
+
+.history {
+  * {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  }
+  font: 12px/180% Arial, Helvetica, sans-serif;
+  width: 860px !important;
+  margin: 60px auto 0 auto !important;
+  a, img {
+    border: 0;
+  }
+  /*history*/
+  .history-box {
+    background: url(images/time-shaft/line04.gif) repeat-y 387px 0;
+    overflow: hidden;
+    position: relative;
+    padding-bottom: 64px;
+
+    .history-date {
+      overflow: hidden;
+      position: relative;
+      h2 {
+        background: #fff url(images/time-shaft/icon06.gif) no-repeat 358px 0;
+        height: 59px;
+        font-size: 25px;
+        font-family: 微软雅黑;
+        font-weight: normal;
+        padding-left: 45px;
+        margin-bottom: 30px;
+        a {
+          color: #00bbff;
+          display: inline-block;
+          *display: inline;
+          zoom: 1;
+          padding-right: 17px;
+          margin: 21px 97px 0 0;
+        }
+        a:hover {
+          text-decoration: none;
+        }
+        img {
+          vertical-align: -5px;
+        }
+        .bounce-in-down {
+          margin-top: 0px;
+          animation-duration: 2s;
+          animation-timing-function: ease;
+          animation-fill-mode: both;
+          display: list-item;
+        }
+        .date02 {
+          background: none;
+        }
+      }
+      h2.first {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+      }
+      ul.list {
+        display: block;
+        overflow: hidden;
+        height: 360px;
+        li {
+          background: url(images/time-shaft/icon07.gif) 380px 25px no-repeat ;
+          zoom: 1;
+          height: 120px;
+          h3 {
+            float: left;
+            width: 368px;
+            text-align: right;
+            padding-right: 19px;
+            color: #c3c3c3;
+            font: normal 18px/16px Arial;
+            display: block;
+            position: relative;
+            top:25px;
+            span {
+              display: block;
+              color: #d0d0d0;
+              font-size: 12px;
+            }
+          }
+          dl {
+            cursor: pointer;
+            float: left;
+            padding-left: 41px;
+            margin:0px;
+            font-family: 微软雅黑;
+            word-break: break-all;
+            word-wrap:break-word;
+            width: 400px;
+            position: relative;
+            padding-top: 15px;
+          }
+          dt {
+            font: 24px 微软雅黑;
+            color: #747474;
+            text-decoration: underline;
+            padding: 0px 0px 4px 0px;
+          }
+          span {
+            display: block;
+            color: #6e6e6e;
+            font-size: 14px;
+            height: 62px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+        }
+        li.last {
+          padding-bottom: 0;
+        }
+        li:after {
+          content: " ";
+          display: block;
+          height: 0;
+          clear: both;
+          visibility: hidden;
+        }
+
+        li:hover {
+          h3 {
+            color: #1db702;
+            font-size: 22px;
+            span {
+              color: #a8dda3;
+            }
+          }
+          dl {
+            margin-top: -8px;
+          }
+          dt {
+            color: #1db702;
+            font-size: 30px;
+            line-height: 28px;
+            _font-size: 12px !important;
+            _font-weight: bold;
+            word-wrap: break-word;
+            word-break: break-all;
+            width: 404px;
+            span {
+              _font-weight: normal !important;
+            }
+            a {
+              _background: transparent !important;
+              *background: transparent !important;
+              *font-size: 12px !important;
+              _font-weight: normal !important;
+            }
+          }
+          dt a {
+            display: inline-block;
+            *display: inline;
+            zoom: 1;
+            overflow: hidden;
+            vertical-align: middle;
+            margin-left: 12px;
+          }
+          dd {
+            padding-top: 20px;
+            display: none;
+            p {
+              overflow: hidden;
+              zoom: 1;
+              line-height: 21px;
+              color: #787878;
+            }
+            img {
+              float: left;
+            }
+          }
+        }
+      }
+      h2.first {
+        .more-history {
+          font-size: 16px;
+          background: transparent;
+          margin-left: 30px;
+          .more-history:hover {
+            text-decoration: underline;
+          }
+        }
+
+      }
+
+
+    }
+    $history-btn-height:32px;
+    .up-btn{
+      background: url(images/time-shaft/up.png) 0px 0px no-repeat ;
+      width: $history-btn-height;
+      height:$history-btn-height;
+      position: absolute;
+      bottom:32px;
+      left:90%;
+      cursor: pointer;
+    }
+    .down-btn{
+      background: url(images/time-shaft/down.png) 0px 0px no-repeat ;
+      width: $history-btn-height;
+      height:$history-btn-height;
+      position: absolute;
+      bottom:0px;
+      left:90%;
+      cursor: pointer;
+    }
+
+  }
+  .no-data{
+    width: 226px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 7px;
+    margin-left: 0px;
+    text-align: center;
+    color: #1BB511;
+    border: 2px  solid #1BB511;
+    border-top: 2px  solid #1BB511;
+    border-bottom: 2px  solid #1BB511;
+    position: absolute;
+  }
+}

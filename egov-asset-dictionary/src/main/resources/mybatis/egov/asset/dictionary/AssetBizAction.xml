@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.dictionary.impl.mapper.AssetBizActionMapper" >
+  <resultMap id="assetBizActionMap" type="com.bosssoft.egov.asset.dictionary.impl.entity.AssetBizAction" >
+         <result property="bizActionId" column="BIZ_ACTION_ID" />
+	     <result property="bizActionCode" column="BIZ_ACTION_CODE" />
+	     <result property="bizActionName" column="BIZ_ACTION_NAME" />
+	     <result property="bizTypeId" column="BIZ_TYPE_ID" />
+	     <result property="bizTypeCode" column="BIZ_TYPE_CODE" />
+	     <result property="bizTypeName" column="BIZ_TYPE_NAME" />
+	     <result property="curBpmStatus" column="CUR_BPM_STATUS" />
+	     <result property="nextBpmStatus" column="NEXT_BPM_STATUS" />
+	     <result property="tableMain" column="TABLE_MAIN" />
+	     <result property="tableDetails" column="TABLE_DETAILS" />
+	 </resultMap>
+ 
+ <sql id="Base_Column_List">
+    BIZ_ACTION_ID,BIZ_ACTION_CODE,BIZ_ACTION_NAME,BIZ_TYPE_ID,BIZ_TYPE_CODE,BIZ_TYPE_NAME,CUR_BPM_STATUS,NEXT_BPM_STATUS,TABLE_MAIN,TABLE_DETAILS  </sql>
+ 
+    <select id="queryAssetBizActionPage" resultMap="assetBizActionMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM ASSET_BIZ_ACTION
+      	 <trim prefix="where"  prefixOverrides="and |or">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            #{searcher.__QUERYCON}
+	        </if>  
+	    </trim>
+    </select>
+   
+   <select id="getAssetBizActionByCondition" resultMap="assetBizActionMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM ASSET_BIZ_ACTION
+      	 <trim prefix="where"  prefixOverrides="and |or">  
+	        <if test="condition != null and condition != ''">  
+	           ${condition}
+	        </if>  
+	    </trim>
+    </select>
+
+</mapper>

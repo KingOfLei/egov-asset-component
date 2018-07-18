@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.amc.user.mapper.AmcDrcAuthRuleMapper" >
+  	<!-- 更新岗位列表 -->
+  	<update id="updateById" parameterType="com.bosssoft.egov.asset.amc.user.entity.DrcAuthRule">
+  		UPDATE DRC_AUTH_RULE
+    	<set>
+    		<if test="roleId!=null">ROLE_ID=#{roleId},</if>
+    		<if test="roleCode!=null">ROLE_CODE=#{roleCode},</if>
+    		<if test="roleName!=null">ROLE_NAME=#{roleName},</if>
+    		<if test="roleType!=null">ROLE_TYPE=#{roleType},</if>
+    	</set>
+    	WHERE RULE_VALUE_ID=#{ruleValueId} AND PARTY_CODE=#{partyCode}
+  	</update>
+  	
+  	<delete id="deleteById" parameterType="com.bosssoft.egov.asset.amc.user.entity.DrcAuthRule">
+  		DELETE FROM DRC_AUTH_RULE 
+  		WHERE PARTY_CODE=#{partyCode}
+  		<if test="ruleValueId!=null"> AND RULE_VALUE_ID=#{ruleValueId} </if>
+  	</delete>
+  	
+  	<delete id="delSubPos" parameterType="com.bosssoft.egov.asset.amc.user.entity.DrcAuthRule">
+  		DELETE FROM DRC_AUTH_RULE 
+  		WHERE PARTY_CODE=#{partyCode}
+  		<if test="ruleValueId!=null"> AND RULE_VALUE_ID=#{ruleValueId} </if>
+  		<if test="roleId != null and roleId != '' " > AND ROLE_ID=#{roleId} </if>
+  		<if test="roleId == null or roleId == '' "> AND ROLE_ID IS NULL </if>
+  	</delete>
+  	
+  	
+  	<delete id="batchDeleteAuthRule" parameterType="java.util.List">
+  		DELETE FROM DRC_AUTH_RULE
+  		WHERE PARTY_CODE IN 
+  		<foreach collection="userCodes" index="index" item="userCode" open="(" 
+  			separator="," close=")">
+  			#{userCode}
+  		</foreach>
+  	</delete>
+</mapper>

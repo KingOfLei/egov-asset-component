@@ -1,0 +1,30 @@
+$cad-height:153px;
+.common-attachment-div{
+  height: $cad-height;
+  width: 100%;
+  background: #fff;
+  overflow: hidden;
+  overflow-y: auto;
+  position: relative;
+  bottom: 0;
+  left:0;
+  padding-left: 28px;
+  border-top: 2px solid $upload-bordercolor;
+}
+
+.common-attachment-div-title-bar{
+  position: relative;
+  bottom: $cad-height - 2;
+  left: 0;
+  width: 28px;
+  height: $cad-height;
+  padding-left: 5px;
+  padding-top: 60px;
+  /* line-height: 200px; */
+  background: $upload-bordercolor;
+  color: #fff;
+  font-size: 16px;
+  text-align: left;
+  word-break: break-all;
+  word-wrap: break-word;
+}

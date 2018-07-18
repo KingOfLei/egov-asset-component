@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.mapper.AssetCommentMapper" >
+  <resultMap id="assetCommentMap" type="com.bosssoft.egov.asset.entity.AssetComment" >
+         <result property="id" column="ID" />
+         <result property="rgnId" column="RGN_ID" />
+	     <result property="rgnCode" column="RGN_CODE" />
+	     <result property="rgnName" column="RGN_NAME" />
+	     <result property="orgId" column="ORG_ID" />
+	     <result property="orgCode" column="ORG_CODE" />
+	     <result property="orgName" column="ORG_NAME" />
+	     <result property="userId" column="USER_ID" />
+	     <result property="userCode" column="USER_CODE" />
+	     <result property="userName" column="USER_NAME" />
+	     <result property="str01" column="STR01" />
+	     <result property="str02" column="STR02" />
+	     <result property="str03" column="STR03" />
+	     <result property="status" column="STATUS" />
+	     <result property="content" column="CONTENT" />
+	 </resultMap>
+ 
+ <sql id="Base_Column_List">
+    ID,RGN_ID,RGN_CODE,RGN_NAME,ORG_ID,ORG_CODE,ORG_NAME,USER_ID,USER_CODE,USER_NAME,STR01,STR02,STR03,STATUS,CONTENT  </sql>
+ 
+    <select id="queryAssetCommentPage" resultMap="assetCommentMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM ASSET_COMMENT
+      	 <trim prefix="where"  prefixOverrides="and |or">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            ${searcher.__QUERYCON}
+	        </if>  
+	    </trim>
+    </select>
+    
+    <select id="queryAssetCommentListByUserCode" resultMap="assetCommentMap">
+       SELECT     
+    	<include refid="Base_Column_List" />
+        FROM ASSET_COMMENT
+        WHERE USER_CODE = #{userCode}
+        AND STATUS = 1
+        ORDER BY ID DESC
+    </select>
+    
+    <insert id="addComment" parameterType="java.util.List">
+         INSERT INTO ASSET_COMMENT (
+           <include refid="Base_Column_List"></include>
+         ) 
+        <foreach collection="list" item="item" index="index" separator=" UNION ALL ">
+           SELECT 
+              #{item.id},
+              #{item.rgnId},
+              #{item.rgnCode},
+              #{item.rgnName},
+              #{item.orgId},
+              #{item.orgCode},
+              #{item.orgName},
+              #{item.userId},
+              #{item.userCode},
+              #{item.userName},
+              #{item.str01},
+              #{item.str02},
+              #{item.str03},
+              #{item.status},
+              #{item.content}        
+            FROM DUAL
+        </foreach>
+<!--         BEGIN
+        <foreach collection="list" item="item" index="index" separator=";">
+            INSERT INTO ASSET_COMMENT (
+           <include refid="Base_Column_List"></include>
+         )  
+           VALUES(
+              #{item.id},
+              #{item.rgnId},
+              #{item.rgnCode},
+              #{item.rgnName},
+              #{item.orgId},
+              #{item.orgCode},
+              #{item.orgName},
+              #{item.userId},
+              #{item.userCode},
+              #{item.userName},
+              #{item.str01},
+              #{item.str02},
+              #{item.str03},
+              #{item.status},
+              #{item.content}        
+            )
+        </foreach>
+        ; END ;-->
+    </insert> 
+</mapper>

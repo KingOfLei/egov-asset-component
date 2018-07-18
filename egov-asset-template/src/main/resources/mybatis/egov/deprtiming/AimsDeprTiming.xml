@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.deprtiming.mapper.AimsDeprTimingMapper" >
+  <resultMap id="aimsDeprTimingMap" type="com.bosssoft.egov.asset.deprtiming.entity.AimsDeprTiming" >
+         <result property="id" column="ID" />
+	     <result property="orgId" column="ORG_ID" />
+	     <result property="orgCode" column="ORG_CODE" />
+	     <result property="orgName" column="ORG_NAME" />
+	     <result property="isDepr" column="IS_DEPR" />
+	     <result property="creatorName" column="CREATOR_NAME" />
+	     <result property="creatorTel" column="CREATOR_TEL" />
+	     <result property="orgPrincipal" column="ORG_PRINCIPAL" />
+	 </resultMap>
+ 
+ <sql id="Base_Column_List">
+    ID,ORG_ID,ORG_CODE,ORG_NAME,IS_DEPR,CREATOR_NAME,CREATOR_TEL,ORG_PRINCIPAL  </sql>
+ 
+    <select id="queryAimsDeprTimingPage" resultMap="aimsDeprTimingMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM AIMS_DEPR_TIMING
+      	 <trim prefix="where"  prefixOverrides="and |or">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            #{searcher.__QUERYCON}
+	            <if test = "id != null"> AND ID = #{id}</if>
+	        </if>  
+	    </trim>
+    </select>
+    <select id="queryOne" resultMap="aimsDeprTimingMap">
+    	SELECT
+		<include refid="Base_Column_List" />
+  		FROM AIMS_DEPR_TIMING
+        WHERE ID = #{id}
+    </select>
+    <select id="queryByOrgId" resultMap="aimsDeprTimingMap">
+    	SELECT
+		<include refid="Base_Column_List" />
+  		FROM AIMS_DEPR_TIMING
+        WHERE ORG_ID = #{orgId}
+    </select>
+        <select id="getDeprInfo" resultMap="aimsDeprTimingMap">
+    	SELECT
+		ORG_CODE,ORG_NAME,ORG_ID
+  		FROM AIMS_DEPR_INFO
+        WHERE ORG_CODE = #{orgCode}
+    </select>
+    <select id="queryByOrgCode" resultMap="aimsDeprTimingMap">
+  		SELECT
+		<include refid="Base_Column_List" />
+  		FROM AIMS_DEPR_TIMING
+  		WHERE ORG_CODE=#{orgCode}
+  		AND IS_DEPR = 1
+	</select>
+	
+	
+	<update id="updateByOrgCode" parameterType="com.bosssoft.egov.asset.deprtiming.entity.AimsDeprTiming">
+		UPDATE AIMS_DEPR_TIMING
+		<set>
+			<if test="id != null">ID = #{id},</if>
+			<if test="orgCode != null">ORG_CODE = #{orgCode},</if>
+			<if test="orgName != null">ORG_NAME = #{orgName},</if>
+			<if test="orgId != null">ORG_ID = #{orgId},</if>
+			<if test="isDepr != null">IS_DEPR = #{isDepr},</if>
+			<if test="creatorName != null">CREATOR_NAME = #{creatorName},</if>
+			<if test="creatorTel != null ">CREATOR_TEL = #{creatorTel},</if>
+			<if test="orgPrincipal != null ">ORG_PRINCIPAL = #{orgPrincipal}</if>
+		</set>
+		WHERE ORG_CODE = #{orgCode}
+	</update>
+	
+	<delete id = "deleteByOrgCode" parameterType="com.bosssoft.egov.asset.deprtiming.entity.AimsDeprTiming">
+	    DELETE AIMS_DEPR_TIMING
+	    WHERE ORG_CODE = #{orgCode}
+	</delete>
+	
+	<delete id = "deleteById" parameterType="com.bosssoft.egov.asset.deprtiming.entity.AimsDeprTiming">
+	    DELETE AIMS_DEPR_TIMING
+	    WHERE ID = #{id}
+	</delete>
+</mapper>

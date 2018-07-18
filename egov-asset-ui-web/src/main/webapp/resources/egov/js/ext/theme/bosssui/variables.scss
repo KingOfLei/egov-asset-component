@@ -1,0 +1,47 @@
+//
+// Variables
+// --------------------------------------------------
+
+//主色调-背景色
+$main-background-color: #24a68f !default;
+$main-font-color: #fff ！default;
+
+//头部背景色
+$skin-blue-main-header-bg: #24a68f !default;
+
+//导航栏
+$page-tabs-border-color: #AEC7BF !default;
+
+//左侧菜单
+$skin-blue-menu-left-bg-color: #24a68f !default;
+$skin-blue-menu-font-color: #222d32 !default;
+$skin-blue-menu-font-hover-color: #217754 !default;
+$sidebar-collapse-border-color:#ddd !default;
+
+$second-color: #A9CDC3 !default;
+//表单输入框边框颜色
+$form-item-border: #d1cdc8 !default;
+
+
+$app-grid-main-color: #24a68f !default;
+$app-grid-second-color: #D4EAE1 !default;
+$app-grid-border-color: #24a68f !default;
+
+//表单背景色
+$form-tab-container-formgroup-background-color: #d4eae1 !default;
+//表单间隔
+$form-margin:5px !default;
+//表单组间隔
+$form-section-margin-bottom:15px !default;
+//表单网格间距
+$form-table-margin:0px 50px 10px auto !default;
+
+//网格边距
+$xgrid-padding:5px;
+
+//i-btn按钮宽 高
+$i-btn-width:22px;
+$i-btn-height:22px;
+
+// **********主题按钮图标路径变量****************
+$theme-icon-path: $cover-image-path + "blue-skin/"

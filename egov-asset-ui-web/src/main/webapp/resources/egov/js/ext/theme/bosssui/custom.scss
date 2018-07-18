@@ -1,0 +1,53 @@
+
+/*网格间隔*/
+// .xgridStyle{
+  // padding:$xgrid-padding;
+// }
+.xgridStyle1{
+  padding:0px $xgrid-padding $xgrid-padding $xgrid-padding;
+}
+
+
+
+/*附件上传*/
+.attachmentItemName {
+	margin-left: 20px;
+	margin-top:10px;
+	font-size: 15px;
+	display: block;
+}
+
+.attachmentItemRemark {
+	font-weight: bold;
+	color: red;
+	font-size: 10px;	
+}
+
+.attachmentUpload {
+	height: 90px;
+}
+
+.attachmentItemStyle {
+	left: 0px;
+	width: 95%;
+	text-align: center;
+	border-radius: 4px;
+	height: 90px;
+	margin-left: 20px;
+}
+.app-upload .toolbar ul li .selectFile {
+    position: relative;
+    max-width:100%;
+}
+.app-upload.toolbar-bottom .toolbar {
+    border-top: 1px solid #24a68f;
+}
+
+.app-upload.toolbar-top .toolbar {
+    border-bottom: 1px solid #24a68f;
+}
+
+.already-click{
+	font-size: 17px !important;
+	font-weight: 600 !important;;
+}

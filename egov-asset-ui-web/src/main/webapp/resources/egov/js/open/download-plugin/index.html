@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/zebra_dialog.css">
+    <link rel="stylesheet" href="css/ocx-plugin.css">
+    <script src="js/jquery.js"></script>
+    <script src="js/zebra_dialog.js"></script>
+    <script src="js/jquery.fileDownload.js"></script>
+</head>
+<body>
+    <script>
+        $(function () {
+            $('button').on('click',function () {
+                new $.Zebra_Dialog({
+                    'title': '插件下载',
+                    'custom_class':  'ocx-box',
+                    width:600,
+                    height:500,
+                    'buttons':  false,
+                    'source':  {'ajax': 'ocx-plugin-exists.html'},
+                    'modal': false
+                });
+            })
+        });
+    </script>
+    <center><button>下载</button></center>
+</body>
+</html>

@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.amc.user.mapper.AmcUserMapper" >
+  	<resultMap id="afaUserMap" type="com.bosssoft.platform.appframe.api.entity.ApiUser">
+		<!--WARNING - @mbggenerated-->
+		<id column="USER_ID" jdbcType="VARCHAR" property="userId" />
+		<result column="TENANT_ID" jdbcType="VARCHAR" property="tenantId" />
+		<result column="USER_CODE" jdbcType="VARCHAR" property="userCode" />
+		<result column="PASSWORD" jdbcType="VARCHAR" property="password" />
+		<result column="USER_NAME" jdbcType="VARCHAR" property="userName" />
+		<result column="USER_TYPE" jdbcType="VARCHAR" property="userType" />
+		<result column="IDENTITY_CODE" jdbcType="VARCHAR" property="identityCode" />
+		<result column="INVLIDATE" jdbcType="DATE" property="invlidate" />
+		<result column="AUTH_MODE" jdbcType="VARCHAR" property="authMode" />
+		<result column="STATUS" jdbcType="VARCHAR" property="status" />
+		<result column="UNLOCK_TIME" jdbcType="TIMESTAMP" property="unlockTime" />
+		<result column="MENU_STYLE" jdbcType="VARCHAR" property="menuStyle" />
+		<result column="LASTEST_LOGIN" jdbcType="TIMESTAMP" property="lastestLogin" />
+		<result column="ERROR_COUNT" jdbcType="INTEGER" property="errorCount" />
+		<result column="START_DATE" jdbcType="DATE" property="startDate" />
+		<result column="END_DATE" jdbcType="DATE" property="endDate" />
+		<result column="MAC_ADDRESS" jdbcType="VARCHAR" property="macAddress" />
+		<result column="IP_ADDRESS" jdbcType="VARCHAR" property="ipAddress" />
+		<result column="MOBILE_NO" jdbcType="VARCHAR" property="mobileNo" />
+		<result column="EMAIL" jdbcType="VARCHAR" property="email" />
+		<result column="MAJOR_USERCODE" jdbcType="VARCHAR" property="majorUserCode" />
+		<result column="MAJOR_USERNAME" jdbcType="VARCHAR" property="majorUserName" />
+		<result column="MAIN_ORGID" jdbcType="VARCHAR" property="mainOrgid" />
+		<result column="MAIN_POSITIONID" jdbcType="VARCHAR" property="mainPositionid" />
+		<result column="CREATE_USER" jdbcType="VARCHAR" property="createUser" />
+		<!-- <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" /> -->
+	</resultMap>
+	<resultMap id="afaUserOrgPosMap" type="com.bosssoft.platform.appframe.api.entity.ApiUserOrgPos" extends="afaUserMap">
+		<result column="ORG_NAME" jdbcType="VARCHAR" property="mainOrgName" />
+		<result column="ROLE_NAME" jdbcType="VARCHAR" property="mainPosName" />
+	</resultMap>
+  	<resultMap id="amcUserMap" type="com.bosssoft.egov.asset.amc.user.entity.DrcAuthRule" >
+         <result property="partyCode" column="PARTY_CODE"/>
+         <result property="ruleValueId" column="RULE_VALUE_ID"/>
+         <result property="ruleValueName" column="RULE_VALUE_NAME"/>
+         <result property="roleId" column="ROLE_ID"/>
+         <result property="roleName" column="ROLE_NAME"/>
+         <result property="roleType" column="ROLE_TYPE"/>
+         <result property="roleCode" column="ROLE_CODE"/>
+	</resultMap>
+	<resultMap id="roleMap" type="com.bosssoft.egov.asset.amc.user.entity.AfaAuthParty">
+		<result property="roleCode" column="ROLE_CODE"/>
+        <result property="roleName" column="ROLE_NAME"/>
+        <result property="roleId" column="ROLE_ID"/>
+        <result property="roleType" column="ROLE_TYPE"/>
+	</resultMap>
+	<resultMap id="drcAuthRuleOrgList" type="com.bosssoft.egov.asset.amc.user.entity.DrcAuthRuleOrg">
+		<result property="id" column="ID"/>
+		<result property="ruleValueId" column="RULE_VALUE_ID"/>
+		<result property="ruleValueCode" column="RULE_VALUE_CODE"/>
+		<result property="ruleValueName" column="RULE_VALUE_NAME"/>
+		<result property="rgnId" column="RGN_ID"/>
+		<result property="rgnCode" column="RGN_CODE"/>
+		<result property="rgnName" column="RGN_NAME"/>
+		<result property="financeBudgetCode" column="FINANCE_BUDGET_CODE"/>
+		<result property="orgId" column="ORG_ID"/>
+		<result property="orgCode" column="ORG_CODE"/>
+		<result property="orgName" column="ORG_NAME"/>
+		<result property="orgPid" column="ORG_PID"/>
+		<result property="roleCode" column="ROLE_CODE"/>
+        <result property="roleName" column="ROLE_NAME"/>
+        <result property="roleId" column="ROLE_ID"/>
+        <result property="roleType" column="ROLE_TYPE"/>
+       	<result property="partyId" column="PARTY_ID"/>
+       	<result property="partyCode" column="PARTY_CODE"/>
+       	<result property="partyName" column="PARTY_NAME"/>
+       	<result property="ruleOperator" column="RULE_OPERATOR"/>
+	</resultMap>
+	<resultMap id="subOrgList" type="com.bosssoft.egov.asset.aims.api.org.entity.AimsBasicOrg">
+		<result property="orgId" column="ORG_ID"/>
+		<result property="orgCode" column="ORG_CODE"/>
+		<result property="financeBudgetCode" column="FINANCE_BUDGET_CODE"/>
+		<result property="orgName" column="ORG_NAME"/>
+		<result property="orgPid" column="ORG_PID"/>
+		<result property="orgIsleaf" column="ORG_ISLEAF"/>
+		<result property="rgnId" column="RGN_ID"/>
+		<result property="rgnCode" column="RGN_CODE"/>
+		<result property="rgnName" column="RGN_NAME"/>
+	</resultMap>
+	<sql id="User_Org_Pos_Column_List">
+   	u.USER_ID,u.TENANT_ID,u.USER_CODE,u.PASSWORD,u.USER_NAME,u.USER_TYPE,u.INVLIDATE,u.AUTH_MODE,u.STATUS,
+   	u.UNLOCK_TIME,u.MENU_STYLE,u.ERROR_COUNT,u.START_DATE,u.END_DATE,u.MAC_ADDRESS,u.IP_ADDRESS,
+   	u.MOBILE_NO,u.EMAIL,u.MAJOR_USERCODE,u.MAJOR_USERNAME,u.MAIN_ORGID,u.MAIN_POSITIONID,u.CREATE_USER,u.CREATE_TIME,u.IDENTITY_CODE,
+	p.ROLE_NAME,o.ORG_NAME
+	</sql>
+	
+	<select id="queryApiUserPage" resultMap="afaUserOrgPosMap">
+    	SELECT  DISTINCT
+		<include refid="User_Org_Pos_Column_List" /> 
+		FROM AFA_USER  u	
+		LEFT JOIN AFA_ORG_USER  ou ON ou.USER_CODE=u.USER_CODE 
+		LEFT JOIN AFA_POSITION_USER pu on pu.USER_CODE=u.USER_CODE
+		LEFT JOIN AFA_ORG  o on o.ORG_ID=u.MAIN_ORGID
+		LEFT JOIN AFA_ROLE P ON P.ROLE_ID= U.MAIN_POSITIONID
+		<trim prefix="where "  prefixOverrides="and">  
+			<if test="searcher != null and searcher.__QUERYCON != null">  
+	            ${searcher.__QUERYCON}
+			</if>  
+		</trim>
+	</select>
+	
+	
+    <select id="querySubPosByUserCode" resultMap="amcUserMap">
+    	SELECT RULE_VALUE_ID,RULE_VALUE_NAME,ROLE_ID,ROLE_NAME,ROLE_TYPE,ROLE_CODE,PARTY_CODE
+    		FROM DRC_AUTH_RULE 
+			<trim prefix="where" prefixOverrides="and"> 
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            ${searcher.__QUERYCON}
+	        </if>  
+	    </trim>
+    </select>
+    
+    <select id="querySubPosList" resultMap="roleMap">
+    	SELECT R.ROLE_ID AS ROLE_ID,R.ROLE_CODE AS ROLE_CODE,
+    	R.ROLE_NAME AS ROLE_NAME,R.ROLE_TYPE AS ROLE_TYPE
+    	FROM AFA_ROLE R
+    </select>
+    
+    <select id="querySubOrgByUserCode" resultMap="drcAuthRuleOrgList">
+    	SELECT ID, ORG.ORG_ID AS ORG_ID, ORG.ORG_CODE AS ORG_CODE, ORG.ORG_NAME AS ORG_NAME,
+        ORG.FINANCE_BUDGET_CODE AS FINANCE_BUDGET_CODE,
+        ORG.ORG_PID AS ORG_PID,ORG.RGN_ID AS RGN_ID,ORG.RGN_CODE AS RGN_CODE,ORG.RGN_NAME AS RGN_NAME,
+        RULE_VALUE_ID,RULE_VALUE_CODE,RULE_VALUE_NAME,ROLE_ID,ROLE_NAME,ROLE_TYPE,ROLE_CODE,
+        PARTY_ID,PARTY_CODE,PARTY_NAME,RULE_OPERATOR
+    	FROM DRC_AUTH_RULE T LEFT JOIN AIMS_BASIC_ORG ORG
+    	ON (T.RULE_VALUE_ID = ORG.ORG_ID)
+	    WHERE T.STATUS=1
+	    <if test="searcher != null and searcher.__QUERYCON != null">  
+	         AND  ${searcher.__QUERYCON}
+	    </if>
+	    <if test="searcher == null or searcher.__QUERYCON == null">
+	    	AND PARTY_CODE IS NULL
+	    </if>
+	    ORDER BY RULE_VALUE_CODE 
+    </select>
+    
+    <!-- <select id="getRelation" resultMap="subOrgList">
+    	SELECT ORG.ORG_ID AS ORG_ID, ORG.ORG_CODE AS ORG_CODE, ORG.ORG_NAME AS ORG_NAME,
+    		ORG.ORG_PID AS ORG_PID,ORG.ORG_ISLEAF AS ORG_ISLEAF
+    	FROM DRC_AUTH_RULE T LEFT JOIN AIMS_BASIC_ORG ORG
+    	ON (T.RULE_VALUE_ID = ORG.ORG_ID)
+	    WHERE T.STATUS=1
+	   	AND T.PARTY_CODE=#{partyCode}
+    </select> -->
+    
+    <select id="getDrcAuthRules" resultMap="amcUserMap">
+    	SELECT distinct ROLE_ID,ROLE_NAME,ROLE_TYPE,ROLE_CODE,PARTY_CODE
+        FROM DRC_AUTH_RULE
+        WHERE PARTY_CODE=#{partyCode}
+    </select>
+    
+    <!-- 根据用户编码删除用户授权信息 -->
+    <delete id="deleteAuthPartyByPartyCode" parameterType="com.bosssoft.egov.asset.amc.user.entity.AfaAuthParty">
+    	DELETE FROM AFA_AUTH_PARTY 
+    	WHERE PARTY_CODE=#{partyCode}
+    	<if test="roleCode != null and roleCode != ''"> AND ROLE_CODE=#{roleCode}</if>
+    </delete>
+    
+    <!-- 新增岗位授权信息 -->
+    <insert id="insertAfaAuthParty" parameterType="com.bosssoft.egov.asset.amc.user.entity.AfaAuthParty">
+    	INSERT INTO  AFA_AUTH_PARTY(ROLE_CODE, ROLE_TYPE, PARTY_CODE, PARTY_TYPE, CREATE_USER,CREATE_TIME)
+    	VALUES(#{roleCode},#{roleType}, #{partyCode}, #{partyType}, #{createUser},#{createTime})
+    </insert>
+    
+    <select id="querAssetTodoUsers" resultType="java.lang.Integer">
+    	SELECT COUNT(*)
+    	FROM ASSET_TODO_USER
+    	WHERE USER_CODE=#{userCode}
+    	AND STATUS=0
+    </select>
+    
+    <delete id="batchDeleteAuthParty" parameterType="java.util.List">
+    	DELETE FROM AFA_AUTH_PARTY
+  		WHERE PARTY_CODE IN
+  		<foreach collection="userCodes" index="index" item="userCode" open="(" 
+  			separator="," close=")">
+  			#{userCode}
+  		</foreach>
+    </delete>
+    
+    <select id="selectApiUser" parameterType="com.bosssoft.platform.appframe.api.entity.ApiUser" resultMap="afaUserOrgPosMap">
+    	SELECT  DISTINCT
+		<include refid="User_Org_Pos_Column_List" /> 
+		FROM AFA_USER  u	
+		LEFT JOIN AFA_ORG_USER  ou ON ou.USER_CODE=u.USER_CODE 
+		LEFT JOIN AFA_POSITION_USER pu on pu.USER_CODE=u.USER_CODE
+		LEFT JOIN AFA_ORG  o on o.ORG_ID=u.MAIN_ORGID
+		LEFT JOIN AFA_ROLE P ON P.ROLE_ID= U.MAIN_POSITIONID
+		WHERE u.USER_CODE=#{userCode}
+    </select>
+    
+    <!-- 查询用户管理办结库分页信息 -->
+   	<select id="queryShowTodoPage" resultMap="afaUserOrgPosMap">
+    	SELECT 
+    	T.USER_ID,T.TENANT_ID,T.USER_CODE,T.PASSWORD,T.USER_NAME,T.USER_TYPE,T.INVLIDATE,T.AUTH_MODE,T.STATUS,
+   		T.UNLOCK_TIME,T.MENU_STYLE,T.ERROR_COUNT,T.START_DATE,T.END_DATE,T.MAC_ADDRESS,T.IP_ADDRESS,
+   		T.MOBILE_NO,T.EMAIL,T.MAJOR_USERCODE,T.MAJOR_USERNAME,T.MAIN_ORGID,T.MAIN_POSITIONID,T.CREATE_USER,T.CREATE_TIME,T.IDENTITY_CODE
+    	,T.ORG_NAME, T.ROLE_NAME
+    	FROM VUSER_MANAGE T
+    	<trim prefix="where "  prefixOverrides="and">  
+			<if test="searcher != null and searcher.__QUERYCON != null">  
+	            ${searcher.__QUERYCON}
+			</if>
+		</trim>
+    </select>
+</mapper>

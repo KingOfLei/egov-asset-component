@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.activiti.mapper.ActReProcdefMapper" >
+  <resultMap id="actReProcdefMap" type="com.bosssoft.egov.asset.activiti.entity.ActReProcdef" >
+         <result property="id" column="ID_" />
+	     <result property="rev" column="REV_" />
+	     <result property="category" column="CATEGORY_" />
+	     <result property="name" column="NAME_" />
+	     <result property="key" column="KEY_" />
+	     <result property="version" column="VERSION_" />
+	     <result property="deploymentId" column="DEPLOYMENT_ID_" />
+	     <result property="resourceName" column="RESOURCE_NAME_" />
+	     <result property="dgrmResourceName" column="DGRM_RESOURCE_NAME_" />
+	     <result property="description" column="DESCRIPTION_" />
+	     <result property="hasStartFormKey" column="HAS_START_FORM_KEY_" />
+	     <result property="suspensionState" column="SUSPENSION_STATE_" />
+	     <result property="tenantId" column="TENANT_ID_" />
+	 </resultMap>
+ 
+ <sql id="Base_Column_List">
+    ID_,REV_,CATEGORY_,NAME_,KEY_,VERSION_,DEPLOYMENT_ID_,RESOURCE_NAME_,DGRM_RESOURCE_NAME_,DESCRIPTION_,HAS_START_FORM_KEY_,SUSPENSION_STATE_,TENANT_ID_  </sql>
+ 
+    <select id="queryActReProcdefPage" resultMap="actReProcdefMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM ACT_RE_PROCDEF
+      	 <trim prefix="where"  prefixOverrides="and |or">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            #{searcher.__QUERYCON}
+	        </if>  
+	    </trim>
+    </select>
+    
+        <select id="queryActReProcdefById" resultMap="actReProcdefMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM ACT_RE_PROCDEF
+      	WHERE ID_ = #{id}
+    </select>
+    
+</mapper>

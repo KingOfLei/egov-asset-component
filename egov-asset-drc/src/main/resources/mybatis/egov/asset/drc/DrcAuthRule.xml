@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.egov.asset.drc.mapper.DrcAuthRuleMapper" >
+  <resultMap id="drcAuthRuleMap" type="com.bosssoft.egov.asset.drc.entity.DrcAuthRule" >
+         <result property="id" column="ID" />
+	     <result property="cfgId" column="CFG_ID" />
+	     <result property="partyId" column="PARTY_ID" />
+	     <result property="partyType" column="PARTY_TYPE" />	     
+	     <result property="ruleType" column="RULE_TYPE" />
+	     <result property="ruleField" column="RULE_FIELD" />
+	     <result property="ruleValue" column="RULE_VALUE" />
+	     <result property="ruleOperator" column="RULE_OPERATOR" />
+	     <result property="ruleCondition" column="RULE_CONDITION" />
+	     <result property="status" column="STATUS" />
+	     <result property="remark" column="REMARK" />
+	 </resultMap>
+ 
+ <sql id="Base_Column_List">
+    ID,CFG_ID,RULE_TYPE,,PARTY_ID,PARTY_TYPE,RULE_FIELD,RULE_VALUE,RULE_OPERATOR,RULE_CONDITION,STATUS,REMARK  </sql>
+ 
+    <select id="queryDrcAuthRulePage" resultMap="drcAuthRuleMap">
+    	SELECT     
+    	<include refid="Base_Column_List" />
+        FROM DRC_AUTH_RULE
+      	 <trim prefix="where"  prefixOverrides="and |or">  
+	        <if test="searcher != null and searcher.__QUERYCON != null">  
+	            ${searcher.__QUERYCON}
+	        </if>  
+	    </trim>
+    </select>
+</mapper>
